@@ -9,7 +9,7 @@
 
 static SDL_Window* gWindow =NULL;
 static SDL_Renderer* gScreen=NULL;
-static SDL_Event* gEvent;
+static SDL_Event gEvent;
 
 //screen size
 const int SCREEN_WIDTH =1280;
@@ -20,5 +20,7 @@ const int COLOR_KEY_R =255;
 const int COLOR_KEY_G =255;
 const int COLOR_KEY_B =255;
 const int COLOR_KEY_A =255;
+
+const int RENDER_DRAW_COLOR = 0XFF;
 #endif // BASE_H
 

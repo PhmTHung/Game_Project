@@ -1,5 +1,5 @@
 #include "basefunc.h"
-
+#include "baseobj.h"
 
 BaseObject gBackground;
 
@@ -45,7 +45,20 @@ bool LoadBackground()
 {
     bool ret =gBackground.LoadImage("image/ahead.png",gScreen);
     if(ret==false)return false;
-    return tru;
+    return true;
+}
+void close()
+{
+    gBackground.Free();
+
+    SDL_DestroyRenderer(gScreen);
+    gScreen=NULL;
+
+    SDL_DestroyWindow(gWindow);
+    gWindow=NULL;
+
+    IMG_Quit();
+    SDL_Quit();
 }
 int main (int argc,char* argv[])
 {
@@ -57,7 +70,7 @@ int main (int argc,char* argv[])
     {
         while(SDL_PollEvent(&gEvent)!=0)
         {
-            if(gEvent->type==SDL_QUIT)
+            if(gEvent.type==SDL_QUIT)
             {
                 is_quit=true;
             }
@@ -68,5 +81,6 @@ int main (int argc,char* argv[])
         gBackground.Render(gScreen,NULL);
         SDL_RenderPresent(gScreen);
     }
+    close();
     return 0;
 }

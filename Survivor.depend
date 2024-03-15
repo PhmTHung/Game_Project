@@ -421,3 +421,22 @@
 1710471394 c:\laptrinh\survivor\baseobj.h
 	"basefunc.h"
 
+1710470075 source:c:\laptrinh\survivor\game_project\basefunc.cpp
+	"basefunc.h"
+
+1710512122 c:\laptrinh\survivor\game_project\basefunc.h
+	<string>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+
+1710471442 source:c:\laptrinh\survivor\game_project\baseobj.cpp
+	"baseobj.h"
+
+1710471394 c:\laptrinh\survivor\game_project\baseobj.h
+	"basefunc.h"
+
+1710512273 source:c:\laptrinh\survivor\game_project\main.cpp
+	"basefunc.h"
+	"baseobj.h"
+
