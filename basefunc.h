@@ -21,6 +21,19 @@ const int COLOR_KEY_G =255;
 const int COLOR_KEY_B =255;
 const int COLOR_KEY_A =255;
 
-const int RENDER_DRAW_COLOR = 0XFF;
+const int RENDER_DRAW_COLOR = 255;
+
+#define TILE_SIZE 32
+
+#define MAP_X 50
+#define MAP_Y 25
+//
+typedef struct Map
+{
+    int max_x;
+    int max_y;
+
+    std::string file_name;
+};
 #endif // BASE_H
 

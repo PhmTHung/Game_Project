@@ -1,5 +1,6 @@
 #include "baseobj.h"
-
+#include "xulygame.h"
+#include "basefunc.h"
 BaseObject::BaseObject()
 {
     p_object =NULL;
@@ -10,10 +11,10 @@ BaseObject::BaseObject()
 }
 BaseObject::~BaseObject()
 {
-
-
+    Free();
 }
-bool BaseObject::LoadImage(std::string path,SDL_Renderer* screen)
+//chuyen tu bool sang void
+void BaseObject::LoadImage(std::string path,SDL_Renderer* screen)
 {
     SDL_Texture* new_texture =NULL;
     SDL_Surface*load_surface=IMG_Load(path.c_str());
@@ -32,9 +33,8 @@ bool BaseObject::LoadImage(std::string path,SDL_Renderer* screen)
     }
     // gan sang p_object
     p_object=new_texture;
-    return p_object!=NULL;
+    //return p_object!=NULL;
 }
-
 void BaseObject::Render(SDL_Renderer*des, const SDL_Rect* clip)
 {
     SDL_Rect renderquad= {rect.x,rect.y,rect.w,rect.h};
@@ -49,3 +49,4 @@ void BaseObject::Free()
         //rect.w=0;rect.h=0;
     }
 }
+

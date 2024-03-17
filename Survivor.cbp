@@ -44,6 +44,10 @@
 		<Unit filename="baseobj.cpp" />
 		<Unit filename="baseobj.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="map.cpp" />
+		<Unit filename="map.h" />
+		<Unit filename="xulygame.cpp" />
+		<Unit filename="xulygame.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

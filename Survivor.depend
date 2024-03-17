@@ -424,19 +424,44 @@
 1710470075 source:c:\laptrinh\survivor\game_project\basefunc.cpp
 	"basefunc.h"
 
-1710512122 c:\laptrinh\survivor\game_project\basefunc.h
+1710660146 c:\laptrinh\survivor\game_project\basefunc.h
 	<string>
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
 
-1710471442 source:c:\laptrinh\survivor\game_project\baseobj.cpp
+1710659596 source:c:\laptrinh\survivor\game_project\baseobj.cpp
 	"baseobj.h"
-
-1710471394 c:\laptrinh\survivor\game_project\baseobj.h
+	"xulygame.h"
 	"basefunc.h"
 
-1710512273 source:c:\laptrinh\survivor\game_project\main.cpp
+1710647081 c:\laptrinh\survivor\game_project\baseobj.h
+	"basefunc.h"
+
+1710659200 source:c:\laptrinh\survivor\game_project\main.cpp
 	"basefunc.h"
 	"baseobj.h"
+	"xulygame.h"
+
+1710659073 source:c:\laptrinh\survivor\game_project\map.cpp
+	"map.h"
+	"baseobj.h"
+	"basefunc.h"
+	<fstream>
+	<iostream>
+
+1710660131 c:\laptrinh\survivor\game_project\map.h
+	"basefunc.h"
+	"baseobj.h"
+
+1710647081 c:\laptrinh\survivor\game_project\xulygame.h
+	<SDL.h>
+	<stdio.h>
+
+1710659395 source:c:\laptrinh\survivor\game_project\xulygame.cpp
+	"xulygame.h"
+	"baseobj.h"
+	"basefunc.h"
+	"map.h"
+	<iostream>
 
