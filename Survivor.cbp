@@ -44,8 +44,11 @@
 		<Unit filename="baseobj.cpp" />
 		<Unit filename="baseobj.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="mainobj.cpp" />
+		<Unit filename="mainobj.h" />
 		<Unit filename="map.cpp" />
 		<Unit filename="map.h" />
+		<Unit filename="map.txt" />
 		<Unit filename="xulygame.cpp" />
 		<Unit filename="xulygame.h" />
 		<Extensions>

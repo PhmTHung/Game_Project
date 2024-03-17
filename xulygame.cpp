@@ -2,11 +2,12 @@
 #include "baseobj.h"
 #include "basefunc.h"
 #include "map.h"
+#include "mainobj.h"
 #include <iostream>
 
 BaseObject gBackground;
 GameMap Map;
-
+MainObject player;
 
 Game::Game(){};
 Game::~Game(){};
@@ -32,19 +33,23 @@ void Game::InitData()
         }
     }
     //gBackground.LoadImage("image/dirt_03.png",gScreen);
-    Map.LoadMap("image/maplv1.txt");
+
+    Map.LoadMap("map.txt");
     Map.LoadTiles(gScreen);
+    player.LoadImage("image/left.png",gScreen);
+    //player.LoadImage("player_right.png",gScreen);
+    player.set_clips();
+}
+void Game::handleEvents()
+{
+    player.HandleInputAction(gEvent,gScreen);
 }
 void Game::render()
 {
     SDL_RenderClear(gScreen);
-//    SDL_RenderCopy(gRenderer,playerTex,NULL,&destR);
-//    GameMap->DrawMap();
-//    player->Render();
-//    enemy->Render();
-//    gBackground.Render(gScreen,NULL);
-    //SDL_RenderPresent(renderer);
-    Map.DrawMap(gScreen);
+    //Map.DrawMap(gScreen);
+    gBackground.Render(gScreen);
+    //player.FrameShow(gScreen);
     SDL_RenderPresent(gScreen);
 }
 void Game::close()
@@ -54,6 +59,7 @@ void Game::close()
 
     SDL_DestroyRenderer(gScreen);
     gScreen=NULL;
+
     IMG_Quit();
     SDL_Quit();
     std::cout<<"game cleaned"<<std::endl;;

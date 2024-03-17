@@ -6,6 +6,14 @@
 
 #define MAP_TILE 20
 
+
+class TileMap:public BaseObject
+{
+public:
+    TileMap();
+    ~TileMap();
+};
+
 class GameMap
 {
 public:
@@ -17,11 +25,12 @@ public:
     void LoadTiles(SDL_Renderer* screen);
 
 private:
-    Map game_map;
+    //Map game_map;
+    TileMap tile_map[3];
     SDL_Rect src,dest;
     BaseObject dirt;
     BaseObject water;
 
-    int MAP[MAP_X][MAP_Y];
+    int arr[MAP_X][MAP_Y];
 };
 #endif // GAME_MAP

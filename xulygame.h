@@ -14,7 +14,6 @@ public:
 private:
     bool isRunning;
     SDL_Window* gWindow;
-    //SDL_Renderer* gRenderer;
     SDL_Renderer* gScreen;
 };
 #endif // XU_LY_GAME_H

@@ -14,7 +14,7 @@ BaseObject::~BaseObject()
     Free();
 }
 //chuyen tu bool sang void
-void BaseObject::LoadImage(std::string path,SDL_Renderer* screen)
+bool BaseObject::LoadImage(std::string path,SDL_Renderer* screen)
 {
     SDL_Texture* new_texture =NULL;
     SDL_Surface*load_surface=IMG_Load(path.c_str());
@@ -33,7 +33,7 @@ void BaseObject::LoadImage(std::string path,SDL_Renderer* screen)
     }
     // gan sang p_object
     p_object=new_texture;
-    //return p_object!=NULL;
+    return p_object!=NULL;
 }
 void BaseObject::Render(SDL_Renderer*des, const SDL_Rect* clip)
 {
@@ -46,7 +46,7 @@ void BaseObject::Free()
     {
         SDL_DestroyTexture(p_object);
         p_object=NULL;
-        //rect.w=0;rect.h=0;
+        rect.w=0;rect.h=0;
     }
 }
 
