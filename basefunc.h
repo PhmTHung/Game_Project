@@ -13,7 +13,7 @@ static SDL_Event gEvent;
 
 //screen size
 const int SCREEN_WIDTH =800;
-const int SCREEN_HEIGHT=640;
+const int SCREEN_HEIGHT=800;
 const int SCREEN_BPP =32;
 
 const int COLOR_KEY_R =255;
@@ -21,7 +21,7 @@ const int COLOR_KEY_G =255;
 const int COLOR_KEY_B =255;
 const int COLOR_KEY_A =255;
 
-const int RENDER_DRAW_COLOR = 255;
+const int RENDER_DRAW_COLOR = 0xFF;
 
 #define TILE_SIZE 32
 

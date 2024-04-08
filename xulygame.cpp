@@ -29,15 +29,19 @@ void Game::InitData()
             SDL_SetRenderDrawColor(gScreen,RENDER_DRAW_COLOR,RENDER_DRAW_COLOR,RENDER_DRAW_COLOR,RENDER_DRAW_COLOR);
             int imgFlags=IMG_INIT_PNG;
             if((IMG_Init(imgFlags)&&imgFlags)) std::cout<<"Create init image.PNG"<<std::endl;
-            isRunning=true;
         }
+        isRunning=true;
     }
+    //return flag;
     //gBackground.LoadImage("image/dirt_03.png",gScreen);
 
     Map.LoadMap("map.txt");
     Map.LoadTiles(gScreen);
+
     player.LoadImage("image/left.png",gScreen);
-    //player.LoadImage("player_right.png",gScreen);
+    player.LoadImage("image/right.png",gScreen);
+    player.LoadImage("image/ahead.png",gScreen);
+    player.LoadImage("image/behind.png",gScreen);
     player.set_clips();
 }
 void Game::handleEvents()
@@ -47,9 +51,11 @@ void Game::handleEvents()
 void Game::render()
 {
     SDL_RenderClear(gScreen);
-    //Map.DrawMap(gScreen);
-    gBackground.Render(gScreen);
-    //player.FrameShow(gScreen);
+
+    Map.DrawMap(gScreen);
+    //gBackground.Render(gScreen);
+    player.FrameShow(gScreen);
+
     SDL_RenderPresent(gScreen);
 }
 void Game::close()

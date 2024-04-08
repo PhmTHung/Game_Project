@@ -8,6 +8,7 @@ public:
     Game();
     ~Game();
     void InitData();//
+    bool running(){return isRunning;}
     void handleEvents();//
     void render();
     void close();
