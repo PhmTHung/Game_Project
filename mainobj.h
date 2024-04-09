@@ -1,9 +1,12 @@
 #ifndef MAIN_OBJ_H
 #define MAIN_OBJ_H
 
+#include <vector>
+
 #include "basefunc.h"
 #include "baseobj.h"
 #include "map.h"
+#include "vukhi.h"
 
 
 class MainObject:public BaseObject
@@ -24,8 +27,17 @@ public:
     void HandleInputAction(SDL_Event events,SDL_Renderer* screen);
     void set_clips();
     //ham xu ly di chuyen// se sua sau khi test
-    void DoPlayer(Map& Map_data)
-    void CheckToMap(Map& Map_data)
+    void player_move(Map& map_data);
+    //playercoordinate xu ly map
+    void PlayerGPS(Map& map_data);
+    //xu ly vu khi
+    void set_weapon_list(std::vector<Weapon*>weapon_list)
+    {
+        p_weapon_list=weapon_list;
+    }
+    void HandleWeapon(SDL_Renderer* des);
+    std::vector<Weapon*>get_weapon_list() const{return p_weapon_list;}
+
 private:
     //di chuyen trai phai x_step=x_val
     int x_step;//trai phai
@@ -44,6 +56,8 @@ private:
     int frame;
     //trang thai di chuyen
     int status;
-    //bien tren mat
+    //
+    //vu khi
+    std::vector<Weapon*> p_weapon_list;
 };
 #endif // MAIN_OBJ_H

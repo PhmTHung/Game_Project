@@ -14,17 +14,16 @@ static SDL_Event gEvent;
 //screen size
 const int SCREEN_WIDTH =800;
 const int SCREEN_HEIGHT=800;
-const int SCREEN_BPP =32;
 
 const int COLOR_KEY_R =255;
 const int COLOR_KEY_G =255;
 const int COLOR_KEY_B =255;
 const int COLOR_KEY_A =255;
-
 const int RENDER_DRAW_COLOR = 0xFF;
 
 #define TILE_SIZE 32
-
+#define SPEED_MOVE 8
+#define WALL 1
 #define MAP_X 25
 #define MAP_Y 25
 //input duong di chuyen
@@ -35,12 +34,17 @@ typedef struct Input
     int up;
     int down;
 };
+
 typedef struct Map
 {
-    //int max_x;
-    //int max_y;
+    int start_x;
+    int start_y;
 
-    std::string file_name;
+    int max_x;
+    int max_y;
+
+    int arr[MAP_X][MAP_Y];
+
 };
 #endif // BASE_H
 

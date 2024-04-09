@@ -49,6 +49,8 @@
 		<Unit filename="map.cpp" />
 		<Unit filename="map.h" />
 		<Unit filename="map.txt" />
+		<Unit filename="vukhi.cpp" />
+		<Unit filename="vukhi.h" />
 		<Unit filename="xulygame.cpp" />
 		<Unit filename="xulygame.h" />
 		<Extensions>

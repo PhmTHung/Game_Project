@@ -3,10 +3,10 @@
 //#include "xulygame.h"
 #include "mainobj.h"
 #include "map.h"
+#include "Threats.h"
 #include<iostream>
 
 //Game *game = NULL;
-//BaseObject gBackground;
 bool InitData()
 {
     bool flag=true;
@@ -31,30 +31,33 @@ bool InitData()
     return flag;
 }
 
-//bool LoadBackground()
-//{
-//    int ret=gBackground.LoadImage("image/dirt_03.png",gScreen);
-//    if(ret==false) return false;
-//    return true;
-//}
 int main (int argc,char* argv[])
 {
     //game=new Game();
     //game->InitData();
     if(InitData()==false) return -1;
     //if(LoadBackground()==false) std::cout<<"can load background"<<std::endl;
-    GameMap Map;
-    Map.LoadMap("map.txt");
-    Map.LoadTiles(gScreen);
+    GameMap G_Map;
+    G_Map.LoadMap("map.txt");
+    G_Map.LoadTiles(gScreen);
 
     MainObject player;
-    player.LoadImage("image/right.png",gScreen);
-    player.LoadImage("image/left.png",gScreen);
-    player.LoadImage("image/ahead.png",gScreen);
-    player.LoadImage("image/behind.png",gScreen);
+
+    player.LoadImage("image/MainCharacter/right.png",gScreen);
+    player.LoadImage("image/MainCharacter/left.png",gScreen);
+    player.LoadImage("image/MainCharacter/ahead.png",gScreen);
+    player.LoadImage("image/MainCharacter/behind.png",gScreen);
     player.set_clips();
 
-    const int FPS = 60;
+    Threats threats;
+
+    threats.LoadImage("image/Threats/threatleft.png",gScreen);
+    threats.LoadImage("image/Threats/threatright.png",gScreen);
+    threats.LoadImage("image/Threats/threatforward.png",gScreen);
+    threats.LoadImage("image/Threats/threatback.png",gScreen);
+    threats.set_clips();
+
+    const int FPS = 30;
     const int framDelay=1000/FPS;
 
     Uint32 frameStart;
@@ -70,6 +73,7 @@ int main (int argc,char* argv[])
                 is_quit=true;
             }
             player.HandleInputAction(gEvent,gScreen);
+            //threats.Threat_Move(map_data);
             //game->handleEvents();
         }
 //        while(game->running())
@@ -88,25 +92,32 @@ int main (int argc,char* argv[])
 //            }
 //        }
 
-        //frameStart =SDL_GetTicks();
+        frameStart =SDL_GetTicks();
 
         SDL_SetRenderDrawColor(gScreen,RENDER_DRAW_COLOR,RENDER_DRAW_COLOR,RENDER_DRAW_COLOR,RENDER_DRAW_COLOR);
         //game->render();
         SDL_RenderClear(gScreen);
 
-        Map.DrawMap(gScreen);
-        //gBackground.Render(gScreen,NULL);
+        G_Map.DrawMap(gScreen);
+        Map map_data=G_Map.getMap();
+
+        player.HandleWeapon(gScreen);
+        player.player_move(map_data);
+        player.PlayerGPS(map_data);
         player.FrameShow(gScreen);
+
+        threats.Threat_Move(map_data);
+        threats.FrameShow(gScreen);
 
         SDL_RenderPresent(gScreen);
 
 
-//        frameTime=SDL_GetTicks()-frameStart;
-//
-//        if(framDelay>frameTime)
-//        {
-//            SDL_Delay(framDelay-frameTime);
-//        }
+        frameTime=SDL_GetTicks()-frameStart;
+
+        if(framDelay>frameTime)
+        {
+            SDL_Delay(framDelay-frameTime);
+        }
     }
 //    game->close();
     SDL_DestroyWindow(gWindow);

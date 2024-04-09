@@ -19,7 +19,7 @@ void GameMap::LoadMap(std::string path)
         {
           for(int j=0;j<25;j++)
           {
-            fin>>arr[i][j];
+            fin>>game_map.arr[i][j];
           }
         }
     fin.close();
@@ -27,10 +27,10 @@ void GameMap::LoadMap(std::string path)
 }
 void GameMap::LoadTiles(SDL_Renderer* screen)
 {
-     grass.LoadImage("image/grass0.png",screen);
-     brick.LoadImage("image/brick.png",screen);
-     sea.LoadImage("image/sea.png",screen);
-     flower.LoadImage("image/flower.png",screen);
+     grass.LoadImage("image/MapTile/grass0.png",screen);
+     brick.LoadImage("image/MapTile/brick.png",screen);
+     sea.LoadImage("image/MapTile/sea.png",screen);
+     flower.LoadImage("image/MapTile/flower.png",screen);
 }
 void GameMap::DrawMap(SDL_Renderer* screen)
 {
@@ -39,7 +39,7 @@ void GameMap::DrawMap(SDL_Renderer* screen)
     {
         for(int j=0;j<25;j++)
         {
-            type=arr[i][j];
+            type=game_map.arr[i][j];
             // 1 pyxel
             int vt_x=i*TILE_SIZE;
             int vt_y=j*TILE_SIZE;
