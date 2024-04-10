@@ -16,6 +16,11 @@ public:
         IN_UP    =3,
         IN_DOWN  =4,
     };
+    enum WeaponType
+    {
+        MAGE_TYPE=50,
+        LASER_TYPE=51
+    };
 
     void set_x_val(const int &xVal){x_val=xVal;}
     int get_x_val() const {return x_val;}
@@ -28,10 +33,15 @@ public:
 
     void set_weapon_direct(const int & weaponDirect){weapon_direct=weaponDirect;}
     int  get_weapon_direct()const {return weapon_direct;}
-    //void HandleMove(const int& x_border,const int& y_border);
+    void HandleMove(const int& x_border,const int& y_border);
     void WeaponRange(int x_border,int y_border);
     int get_x_range() const{return x_border;}
     int get_y_range() const{return y_border;}
+
+    void set_weapon_type(const unsigned int& weaponType){weapon_type=weaponType;}
+    unsigned int get_weapon_type()const{return weapon_type;}
+
+    void LoadImgWeapon(SDL_Renderer* des);
 private:
     int x_val;
     int y_val;
@@ -42,5 +52,6 @@ private:
     bool is_move;
     //hướng bắn
     int weapon_direct;
+    unsigned int weapon_type;
 };
 #endif // VU_KHI_H

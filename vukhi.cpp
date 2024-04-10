@@ -10,8 +10,25 @@ Weapon::Weapon()
     y_border=100;
     is_move=false;
 
+    weapon_type=MAGE_TYPE;
 }
 Weapon::~Weapon(){}
+void Weapon::LoadImgWeapon(SDL_Renderer* des)
+{
+    switch(weapon_type)
+    {
+    case MAGE_TYPE:
+        {
+            LoadImage("image/Weapon/mage.png",des);
+            break;
+        }
+    case LASER_TYPE:
+        {
+            LoadImage("image/Weapon/laser.png",des);
+            break;
+        }
+    }
+}
 void Weapon::WeaponRange(int x_border,int y_border)
 {
     switch (weapon_direct)

@@ -19,7 +19,10 @@ const int COLOR_KEY_R =255;
 const int COLOR_KEY_G =255;
 const int COLOR_KEY_B =255;
 const int COLOR_KEY_A =255;
+
 const int RENDER_DRAW_COLOR = 0xFF;
+
+const int FRAME_PER_SECOND = 25;
 
 #define TILE_SIZE 32
 #define SPEED_MOVE 8

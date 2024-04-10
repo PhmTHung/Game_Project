@@ -1,9 +1,9 @@
 #include "basefunc.h"
 #include "baseobj.h"
-//#include "xulygame.h"
 #include "mainobj.h"
 #include "map.h"
 #include "Threats.h"
+#include "FPS.h"
 #include<iostream>
 
 //Game *game = NULL;
@@ -33,10 +33,9 @@ bool InitData()
 
 int main (int argc,char* argv[])
 {
-    //game=new Game();
-    //game->InitData();
+
+    ImpTimer fps_timer;
     if(InitData()==false) return -1;
-    //if(LoadBackground()==false) std::cout<<"can load background"<<std::endl;
     GameMap G_Map;
     G_Map.LoadMap("map.txt");
     G_Map.LoadTiles(gScreen);
@@ -66,6 +65,7 @@ int main (int argc,char* argv[])
     bool is_quit=false;
      while(!is_quit)
     {
+        fps_timer.start();
         while(SDL_PollEvent(&gEvent)!=0)
         {
             if(gEvent.type==SDL_QUIT)
@@ -73,29 +73,9 @@ int main (int argc,char* argv[])
                 is_quit=true;
             }
             player.HandleInputAction(gEvent,gScreen);
-            //threats.Threat_Move(map_data);
-            //game->handleEvents();
         }
-//        while(game->running())
-//        {
-//            frameStart =SDL_GetTicks();
-//
-//            game->handleEvents();
-//            game->update();
-//            game->render();
-//
-//            frameTime=SDL_GetTicks()-frameStart;
-//
-//            if(framDelay>frameTime)
-//            {
-//            SDL_Delay(framDelay-frameTime);
-//            }
-//        }
-
-        frameStart =SDL_GetTicks();
 
         SDL_SetRenderDrawColor(gScreen,RENDER_DRAW_COLOR,RENDER_DRAW_COLOR,RENDER_DRAW_COLOR,RENDER_DRAW_COLOR);
-        //game->render();
         SDL_RenderClear(gScreen);
 
         G_Map.DrawMap(gScreen);
@@ -106,20 +86,23 @@ int main (int argc,char* argv[])
         player.PlayerGPS(map_data);
         player.FrameShow(gScreen);
 
-        threats.Threat_Move(map_data);
+        threats.Threat_Move(map_data,player);
         threats.FrameShow(gScreen);
 
         SDL_RenderPresent(gScreen);
 
+        int real_imp_time=fps_timer.get_ticks();
+        int time_one_frame=1000/FRAME_PER_SECOND;
 
-        frameTime=SDL_GetTicks()-frameStart;
-
-        if(framDelay>frameTime)
+        if(real_imp_time<time_one_frame)
         {
-            SDL_Delay(framDelay-frameTime);
+            int delay_time=time_one_frame-real_imp_time;
+            if(delay_time>=0)
+            {
+                 SDL_Delay(delay_time);
+            }
         }
     }
-//    game->close();
     SDL_DestroyWindow(gWindow);
     gWindow=NULL;
 
@@ -131,3 +114,23 @@ int main (int argc,char* argv[])
 
     return 0;
 }
+//std::vector<Threats*> MakeThreatsList()
+//{
+//    std::vector<Threats*>list_threats;
+//    Threats* threat_obj=new Threats[20];
+//    for(int i=0;i<20;i++)
+//    {
+//        Threats* p_threat=(threat_obj+i);
+//        if(p_threat!=NULL)
+//        {
+//            threat_obj->LoadImage("image/Threats/threatleft.png", screen);
+//            threat_obj->LoadImage("image/Threats/threatright.png", screen);
+//            threat_obj->LoadImage("image/Threats/threatforward.png", screen);
+//            threat_obj->LoadImage("image/Threats/threatback.png", screen);
+//            threat_obj->set_clips();
+//            threat_obj->set_x_pos(i * 32 + 250);
+//            threat_obj->set_y_pos(250);
+//            list_threats.push_back(threat_obj);
+//        }
+//    }
+//}

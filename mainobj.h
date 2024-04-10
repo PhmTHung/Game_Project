@@ -38,6 +38,12 @@ public:
     void HandleWeapon(SDL_Renderer* des);
     std::vector<Weapon*>get_weapon_list() const{return p_weapon_list;}
 
+    void SetPosX(const int &pos){x_pos=pos;}
+    int GetPosX() const {return x_pos;}
+
+    void SetPosY(const int &pos){y_pos=pos;}
+    int GetPosY() const {return y_pos;}
+
 private:
     //di chuyen trai phai x_step=x_val
     int x_step;//trai phai

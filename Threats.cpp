@@ -1,5 +1,8 @@
 #include "Threats.h"
+#include "mainobj.h"
 #include <cstdlib>
+
+
 int randomNum()
 {
     int n;
@@ -9,7 +12,7 @@ int randomNum()
 int randomDirect()
 {
     int n;
-    n=rand()%4+1;
+    n=rand()%10+1;
     return n;
 }
 Threats::Threats()
@@ -23,12 +26,14 @@ Threats::Threats()
     x_step=0;
     y_step=0;
 
-    width_frame=40;
-    height_frame=THREATS_HEIGHT;
+    width_frame=60;
+    height_frame=40;
 
     frame=0;
 
     status=-1;
+
+    come_back_time=0;
 
     input_type.left=0;
 	input_type.right=0;
@@ -47,31 +52,31 @@ bool Threats::LoadImage(std::string path,SDL_Renderer* screen)
 }
 void Threats::FrameShow(SDL_Renderer* des)
 {
-   switch(status)
-   {
-     case MOVE_LEFT:
-        LoadImage("image/Threats/threatleft.png",des);
-        break;
-     case MOVE_RIGHT:
-        LoadImage("image/Threats/threatright.png",des);
-        break;
-     case MOVE_UP:
-        LoadImage("image/Threats/threatback.png",des);
-        break;
-     case MOVE_DOWN:
-        LoadImage("image/Threats/threatforward.png",des);
-        break;
-   }
-   if(input_type.left==1||input_type.right==1||input_type.up==1||input_type.down==1)
-   {
-       ++frame;
-   }else{frame=0;}
-   if(frame>=4){frame=0;}
-   rect.x=x_pos;
-   rect.y=y_pos;
-   SDL_Rect* current_clip =& frame_clip[frame];
-   SDL_Rect renderQuad={rect.x,rect.y,width_frame,height_frame};
-   SDL_RenderCopy(des,p_object,current_clip,&renderQuad);
+    if(come_back_time==0)
+    {
+        switch(status)
+        {
+            case MOVE_LEFT:
+              LoadImage("image/Threats/threatleft.png",des);
+              break;
+            case MOVE_RIGHT:
+              LoadImage("image/Threats/threatright.png",des);
+              break;
+            case MOVE_UP:
+              LoadImage("image/Threats/threatback.png",des);
+              break;
+            case MOVE_DOWN:
+              LoadImage("image/Threats/threatforward.png",des);
+              break;
+         }
+        ++frame;
+        if(frame>=4){frame=0;}
+        rect.x=x_pos;
+        rect.y=y_pos;
+        SDL_Rect* current_clip =& frame_clip[frame];
+        SDL_Rect renderQuad={rect.x,rect.y,width_frame,height_frame};
+        SDL_RenderCopy(des,p_object,current_clip,&renderQuad);
+    }
 }
 void Threats::set_clips()
 {
@@ -98,64 +103,45 @@ void Threats::set_clips()
         frame_clip[3].h=64;
     }
 }
-void Threats::Threat_Move(Map& map_data)
+void Threats::Threat_Move(Map& map_data,MainObject player)
 {
-    int n=randomDirect();
-    switch(n)
+    bool appeared=false;
+    if (!appeared)
     {
-    case 1:
+        // Xuất hiện ngẫu nhiên
+        int n = randomNum();
+        int m = randomNum();
+        x_pos = (SCREEN_WIDTH / n) + 100;
+        y_pos = (SCREEN_HEIGHT / m) + 100;
+        appeared = true; // Đánh dấu quái vật đã xuất hiện
+    }
+    else
+    {
+        // Di chuyển bám theo nhân vật chính
+        if (x_pos < player.GetPosX())
         {
-            status=MOVE_LEFT;
-            input_type.left=1;
-            x_pos-=SPEED_MOVE;
-            if(rect.x<0)
-            {
-                status=MOVE_RIGHT;
-                input_type.right=1;
-                x_pos+=SPEED_MOVE;
-            }
+            x_pos += SPEED_MOVE;
+            status = MOVE_RIGHT;
+            input_type.right = 1;
         }
-        break;
-    case 2:
+        else if (x_pos > player.GetPosX())
         {
-            status=MOVE_RIGHT;
-            input_type.right=1;
-            x_pos+=SPEED_MOVE;
-            if(rect.x>=SCREEN_WIDTH)
-            {
-                status=MOVE_LEFT;
-                input_type.left=1;
-                x_pos-=SPEED_MOVE;
-            }
+            x_pos -= SPEED_MOVE;
+            status = MOVE_LEFT;
+            input_type.left = 1;
         }
-        break;
-    case 3:
+
+        if (y_pos < player.GetPosY())
         {
-            status=MOVE_UP;
-            input_type.up=1;
-            y_pos-=SPEED_MOVE;
-            if(rect.y<0)
-            {
-                status=MOVE_DOWN;
-                input_type.down=1;
-                x_pos-=SPEED_MOVE;
-            }
+            y_pos += SPEED_MOVE;
+            status = MOVE_DOWN;
+            input_type.down = 1;
         }
-        break;
-    case 4:
+        else if (y_pos > player.GetPosY())
         {
-            status=MOVE_DOWN;
-            input_type.down=1;
-            x_pos-=SPEED_MOVE;
-            if(rect.y>=SCREEN_HEIGHT)
-            {
-                status=MOVE_UP;
-                input_type.down=1;
-                y_pos-=SPEED_MOVE;
-            }
+            y_pos -= SPEED_MOVE;
+            status = MOVE_UP;
+            input_type.up = 1;
         }
-        break;
-    default:
-        break;
     }
 }

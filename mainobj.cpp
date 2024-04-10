@@ -1,6 +1,7 @@
 #include "mainobj.h"
 #include "basefunc.h"
 #include "baseobj.h"
+#include "vukhi.h"
 #include <iostream>
 #include <algorithm>
 MainObject::MainObject()
@@ -172,27 +173,35 @@ void MainObject::HandleInputAction(SDL_Event events,SDL_Renderer* screen)
         if(events.key.keysym.sym==SDLK_SPACE)
         {
             Weapon* p_weapon=new Weapon();
-            //p_vukhi->LoadImage("image/dan.png",screen);
-
+            if(events.key.keysym.sym==SDLK_r)
+            {
+                p_weapon->set_weapon_type(Weapon::LASER_TYPE);
+                p_weapon->LoadImgWeapon(screen);
+            }
+            else
+            {
+                p_weapon->set_weapon_type(Weapon::MAGE_TYPE);
+                p_weapon->LoadImgWeapon(screen);
+            }
             switch (status)
             {
             case MOVE_LEFT:
-                p_weapon->LoadImage("image/Weapon/bladexleft.png",screen);
+                //p_weapon->LoadImage("image/Weapon/bladexleft.png",screen);
                 p_weapon->set_weapon_direct(Weapon::IN_LEFT);
                 p_weapon->SetRect(this->rect.x+width_frame/2,rect.y-0.1*height_frame);
                 break;
             case MOVE_RIGHT:
-                p_weapon->LoadImage("image/Weapon/bladexright.png",screen);
+                //p_weapon->LoadImage("image/Weapon/bladexright.png",screen);
                 p_weapon->set_weapon_direct(Weapon::IN_RIGHT);
                 p_weapon->SetRect(this->rect.x+width_frame/2,rect.y-0.1*height_frame);
                 break;
             case MOVE_UP:
-                p_weapon->LoadImage("image/Weapon/bladexup.png",screen);
+                //p_weapon->LoadImage("image/Weapon/bladexup.png",screen);
                 p_weapon->set_weapon_direct(Weapon::IN_UP);
                 p_weapon->SetRect(this->rect.x+width_frame/2-15,rect.y-0.1*height_frame);
                 break;
             case MOVE_DOWN:
-                p_weapon->LoadImage("image/Weapon/bladexdown.png",screen);
+                //p_weapon->LoadImage("image/Weapon/bladexdown.png",screen);
                 p_weapon->set_weapon_direct(Weapon::IN_DOWN);
                 p_weapon->SetRect(this->rect.x+width_frame/2-15,rect.y-0.1*height_frame);
                 break;
@@ -232,80 +241,61 @@ void MainObject::HandleWeapon(SDL_Renderer* des)
 }
 void MainObject::player_move(Map& map_data)
 {
-//    if(input_type.left==1)  x_step=-SPEED_MOVE;
-//    if(input_type.right==1) x_step=+SPEED_MOVE;
-//    if(input_type.up==1)    y_step=-SPEED_MOVE;
-//    if(input_type.down==1)  y_step=+SPEED_MOVE;
-//    PlayerGPS(map_data);
-     x_step=SPEED_MOVE;
-     y_step=SPEED_MOVE;
+     // Lưu trữ các tọa độ trước khi di chuyển
+    int old_x = x_pos;
+    int old_y = y_pos;
+
+    // Xác định bước di chuyển
+    x_step = SPEED_MOVE;
+    y_step = SPEED_MOVE;
+
+    // Di chuyển player
+    if(input_type.left == 1)  x_pos -= x_step;
+    if(input_type.right == 1) x_pos += x_step;
+    if(input_type.up == 1)    y_pos -= y_step;
+    if(input_type.down == 1)  y_pos += y_step;
+
+    // Kiểm tra va chạm với map
+    PlayerGPS(map_data);
 }
 
 void MainObject::PlayerGPS(Map& map_data)
 {
-    int x1=0,x2=0;
-    int y1=0,y2=0;
+    int width_min = std::min(width_frame, TILE_SIZE);
+    int height_min = std::min(height_frame, TILE_SIZE);
+     // Tính toán các ô mà player đang đứng
+    int x1 = x_pos/TILE_SIZE;
+    int x2 = (x_pos+width_min)/TILE_SIZE;
 
-    //check chieu rong
-    int height_min= std::min(height_frame,TILE_SIZE);
-    x1=(x_pos+x_step)/TILE_SIZE;
-    x2=(x_pos+x_step+width_frame-1)/TILE_SIZE;
+    int y1 = y_pos/TILE_SIZE;
+    int y2 = (y_pos+height_min)/TILE_SIZE;
 
-    y1=(y_pos+y_step)/TILE_SIZE;
-    y2=(y_pos+y_step+height_min-1)/TILE_SIZE;
-
-    if(x1>0 && x2<MAP_X && y1>0 && y2< MAP_Y )
+    // Kiểm tra va chạm với cạnh trên và cạnh dưới của bản đồ
+    if (y1<0)
     {
-        if(x_step >0 )
-        {
-            if(map_data.arr[y1][x2] == WALL || map_data.arr[y2][x2] == WALL )
-            {
-                x_pos=x2*TILE_SIZE;
-                x_pos-=width_frame+1;
-                x_step=0;
-            }
-        }
-        else if(x_step < 0 )
-            {
-                if(map_data.arr[y1][x1] == WALL || map_data.arr[y2][x1] == WALL )
-                {
-                    x_pos=(x1+1)*TILE_SIZE;
-                    x_step=0;
-                }
-            }
+        // Đặt tọa độ y của nhân vật để không vượt ra khỏi biên của bản đồ
+        if (y1 < 0)
+            y_pos = 0;
+        else
+            y_pos = (MAP_Y - 1) * TILE_SIZE - height_frame;
     }
-    //check chieu dai
-    int width_min=std::min(width_frame,TILE_SIZE);
-    x1=(x_pos)/TILE_SIZE;
-    x2=(x_pos+width_min)/TILE_SIZE;
-
-    y1=(y_pos+y_step)/TILE_SIZE;
-    y2=(y_pos+y_step+height_frame-1)/TILE_SIZE;
-
-    if(x1>=0 && x2<MAP_X && y2>=0 && y2<MAP_Y)
+    if(y2>=MAP_Y-1)
     {
-        if(y_step > 0 )
-        {
-            if(map_data.arr[y2][x1] == WALL || map_data.arr[y2][x2] == WALL )
-            {
-                y_pos=y2*TILE_SIZE;
-                y_pos-=height_frame+1;
-                y_step=0;
-            }
-        }
-        else if(y_step < -1 )
-        {
-            if(map_data.arr[y1][x1] == WALL || map_data.arr[y1][x2] == WALL )
-            {
-                y_pos=(y1+1)*TILE_SIZE;
-                y_step=0;
-            }
-        }
+        y_pos=MAP_Y*TILE_SIZE-height_frame;
     }
-    if(input_type.left==1)  x_pos-=x_step;
-    if(input_type.right==1) x_pos+=x_step;
-    if(input_type.up==1)    y_pos-=y_step;
-    if(input_type.down==1)  y_pos+=y_step;
+    // Kiểm tra va chạm với cạnh trái và cạnh phải của bản đồ
+    if (x1<0)
+    {
+        // Đặt tọa độ x của nhân vật để không vượt ra khỏi biên của bản đồ
+        if (x1<0)
+            x_pos = 0;
+        else
+            x_pos = (MAP_X-1)*TILE_SIZE-width_frame;
+    }
+    if(x2>=MAP_X-1)
+    {
+         x_pos=MAP_X*TILE_SIZE-width_frame;
+    }
 }
 
 
