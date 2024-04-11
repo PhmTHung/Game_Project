@@ -8,9 +8,16 @@ Weapon::Weapon()
 
     x_border=100;
     y_border=100;
+
     is_move=false;
 
-    weapon_type=MAGE_TYPE;
+    weapon_type=50;
+    enum
+    {
+        MAGE_TYPE=50,
+        LASER_TYPE=51,
+        THREAT_BULLET=52
+    };
 }
 Weapon::~Weapon(){}
 void Weapon::LoadImgWeapon(SDL_Renderer* des)
@@ -26,6 +33,10 @@ void Weapon::LoadImgWeapon(SDL_Renderer* des)
         {
             LoadImage("image/Weapon/laser.png",des);
             break;
+        }
+    case THREAT_BULLET:
+        {
+            LoadImage("image/Weapon/threatbullet.png",des);
         }
     }
 }
@@ -48,7 +59,7 @@ void Weapon::WeaponRange(int x_border,int y_border)
     case IN_DOWN:
         rect.y +=y_val;
         if(rect.y>y_border) is_move=false;
-
         break;
     }
 }
+

@@ -3,9 +3,36 @@
 #include "mainobj.h"
 #include "map.h"
 #include "Threats.h"
+#include "vukhi.h"
 #include "FPS.h"
 #include<iostream>
 
+
+std::vector<Threats*> MakeThreatsList()
+{
+    std::vector<Threats*>list_threats;
+    Threats* threat_obj=new Threats[5];
+    for(int i=0;i<5;i++)
+    {
+        Threats* p_threat=(threat_obj+i);
+        if(p_threat!=NULL)
+        {
+            p_threat->LoadImage("image/Threats/threatleft.png", gScreen);
+            p_threat->LoadImage("image/Threats/threatright.png", gScreen);
+            p_threat->LoadImage("image/Threats/threatforward.png", gScreen);
+            p_threat->LoadImage("image/Threats/threatback.png", gScreen);
+            p_threat->set_clips();
+            p_threat->set_x_pos(i*100+50);
+            p_threat->set_y_pos(i*120);
+
+            Weapon* p_bullet=new Weapon();
+            p_threat->InitBullet(p_bullet,gScreen);
+
+            list_threats.push_back(p_threat);
+        }
+    }
+    return list_threats;
+}
 //Game *game = NULL;
 bool InitData()
 {
@@ -41,23 +68,16 @@ int main (int argc,char* argv[])
     G_Map.LoadTiles(gScreen);
 
     MainObject player;
-
     player.LoadImage("image/MainCharacter/right.png",gScreen);
     player.LoadImage("image/MainCharacter/left.png",gScreen);
     player.LoadImage("image/MainCharacter/ahead.png",gScreen);
     player.LoadImage("image/MainCharacter/behind.png",gScreen);
     player.set_clips();
 
-    Threats threats;
+    std::vector<Threats*> threats_list = MakeThreatsList();
 
-    threats.LoadImage("image/Threats/threatleft.png",gScreen);
-    threats.LoadImage("image/Threats/threatright.png",gScreen);
-    threats.LoadImage("image/Threats/threatforward.png",gScreen);
-    threats.LoadImage("image/Threats/threatback.png",gScreen);
-    threats.set_clips();
-
-    const int FPS = 30;
-    const int framDelay=1000/FPS;
+    //const int FPS = 30;
+    //const int framDelay=1000/FPS;
 
     Uint32 frameStart;
     int frameTime;
@@ -85,9 +105,51 @@ int main (int argc,char* argv[])
         player.player_move(map_data);
         player.PlayerGPS(map_data);
         player.FrameShow(gScreen);
+        player.DrawHPBar(gScreen);
 
-        threats.Threat_Move(map_data,player);
-        threats.FrameShow(gScreen);
+       for (int i=0;i<threats_list.size();i++)
+        {
+            Threats* p_threat=threats_list.at(i);
+            if(p_threat!=NULL)
+            {
+                p_threat->Threat_Move(map_data);
+                p_threat->SetMapXY(map_data.start_x,map_data.start_y);
+                p_threat->MakeBullet(gScreen,SCREEN_WIDTH,SCREEN_HEIGHT);
+                p_threat->FrameShow(gScreen);
+                p_threat->DrawHPBar(gScreen);
+            }
+        }
+
+        std::vector<Weapon*> bullet_arr=player.get_weapon_list();
+        for(int r=0;r<bullet_arr.size();r++)
+        {
+            Weapon* p_weapon=bullet_arr.at(r);
+            if(p_weapon!=NULL)
+            {
+                for(int t=0;t<threats_list.size();t++)
+                {
+                    Threats* obj_threat=threats_list.at(t);
+                    if(obj_threat!=NULL)
+                    {
+                        SDL_Rect tRect;
+                        tRect.x=obj_threat->GetRect().x;
+                        tRect.y=obj_threat->GetRect().y;
+                        tRect.w=obj_threat->get_width_frame();
+                        tRect.h=obj_threat->get_height_frame();
+
+                        SDL_Rect bRect=p_weapon->GetRect();
+
+                        bool bCol=SDLBaseFunc::CheckCollision(bRect,tRect);
+                        if(bCol)
+                        {
+                            player.DeleteBullet(r);
+                            obj_threat->Free();
+                            threats_list.erase(threats_list.begin()+t);
+                        }
+                    }
+                }
+            }
+        }
 
         SDL_RenderPresent(gScreen);
 
@@ -114,23 +176,4 @@ int main (int argc,char* argv[])
 
     return 0;
 }
-//std::vector<Threats*> MakeThreatsList()
-//{
-//    std::vector<Threats*>list_threats;
-//    Threats* threat_obj=new Threats[20];
-//    for(int i=0;i<20;i++)
-//    {
-//        Threats* p_threat=(threat_obj+i);
-//        if(p_threat!=NULL)
-//        {
-//            threat_obj->LoadImage("image/Threats/threatleft.png", screen);
-//            threat_obj->LoadImage("image/Threats/threatright.png", screen);
-//            threat_obj->LoadImage("image/Threats/threatforward.png", screen);
-//            threat_obj->LoadImage("image/Threats/threatback.png", screen);
-//            threat_obj->set_clips();
-//            threat_obj->set_x_pos(i * 32 + 250);
-//            threat_obj->set_y_pos(250);
-//            list_threats.push_back(threat_obj);
-//        }
-//    }
-//}
+

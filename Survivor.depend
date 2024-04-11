@@ -421,14 +421,15 @@
 1710471394 c:\laptrinh\survivor\baseobj.h
 	"basefunc.h"
 
-1710470075 source:c:\laptrinh\survivor\game_project\basefunc.cpp
+1712760360 source:c:\laptrinh\survivor\game_project\basefunc.cpp
 	"basefunc.h"
 
-1712594818 c:\laptrinh\survivor\game_project\basefunc.h
+1712755022 c:\laptrinh\survivor\game_project\basefunc.h
 	<string>
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
+	<vector>
 
 1712589725 source:c:\laptrinh\survivor\game_project\baseobj.cpp
 	"baseobj.h"
@@ -438,12 +439,13 @@
 1712589709 c:\laptrinh\survivor\game_project\baseobj.h
 	"basefunc.h"
 
-1712672736 source:c:\laptrinh\survivor\game_project\main.cpp
+1712760149 source:c:\laptrinh\survivor\game_project\main.cpp
 	"basefunc.h"
 	"baseobj.h"
 	"mainobj.h"
 	"map.h"
 	"Threats.h"
+	"vukhi.h"
 	"FPS.h"
 	<iostream>
 
@@ -470,7 +472,7 @@
 	"mainobj.h"
 	<iostream>
 
-1712671242 source:c:\laptrinh\survivor\game_project\mainobj.cpp
+1712756148 source:c:\laptrinh\survivor\game_project\mainobj.cpp
 	"mainobj.h"
 	"basefunc.h"
 	"baseobj.h"
@@ -478,27 +480,28 @@
 	<iostream>
 	<algorithm>
 
-1712671806 c:\laptrinh\survivor\game_project\mainobj.h
+1712760805 c:\laptrinh\survivor\game_project\mainobj.h
 	<vector>
 	"basefunc.h"
 	"baseobj.h"
 	"map.h"
 	"vukhi.h"
 
-1712656838 c:\laptrinh\survivor\game_project\vukhi.h
+1712757331 c:\laptrinh\survivor\game_project\vukhi.h
 	"basefunc.h"
 	"baseobj.h"
 
-1712657875 source:c:\laptrinh\survivor\game_project\vukhi.cpp
+1712757951 source:c:\laptrinh\survivor\game_project\vukhi.cpp
 	"vukhi.h"
 	"baseobj.h"
 
-1712672919 c:\laptrinh\survivor\game_project\threats.h
+1712760116 c:\laptrinh\survivor\game_project\threats.h
 	"basefunc.h"
 	"baseobj.h"
 	"mainobj.h"
+	"vukhi.h"
 
-1712672876 source:c:\laptrinh\survivor\game_project\threats.cpp
+1712759501 source:c:\laptrinh\survivor\game_project\threats.cpp
 	"Threats.h"
 	"mainobj.h"
 	<cstdlib>

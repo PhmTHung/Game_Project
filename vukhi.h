@@ -19,7 +19,8 @@ public:
     enum WeaponType
     {
         MAGE_TYPE=50,
-        LASER_TYPE=51
+        LASER_TYPE=51,
+        THREAT_BULLET=52
     };
 
     void set_x_val(const int &xVal){x_val=xVal;}
@@ -33,13 +34,15 @@ public:
 
     void set_weapon_direct(const int & weaponDirect){weapon_direct=weaponDirect;}
     int  get_weapon_direct()const {return weapon_direct;}
-    void HandleMove(const int& x_border,const int& y_border);
+
+    //void HandleMove(const int& x_border,const int& y_border);
     void WeaponRange(int x_border,int y_border);
+
     int get_x_range() const{return x_border;}
     int get_y_range() const{return y_border;}
 
     void set_weapon_type(const unsigned int& weaponType){weapon_type=weaponType;}
-    unsigned int get_weapon_type()const{return weapon_type;}
+    int get_weapon_type()const{return weapon_type;}
 
     void LoadImgWeapon(SDL_Renderer* des);
 private:
@@ -52,6 +55,6 @@ private:
     bool is_move;
     //hướng bắn
     int weapon_direct;
-    unsigned int weapon_type;
+    int weapon_type;
 };
 #endif // VU_KHI_H

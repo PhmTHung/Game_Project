@@ -5,6 +5,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <vector>
 //#include <>
 
 static SDL_Window* gWindow =NULL;
@@ -26,6 +27,7 @@ const int FRAME_PER_SECOND = 25;
 
 #define TILE_SIZE 32
 #define SPEED_MOVE 8
+#define THREAT_SPEED 3
 #define WALL 1
 #define MAP_X 25
 #define MAP_Y 25
@@ -49,5 +51,9 @@ typedef struct Map
     int arr[MAP_X][MAP_Y];
 
 };
+namespace SDLBaseFunc
+{
+    bool CheckCollision(const SDL_Rect& object1, const SDL_Rect& object2);
+}
 #endif // BASE_H
 

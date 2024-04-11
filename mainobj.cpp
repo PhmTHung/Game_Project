@@ -5,25 +5,23 @@
 #include <iostream>
 #include <algorithm>
 MainObject::MainObject()
-{   //hieu ung di chuyen
+{
     frame=0;
-
     x_pos=400;
     y_pos=400;
-
     x_step=0;
     y_step=0;
 
     width_frame=0;
     height_frame=39;
     status=-1;
-    //trang thai di chuyen
-    //move_type
 
     input_type.left=0;
 	input_type.right=0;
 	input_type.down=0;
 	input_type.up=0;
+
+    InitHP(100);
 }
 MainObject::~MainObject(){}
 // ke thua LoadImage tu BaseObject
@@ -206,7 +204,6 @@ void MainObject::HandleInputAction(SDL_Event events,SDL_Renderer* screen)
                 p_weapon->SetRect(this->rect.x+width_frame/2-15,rect.y-0.1*height_frame);
                 break;
             }
-            //p_vukhi->SetRect(this->rect.x+width_frame/2,rect.y-0.1*height_frame);
             p_weapon->set_x_val(20);
             p_weapon->set_is_move(true);
 
@@ -298,6 +295,34 @@ void MainObject::PlayerGPS(Map& map_data)
     }
 }
 
+void MainObject::InitHP(int initialHP) {
+    hp = initialHP;
+}
+void MainObject::DecreaseHP(int amount) {
+    hp -= amount;
+    // Đảm bảo HP không nhỏ hơn 0
+    if (hp < 0) {
+        hp = 0;
+    }
+}
+void MainObject::DrawHPBar(SDL_Renderer* renderer) {
+    // Vẽ thanh HP
+    SDL_Rect hpBarRect = { x_pos+10, y_pos-10, hp, 10 }; // Ví dụ: thanh HP là hình chữ nhật màu đỏ
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Màu đỏ
+    SDL_RenderFillRect(renderer, &hpBarRect);
+}
 
-
-
+void MainObject::DeleteBullet(const int& idx)
+{
+    int size=p_weapon_list.size();
+    if(size>0 && idx <size)
+    {
+        Weapon* p_bullet=p_weapon_list.at(idx);
+        p_weapon_list.erase(p_weapon_list.begin()+idx);
+        if(p_bullet)
+        {
+            delete p_bullet;
+            p_bullet=NULL;
+        }
+    }
+}

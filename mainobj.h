@@ -37,12 +37,21 @@ public:
     }
     void HandleWeapon(SDL_Renderer* des);
     std::vector<Weapon*>get_weapon_list() const{return p_weapon_list;}
+    void DeleteBullet(const int& idx);
 
-    void SetPosX(const int &pos){x_pos=pos;}
-    int GetPosX() const {return x_pos;}
-
-    void SetPosY(const int &pos){y_pos=pos;}
-    int GetPosY() const {return y_pos;}
+    void set_x_pos(const int &pos){x_pos=pos;}
+    int get_x_pos() const {return x_pos;}
+    void set_y_pos(const int &pos){y_pos=pos;}
+    int get_y_pos() const {return y_pos;}
+    void set_width_frame(const int &width){width_frame=width;}
+    int get_width_frame() const {return width_frame;}
+    void set_height_frame(const int &height){height_frame=height;}
+    int get_height_frame() const {return height_frame;}
+    //tao thanh HP
+    void InitHP(int initialHP);
+    void DecreaseHP(int amount);
+    void DrawHPBar(SDL_Renderer* renderer);
+    //chuyen vu khi
 
 private:
     //di chuyen trai phai x_step=x_val
@@ -62,8 +71,10 @@ private:
     int frame;
     //trang thai di chuyen
     int status;
-    //
     //vu khi
     std::vector<Weapon*> p_weapon_list;
+
+    //them thanh HP
+    int hp;
 };
 #endif // MAIN_OBJ_H
