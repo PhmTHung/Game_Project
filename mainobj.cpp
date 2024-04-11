@@ -326,3 +326,12 @@ void MainObject::DeleteBullet(const int& idx)
         }
     }
 }
+
+SDL_Rect MainObject::GetRectFrame()
+{
+    SDL_Rect p_rect;
+    p_rect.x=rect.x;
+    p_rect.y=rect.y;
+    p_rect.w=width_frame;
+    p_rect.h=height_frame;
+}

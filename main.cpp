@@ -5,6 +5,7 @@
 #include "Threats.h"
 #include "vukhi.h"
 #include "FPS.h"
+#include "explosion.h"
 #include<iostream>
 
 
@@ -76,8 +77,15 @@ int main (int argc,char* argv[])
 
     std::vector<Threats*> threats_list = MakeThreatsList();
 
-    //const int FPS = 30;
-    //const int framDelay=1000/FPS;
+    //xu ly vu no
+    Explosion exp_threat;
+    Explosion exp_main;
+
+//    bool tRet=exp_main.LoadImage("image/Explosion/bloodexplo.png",gScreen);
+//    exp_main.set_clip();
+
+    bool tRet=exp_threat.LoadImage("image/Explosion/explosionx8.png",gScreen);
+    exp_threat.set_clip();
 
     Uint32 frameStart;
     int frameTime;
@@ -117,8 +125,40 @@ int main (int argc,char* argv[])
                 p_threat->MakeBullet(gScreen,SCREEN_WIDTH,SCREEN_HEIGHT);
                 p_threat->FrameShow(gScreen);
                 p_threat->DrawHPBar(gScreen);
+
+                SDL_Rect rect_player=player.GetRectFrame();
+                bool bCol=false;
+                std::vector<Weapon*> threat_bullet_list=p_threat->get_bullet_list();
+                for(int b=0;b<threat_bullet_list.size();b++)
+                {
+                    Weapon* thr_bullet=threat_bullet_list.at(b);
+                    if(thr_bullet!=NULL)
+                    {
+                        bCol=SDLBaseFunc::CheckCollision(thr_bullet->GetRect(),rect_player);
+                        if(bCol)
+                        {
+                            p_threat->DeleteBullet(b);
+                            break;//khong kiem tra vien dan nao khac
+                        }
+                    }
+                }
+                SDL_Rect rect_threat=p_threat->GetRectFrame();
+                bool bCol2=SDLBaseFunc::CheckCollision(rect_player,rect_threat);
+                //trung dan hoac cham vao threat
+                //bo sung bij tru mau
+                if(bCol||bCol2)
+                {
+                    p_threat->Free();
+                    //close();
+                    SDL_QUIT;
+                }
             }
         }
+
+        int frame_exp_width=exp_threat.get_frame_width();
+        int frame_exp_height=exp_threat.get_frame_height();
+        //int frame_expmain_width=exp_main.get_frame_width();
+        //int frame_expmain_height=exp_main.get_frame_height();
 
         std::vector<Weapon*> bullet_arr=player.get_weapon_list();
         for(int r=0;r<bullet_arr.size();r++)
@@ -142,6 +182,15 @@ int main (int argc,char* argv[])
                         bool bCol=SDLBaseFunc::CheckCollision(bRect,tRect);
                         if(bCol)
                         {
+                            for(int i=0;i<NUM_FRAM_EXP;i++)
+                            {
+                                int x_pos=p_weapon->GetRect().x-frame_exp_width*0.5;
+                                int y_pos=p_weapon->GetRect().y-frame_exp_height*0.5;
+
+                                exp_threat.set_frame(i);
+                                exp_threat.SetRect(x_pos,y_pos);
+                                exp_threat.Show(gScreen);
+                            }
                             player.DeleteBullet(r);
                             obj_threat->Free();
                             threats_list.erase(threats_list.begin()+t);
@@ -150,6 +199,7 @@ int main (int argc,char* argv[])
                 }
             }
         }
+
 
         SDL_RenderPresent(gScreen);
 

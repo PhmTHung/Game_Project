@@ -60,6 +60,9 @@ public:
 
     void InitBullet(Weapon* p_bullet,SDL_Renderer* screen);
     void MakeBullet(SDL_Renderer* screen,const int& x_limit,const int& y_limit);
+    void DeleteBullet(const int& idx);
+
+    SDL_Rect GetRectFrame();
 private:
     int x_step,y_step;
     int frame;

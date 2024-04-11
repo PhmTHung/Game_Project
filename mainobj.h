@@ -30,6 +30,9 @@ public:
     void player_move(Map& map_data);
     //playercoordinate xu ly map
     void PlayerGPS(Map& map_data);
+
+    SDL_Rect GetRectFrame();
+
     //xu ly vu khi
     void set_weapon_list(std::vector<Weapon*>weapon_list)
     {

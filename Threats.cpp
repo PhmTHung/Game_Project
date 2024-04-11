@@ -203,25 +203,30 @@ void Threats::InitBullet(Weapon* p_bullet,SDL_Renderer* screen)
         p_bullet->set_weapon_type(Weapon::THREAT_BULLET);
         p_bullet->LoadImgWeapon(screen);
         p_bullet->set_is_move(true);
-        switch (status)
-            {
-            case MOVE_LEFT:
-                p_bullet->set_weapon_direct(Weapon::IN_LEFT);
-                p_bullet->SetRect(this->x_pos+20,y_pos+10);
-                break;
-            case MOVE_RIGHT:
-                p_bullet->set_weapon_direct(Weapon::IN_RIGHT);
-                p_bullet->SetRect(this->x_pos+20,y_pos+10);
-                break;
-            case MOVE_UP:
-                p_bullet->set_weapon_direct(Weapon::IN_UP);
-                p_bullet->SetRect(this->x_pos+20,y_pos+10);
-                break;
-            case MOVE_DOWN:
-                p_bullet->set_weapon_direct(Weapon::IN_DOWN);
-                p_bullet->SetRect(this->x_pos+20,y_pos+10);
-                break;
-            }
+//        switch (status)
+//            {
+//            case MOVE_LEFT:
+//                p_bullet->set_weapon_direct(Weapon::IN_LEFT);
+//                p_bullet->SetRect(this->x_pos+20,y_pos+10);
+//                break;
+//            case MOVE_RIGHT:
+//                p_bullet->set_weapon_direct(Weapon::IN_RIGHT);
+//                p_bullet->SetRect(this->x_pos+20,y_pos+10);
+//                break;
+//            case MOVE_UP:
+//                p_bullet->set_weapon_direct(Weapon::IN_UP);
+//                p_bullet->SetRect(this->x_pos+20,y_pos+10);
+//                break;
+//            case MOVE_DOWN:
+//                p_bullet->set_weapon_direct(Weapon::IN_DOWN);
+//                p_bullet->SetRect(this->x_pos+20,y_pos+10);
+//                break;
+//            }
+        //p_bullet->set_weapon_direct(Weapon::IN_LEFT);
+        p_bullet->set_weapon_direct(Weapon::IN_RIGHT);
+        //p_bullet->set_weapon_direct(Weapon::IN_UP);
+        //p_bullet->set_weapon_direct(Weapon::IN_DOWN);
+        p_bullet->SetRect(this->x_pos+20,y_pos+10);
         p_bullet->set_x_val(20);
         bullet_list.push_back(p_bullet);
     }
@@ -235,9 +240,46 @@ void Threats::MakeBullet(SDL_Renderer* screen,const int& x_limit,const int& y_li
         {
             if(p_bullet->get_is_move())
             {
-                p_bullet->WeaponRange(x_limit,y_limit);
-                p_bullet->Render(screen);
+                int bullet_dist=rect.x-p_bullet->GetRect().x;
+                if(bullet_dist<=20)
+                {
+                     p_bullet->WeaponRange(x_limit,y_limit);
+                     p_bullet->Render(screen);
+                }
+                else
+                {
+                    p_bullet->set_is_move(false);
+                }
+
+            }
+            else
+            {
+                p_bullet->set_is_move(true);
+                p_bullet->SetRect(this->x_pos+20,y_pos+10);
             }
         }
     }
+}
+
+void Threats::DeleteBullet(const int& idx)
+{
+    int size=bullet_list.size();
+    if(size>0 && idx <size)
+    {
+        Weapon* p_bullet=bullet_list.at(idx);
+        bullet_list.erase(bullet_list.begin()+idx);
+        if(p_bullet)
+        {
+            delete p_bullet;
+            p_bullet=NULL;
+        }
+    }
+}
+SDL_Rect Threats::GetRectFrame()
+{
+    SDL_Rect p_rect;
+    p_rect.x=rect.x;
+    p_rect.y=rect.y;
+    p_rect.w=width_frame;
+    p_rect.h=height_frame;
 }

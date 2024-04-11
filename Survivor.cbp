@@ -47,6 +47,10 @@
 		<Unit filename="basefunc.h" />
 		<Unit filename="baseobj.cpp" />
 		<Unit filename="baseobj.h" />
+		<Unit filename="dropitem.cpp" />
+		<Unit filename="dropitem.h" />
+		<Unit filename="explosion.cpp" />
+		<Unit filename="explosion.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="mainobj.cpp" />
 		<Unit filename="mainobj.h" />
