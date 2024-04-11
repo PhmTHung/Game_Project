@@ -6,9 +6,10 @@
 #include "vukhi.h"
 #include "FPS.h"
 #include "explosion.h"
+#include "dropitem.h"
 #include<iostream>
 
-
+std::vector<DropItem*> drop_items;
 std::vector<Threats*> MakeThreatsList()
 {
     std::vector<Threats*>list_threats;
@@ -127,15 +128,15 @@ int main (int argc,char* argv[])
                 p_threat->DrawHPBar(gScreen);
 
                 SDL_Rect rect_player=player.GetRectFrame();
-                bool bCol=false;
+                bool bCol1=false;
                 std::vector<Weapon*> threat_bullet_list=p_threat->get_bullet_list();
                 for(int b=0;b<threat_bullet_list.size();b++)
                 {
                     Weapon* thr_bullet=threat_bullet_list.at(b);
                     if(thr_bullet!=NULL)
                     {
-                        bCol=SDLBaseFunc::CheckCollision(thr_bullet->GetRect(),rect_player);
-                        if(bCol)
+                        bCol1=SDLBaseFunc::CheckCollision(thr_bullet->GetRect(),rect_player);
+                        if(bCol1)
                         {
                             p_threat->DeleteBullet(b);
                             break;//khong kiem tra vien dan nao khac
@@ -146,20 +147,28 @@ int main (int argc,char* argv[])
                 bool bCol2=SDLBaseFunc::CheckCollision(rect_player,rect_threat);
                 //trung dan hoac cham vao threat
                 //bo sung bij tru mau
-                if(bCol||bCol2)
+                if(bCol1 || bCol2)
                 {
-                    p_threat->Free();
-                    //close();
-                    SDL_QUIT;
+                    int width_exp_frame=exp_main.get_frame_width();
+                    int height_exp_frame=exp_main.get_frame_height();
+                    for(int exp=0;exp<NUM_FRAM_EXP;exp++)
+                    {
+                        int x_pos=(player.GetRect().x+player.get_width_frame()*0.5)-width_exp_frame*0.5;
+                        int y_pos=(player.GetRect().y+player.get_height_frame()*0.5)-height_exp_frame*0.5;
+
+                        exp_main.set_frame(exp);
+                        exp_main.SetRect(x_pos,y_pos);
+                        exp_main.Show(gScreen);
+                        SDL_RenderPresent(gScreen);
+                    }
                 }
             }
         }
 
         int frame_exp_width=exp_threat.get_frame_width();
         int frame_exp_height=exp_threat.get_frame_height();
-        //int frame_expmain_width=exp_main.get_frame_width();
-        //int frame_expmain_height=exp_main.get_frame_height();
 
+////        /*threat trung dan*/
         std::vector<Weapon*> bullet_arr=player.get_weapon_list();
         for(int r=0;r<bullet_arr.size();r++)
         {
@@ -182,23 +191,34 @@ int main (int argc,char* argv[])
                         bool bCol=SDLBaseFunc::CheckCollision(bRect,tRect);
                         if(bCol)
                         {
-                            for(int i=0;i<NUM_FRAM_EXP;i++)
-                            {
-                                int x_pos=p_weapon->GetRect().x-frame_exp_width*0.5;
-                                int y_pos=p_weapon->GetRect().y-frame_exp_height*0.5;
-
-                                exp_threat.set_frame(i);
-                                exp_threat.SetRect(x_pos,y_pos);
-                                exp_threat.Show(gScreen);
-                            }
+                            //them weapon damge;
+                            obj_threat->DecreaseHP(p_weapon->GetWeaponDamage());
                             player.DeleteBullet(r);
-                            obj_threat->Free();
-                            threats_list.erase(threats_list.begin()+t);
+                            if(obj_threat->GetHP()<=0)
+                            {
+                                for(int i=0;i<NUM_FRAM_EXP;i++)
+                                {
+                                    int x_pos=p_weapon->GetRect().x-frame_exp_width*0.5;
+                                    int y_pos=p_weapon->GetRect().y-frame_exp_height*0.5;
+
+                                    DropItem* drop_item= new DropItem();
+                                    drop_item->LoadImage("image/DropItem/coin.png",gScreen);
+                                    drop_item->SetRect(x_pos,y_pos);
+
+                                    exp_threat.set_frame(i);
+                                    exp_threat.SetRect(x_pos,y_pos);
+                                    exp_threat.Show(gScreen);
+                                }
+                                obj_threat->Free();
+                                threats_list.erase(threats_list.begin()+t);
+                            }
+
                         }
                     }
                 }
             }
         }
+
 
 
         SDL_RenderPresent(gScreen);

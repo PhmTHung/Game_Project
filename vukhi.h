@@ -45,6 +45,7 @@ public:
     int get_weapon_type()const{return weapon_type;}
 
     void LoadImgWeapon(SDL_Renderer* des);
+    int GetWeaponDamage()const{return weapon_damage;}
 private:
     int x_val;
     int y_val;
@@ -56,5 +57,7 @@ private:
     //hướng bắn
     int weapon_direct;
     int weapon_type;
+
+    int weapon_damage;
 };
 #endif // VU_KHI_H

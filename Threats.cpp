@@ -145,32 +145,29 @@ void Threats::Threat_GPS(Map& map_data)
     int width_min = std::min(width_frame, TILE_SIZE);
     int height_min = std::min(height_frame, TILE_SIZE);
     // Tính toán các ô đang đứng
-    int x1 = x_pos/TILE_SIZE;
-    int x2 = (x_pos+width_min)/TILE_SIZE;
-    int y1 = y_pos/TILE_SIZE;
-    int y2 = (y_pos+height_min)/TILE_SIZE;
+    int x1=x_pos/TILE_SIZE;
+    int x2=(x_pos+width_min)/TILE_SIZE;
+    int y1=y_pos/TILE_SIZE;
+    int y2=(y_pos+height_min)/TILE_SIZE;
     // Kiểm tra va chạm với cạnh trên và cạnh dưới của bản đồ
     if (y1<0)
     {
         // Đặt tọa độ y của nhân vật để không vượt ra khỏi biên của bản đồ
-        if (y1 < 0)
-            y_pos = 0;
+        if(y1<0)
+            y_pos=0;
         else
-            y_pos = (MAP_Y - 1) * TILE_SIZE - height_frame;
+            y_pos=(MAP_Y-1)*TILE_SIZE-height_frame;
     }
     if(y2>=MAP_Y-1)
     {
         y_pos=MAP_Y*TILE_SIZE-height_frame;
     }
     // Kiểm tra va chạm với cạnh trái và cạnh phải của bản đồ
-    if (x1<0)
+    if(x1<0)
     {
         // Đặt tọa độ x của nhân vật để không vượt ra khỏi biên của bản đồ
-        if (x1<0)
-            x_pos = 0;
-
-        else
-            x_pos = (MAP_X-1)*TILE_SIZE-width_frame;
+        if (x1<0) x_pos = 0;
+        else x_pos=(MAP_X-1)*TILE_SIZE-width_frame;
     }
     if(x2>=MAP_X-1)
     {
@@ -182,17 +179,15 @@ void Threats::InitHP(int initialHP)
     hp = initialHP;
 }
 
-void Threats::DecreaseHP(int amount)
+void Threats::DecreaseHP(int damage)
 {
-    hp -= amount;
-    // Đảm bảo máu không nhỏ hơn 0
+    hp -= damage;
     if (hp < 0) hp=0;
 }
-
 void Threats::DrawHPBar(SDL_Renderer* renderer)
 {
     SDL_Rect hpBarRect = { x_pos+30, y_pos-10,hp,10 }; // Ví dụ: thanh máu là hình chữ nhật màu đỏ
-    SDL_SetRenderDrawColor(renderer, 200, 100, 0, 255); // Màu đỏ
+    SDL_SetRenderDrawColor(renderer, 250, 150, 0, 255); // Màu đỏ
     SDL_RenderFillRect(renderer, &hpBarRect);
 }
 
@@ -283,3 +278,4 @@ SDL_Rect Threats::GetRectFrame()
     p_rect.w=width_frame;
     p_rect.h=height_frame;
 }
+

@@ -52,8 +52,9 @@ public:
     }
 
     void InitHP(int initialHP);
-    void DecreaseHP(int amount);
+    void DecreaseHP(int damage);
     void DrawHPBar(SDL_Renderer* renderer);
+    int GetHP()const{return hp;}
 
     std::vector<Weapon*>get_bullet_list() const{return bullet_list;}
     void set_bullet_list(const std::vector<Weapon*>& bl_list){bullet_list=bl_list;}
@@ -65,14 +66,18 @@ public:
     SDL_Rect GetRectFrame();
 private:
     int x_step,y_step;
+
     int frame;
+    SDL_Rect frame_clip[4];
+    int width_frame,height_frame;
+
     int status;
     int x_pos,y_pos;
     int map_x,map_y;
-    int width_frame,height_frame;
+
     int type_move;
     Input input_type;
-    SDL_Rect frame_clip[4];
+
     int come_back_time;
     int hp;
 

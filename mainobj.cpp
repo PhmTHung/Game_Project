@@ -12,7 +12,7 @@ MainObject::MainObject()
     x_step=0;
     y_step=0;
 
-    width_frame=0;
+    width_frame=32;
     height_frame=39;
     status=-1;
 
