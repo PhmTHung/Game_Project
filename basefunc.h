@@ -5,8 +5,8 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 #include <vector>
-//#include <>
 
 static SDL_Window* gWindow =NULL;
 static SDL_Renderer* gScreen=NULL;

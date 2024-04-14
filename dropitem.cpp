@@ -11,23 +11,25 @@ bool DropItem::LoadImage(std::string path,SDL_Renderer* screen)
     bool ret=BaseObject::LoadImage(path,screen);
     if(ret==true)
     {
-        width_frame=rect.w;
+        frame_width=rect.w;
     }
     return ret;
 }
-void DropItem::FrameShow(SDL_Renderer* des)
+void DropItem::Show(SDL_Renderer* screen)
 {
-        ++frame;
-        if(frame>=4){frame=0;}
-        rect.x=x_pos;
-        rect.y=y_pos;
-        SDL_Rect* current_clip =& frame_clip[frame];
-        SDL_Rect renderQuad={rect.x,rect.y,width_frame,height_frame};
-        SDL_RenderCopy(des,p_object,current_clip,&renderQuad);
+    SDL_Rect* current_clip= &frame_clip[frame];
+    SDL_Rect render_quad={rect.x,rect.y,frame_width,frame_height};
+    if(current_clip!= NULL)
+    {
+        render_quad.w=current_clip->w;
+        render_quad.h=current_clip->h;
+    }
+    SDL_RenderCopy(screen,p_object,current_clip,&render_quad);
 }
+
 void DropItem::set_clips()
 {
-    if(width_frame>0 && height_frame >0)
+    if(frame_width>0 && frame_height >0)
     {
         frame_clip[0].x=0;
         frame_clip[0].y=0;
@@ -48,5 +50,10 @@ void DropItem::set_clips()
         frame_clip[3].y=0;
         frame_clip[3].w=32;
         frame_clip[3].h=64;
+    }
+}
+void DropItem::Update(Uint32 time) {
+    if (time_exist > 0) {
+        time_exist -= time;
     }
 }

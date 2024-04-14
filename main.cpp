@@ -5,6 +5,7 @@
 #include "Threats.h"
 #include "vukhi.h"
 #include "FPS.h"
+#include "text.h"
 #include "explosion.h"
 #include "dropitem.h"
 #include<iostream>
@@ -36,6 +37,7 @@ std::vector<Threats*> MakeThreatsList()
     return list_threats;
 }
 //Game *game = NULL;
+TTF_Font* gFont=NULL;
 bool InitData()
 {
     bool flag=true;
@@ -56,6 +58,16 @@ bool InitData()
             if((IMG_Init(imgFlags)&&imgFlags)) std::cout<<"Create init image.PNG"<<std::endl;
             flag=true;
         }
+        if(TTF_Init()==-1) flag=false;
+        else
+        {
+            gFont=TTF_OpenFont("textfont/textfont.ttf",18);
+            if(gFont!=NULL)
+            {
+                flag=false;
+                std::cout<<"TTF cannot Init";
+            }
+        }
     }
     return flag;
 }
@@ -65,6 +77,10 @@ int main (int argc,char* argv[])
 
     ImpTimer fps_timer;
     if(InitData()==false) return -1;
+    //
+    TextManager time;
+    time.setColorType(TextManager::WHITE_TEXT);
+
     GameMap G_Map;
     G_Map.LoadMap("map.txt");
     G_Map.LoadTiles(gScreen);
@@ -81,12 +97,20 @@ int main (int argc,char* argv[])
     //xu ly vu no
     Explosion exp_threat;
     Explosion exp_main;
-
-//    bool tRet=exp_main.LoadImage("image/Explosion/bloodexplo.png",gScreen);
-//    exp_main.set_clip();
-
     bool tRet=exp_threat.LoadImage("image/Explosion/explosionx8.png",gScreen);
+    if(tRet)
+    {
+        std::cout<<"Init file Explo OK"<<std::endl;
+    }
     exp_threat.set_clip();
+
+    DropItem coins;
+    bool cret=coins.LoadImage("image/DropItem/coin.png",gScreen);
+    if(cret)
+    {
+        std::cout<<"Init file DropIt OK"<<std::endl;
+    }
+    coins.set_clips();
 
     Uint32 frameStart;
     int frameTime;
@@ -116,6 +140,7 @@ int main (int argc,char* argv[])
         player.FrameShow(gScreen);
         player.DrawHPBar(gScreen);
 
+       //std::vector<Threats*> threats_list = MakeThreatsList();
        for (int i=0;i<threats_list.size();i++)
         {
             Threats* p_threat=threats_list.at(i);
@@ -127,40 +152,34 @@ int main (int argc,char* argv[])
                 p_threat->FrameShow(gScreen);
                 p_threat->DrawHPBar(gScreen);
 
-                SDL_Rect rect_player=player.GetRectFrame();
+                SDL_Rect rect_player=player.GetRect();
+                SDL_Rect rect_threat=p_threat->GetRect();
                 bool bCol1=false;
                 std::vector<Weapon*> threat_bullet_list=p_threat->get_bullet_list();
                 for(int b=0;b<threat_bullet_list.size();b++)
                 {
                     Weapon* thr_bullet=threat_bullet_list.at(b);
+                    SDL_Rect rect_threat_bullet=thr_bullet->GetRect();
+//
                     if(thr_bullet!=NULL)
                     {
-                        bCol1=SDLBaseFunc::CheckCollision(thr_bullet->GetRect(),rect_player);
+                        bCol1=SDLBaseFunc::CheckCollision(rect_threat_bullet,rect_player);
                         if(bCol1)
                         {
-                            p_threat->DeleteBullet(b);
-                            break;//khong kiem tra vien dan nao khac
+                            std::cout<<"Hit threat bullet"<<std::endl;
+                            //p_threat->DeleteBullet(b);
+                            player.DecreaseHP(thr_bullet->GetThBuDamage());
+                            break;
                         }
                     }
                 }
-                SDL_Rect rect_threat=p_threat->GetRectFrame();
                 bool bCol2=SDLBaseFunc::CheckCollision(rect_player,rect_threat);
-                //trung dan hoac cham vao threat
-                //bo sung bij tru mau
-                if(bCol1 || bCol2)
+                if(bCol2)
                 {
-                    int width_exp_frame=exp_main.get_frame_width();
-                    int height_exp_frame=exp_main.get_frame_height();
-                    for(int exp=0;exp<NUM_FRAM_EXP;exp++)
-                    {
-                        int x_pos=(player.GetRect().x+player.get_width_frame()*0.5)-width_exp_frame*0.5;
-                        int y_pos=(player.GetRect().y+player.get_height_frame()*0.5)-height_exp_frame*0.5;
+                    std::cout<<"Hit the threat"<<std::endl;
+                    player.DecreaseHP(p_threat->GetThreatDamage());
 
-                        exp_main.set_frame(exp);
-                        exp_main.SetRect(x_pos,y_pos);
-                        exp_main.Show(gScreen);
-                        SDL_RenderPresent(gScreen);
-                    }
+                    break;
                 }
             }
         }
@@ -192,23 +211,33 @@ int main (int argc,char* argv[])
                         if(bCol)
                         {
                             //them weapon damge;
+                            //threat trung dan bij tru mau
+                            std::cout<<"Hit your bullet"<<std::endl;
                             obj_threat->DecreaseHP(p_weapon->GetWeaponDamage());
                             player.DeleteBullet(r);
                             if(obj_threat->GetHP()<=0)
                             {
+                                std::cout<<"Kill"<<std::endl;
                                 for(int i=0;i<NUM_FRAM_EXP;i++)
                                 {
                                     int x_pos=p_weapon->GetRect().x-frame_exp_width*0.5;
                                     int y_pos=p_weapon->GetRect().y-frame_exp_height*0.5;
-
-                                    DropItem* drop_item= new DropItem();
-                                    drop_item->LoadImage("image/DropItem/coin.png",gScreen);
-                                    drop_item->SetRect(x_pos,y_pos);
-
+                                    //sinh vu no
                                     exp_threat.set_frame(i);
                                     exp_threat.SetRect(x_pos,y_pos);
                                     exp_threat.Show(gScreen);
                                 }
+
+                                     for(int i=0;i<4;i++)
+                                   {
+                                    int x_pos=p_weapon->GetRect().x-frame_exp_width*0.5;
+                                    int y_pos=p_weapon->GetRect().y-frame_exp_height*0.5;
+                                    //sinh xu,item
+//                                    coin->set_frame(i);
+//                                    coin->SetRect(x_pos,y_pos);
+//                                    coin->Show(gScreen);
+                                   }
+                                //delete coin;
                                 obj_threat->Free();
                                 threats_list.erase(threats_list.begin()+t);
                             }
@@ -219,7 +248,14 @@ int main (int argc,char* argv[])
             }
         }
 
-
+        //thoi gian
+//        std::string str_time="TIME: ";
+//        Uint32 time_val=SDL_GetTicks()/1000;
+//        Uint32 val_time=300-time_val;
+//        if(val_time<=0)
+//        {
+//
+//        }
 
         SDL_RenderPresent(gScreen);
 

@@ -56,14 +56,16 @@ public:
     void DrawHPBar(SDL_Renderer* renderer);
     int GetHP()const{return hp;}
 
-    std::vector<Weapon*>get_bullet_list() const{return bullet_list;}
-    void set_bullet_list(const std::vector<Weapon*>& bl_list){bullet_list=bl_list;}
+    std::vector<Weapon*>get_bullet_list() const{return t_bullet_list;}
+    void set_bullet_list(const std::vector<Weapon*>& bl_list){t_bullet_list=bl_list;}
 
     void InitBullet(Weapon* p_bullet,SDL_Renderer* screen);
     void MakeBullet(SDL_Renderer* screen,const int& x_limit,const int& y_limit);
     void DeleteBullet(const int& idx);
 
     SDL_Rect GetRectFrame();
+
+    int GetThreatDamage()const{return threat_damage;}
 private:
     int x_step,y_step;
 
@@ -81,6 +83,8 @@ private:
     int come_back_time;
     int hp;
 
-    std::vector<Weapon*>bullet_list;
+    int threat_damage;
+
+    std::vector<Weapon*>t_bullet_list;
 };
 #endif // THREATS_H

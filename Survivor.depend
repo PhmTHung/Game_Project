@@ -424,7 +424,7 @@
 1712760360 source:c:\laptrinh\survivor\game_project\basefunc.cpp
 	"basefunc.h"
 
-1712755022 c:\laptrinh\survivor\game_project\basefunc.h
+1712909278 c:\laptrinh\survivor\game_project\basefunc.h
 	<string>
 	<SDL.h>
 	<SDL_image.h>
@@ -439,7 +439,7 @@
 1712589709 c:\laptrinh\survivor\game_project\baseobj.h
 	"basefunc.h"
 
-1712822910 source:c:\laptrinh\survivor\game_project\main.cpp
+1713016594 source:c:\laptrinh\survivor\game_project\main.cpp
 	"basefunc.h"
 	"baseobj.h"
 	"mainobj.h"
@@ -447,10 +447,12 @@
 	"Threats.h"
 	"vukhi.h"
 	"FPS.h"
+	"text.h"
 	"explosion.h"
+	"dropitem.h"
 	<iostream>
 
-1712568757 source:c:\laptrinh\survivor\game_project\map.cpp
+1712909753 source:c:\laptrinh\survivor\game_project\map.cpp
 	"map.h"
 	"baseobj.h"
 	"basefunc.h"
@@ -488,21 +490,21 @@
 	"map.h"
 	"vukhi.h"
 
-1712823131 c:\laptrinh\survivor\game_project\vukhi.h
+1713016212 c:\laptrinh\survivor\game_project\vukhi.h
 	"basefunc.h"
 	"baseobj.h"
 
-1712822858 source:c:\laptrinh\survivor\game_project\vukhi.cpp
+1713016341 source:c:\laptrinh\survivor\game_project\vukhi.cpp
 	"vukhi.h"
 	"baseobj.h"
 
-1712824709 c:\laptrinh\survivor\game_project\threats.h
+1713013828 c:\laptrinh\survivor\game_project\threats.h
 	"basefunc.h"
 	"baseobj.h"
 	"mainobj.h"
 	"vukhi.h"
 
-1712824247 source:c:\laptrinh\survivor\game_project\threats.cpp
+1713016339 source:c:\laptrinh\survivor\game_project\threats.cpp
 	"Threats.h"
 	"mainobj.h"
 	<cstdlib>
@@ -513,7 +515,7 @@
 
 1712594470 c:\laptrinh\survivor\game_project\fps.h
 
-1712825386 source:c:\laptrinh\survivor\game_project\dropitem.cpp
+1712970979 source:c:\laptrinh\survivor\game_project\dropitem.cpp
 	"dropitem.h"
 	"baseobj.h"
 
@@ -524,7 +526,13 @@
 	"basefunc.h"
 	"baseobj.h"
 
-1712825386 c:\laptrinh\survivor\game_project\dropitem.h
+1712971401 c:\laptrinh\survivor\game_project\dropitem.h
 	"baseobj.h"
+	"basefunc.h"
+
+1712909916 source:c:\laptrinh\survivor\game_project\text.cpp
+	"text.h"
+
+1712911454 c:\laptrinh\survivor\game_project\text.h
 	"basefunc.h"
 

@@ -45,7 +45,15 @@ public:
     int get_weapon_type()const{return weapon_type;}
 
     void LoadImgWeapon(SDL_Renderer* des);
+
     int GetWeaponDamage()const{return weapon_damage;}
+    int GetThBuDamage()const{return thr_bul_damge;}
+
+    SDL_Rect GetRectFrame();
+    void set_width_frame(const int &width){width_frame=width;}
+    int get_width_frame() const {return width_frame;}
+    void set_height_frame(const int &height){height_frame=height;}
+    int get_height_frame() const {return height_frame;}
 private:
     int x_val;
     int y_val;
@@ -59,5 +67,9 @@ private:
     int weapon_type;
 
     int weapon_damage;
+    int thr_bul_damge;
+
+    int width_frame;
+    int height_frame;
 };
 #endif // VU_KHI_H

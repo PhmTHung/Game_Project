@@ -9,10 +9,16 @@ Weapon::Weapon()
     x_border=100;
     y_border=100;
 
+    width_frame=40;
+    height_frame=40;
+
     is_move=false;
 
     weapon_type=50;
+
     weapon_damage=20;
+    thr_bul_damge=10;
+
     enum
     {
         MAGE_TYPE=50,
@@ -63,4 +69,11 @@ void Weapon::WeaponRange(int x_border,int y_border)
         break;
     }
 }
-
+SDL_Rect Weapon::GetRectFrame()
+{
+    SDL_Rect p_rect;
+    p_rect.x=rect.x;
+    p_rect.y=rect.y;
+    p_rect.w=width_frame;
+    p_rect.h=height_frame;
+}

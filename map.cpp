@@ -1,8 +1,6 @@
 #include "map.h"
-//the
 #include "baseobj.h"
 #include "basefunc.h"
-//m
 #include <fstream>
 #include <iostream>
 

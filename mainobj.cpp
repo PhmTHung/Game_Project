@@ -21,7 +21,7 @@ MainObject::MainObject()
 	input_type.down=0;
 	input_type.up=0;
 
-    InitHP(100);
+    InitHP(1000);
 }
 MainObject::~MainObject(){}
 // ke thua LoadImage tu BaseObject

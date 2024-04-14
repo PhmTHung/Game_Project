@@ -33,6 +33,8 @@ Threats::Threats()
 
     frame=0;
 
+    threat_damage=5;
+
     status=-1;
     input_type.left=0;
 	input_type.right=0;
@@ -223,34 +225,34 @@ void Threats::InitBullet(Weapon* p_bullet,SDL_Renderer* screen)
         //p_bullet->set_weapon_direct(Weapon::IN_DOWN);
         p_bullet->SetRect(this->x_pos+20,y_pos+10);
         p_bullet->set_x_val(20);
-        bullet_list.push_back(p_bullet);
+        t_bullet_list.push_back(p_bullet);
     }
 }
 void Threats::MakeBullet(SDL_Renderer* screen,const int& x_limit,const int& y_limit)
 {
-    for(int i=0;i<bullet_list.size();i++)
+    for(int i=0;i<t_bullet_list.size();i++)
     {
-        Weapon* p_bullet=bullet_list.at(i);
-        if(p_bullet!=NULL)
+        Weapon* t_bullet=t_bullet_list.at(i);
+        if(t_bullet!=NULL)
         {
-            if(p_bullet->get_is_move())
+            if(t_bullet->get_is_move())
             {
-                int bullet_dist=rect.x-p_bullet->GetRect().x;
+                int bullet_dist=rect.x-t_bullet->GetRect().x;
                 if(bullet_dist<=20)
                 {
-                     p_bullet->WeaponRange(x_limit,y_limit);
-                     p_bullet->Render(screen);
+                     t_bullet->WeaponRange(x_limit,y_limit);
+                     t_bullet->Render(screen);
                 }
                 else
                 {
-                    p_bullet->set_is_move(false);
+                    t_bullet->set_is_move(false);
                 }
 
             }
             else
             {
-                p_bullet->set_is_move(true);
-                p_bullet->SetRect(this->x_pos+20,y_pos+10);
+                t_bullet->set_is_move(true);
+                t_bullet->SetRect(this->x_pos+20,y_pos+10);
             }
         }
     }
@@ -258,15 +260,15 @@ void Threats::MakeBullet(SDL_Renderer* screen,const int& x_limit,const int& y_li
 
 void Threats::DeleteBullet(const int& idx)
 {
-    int size=bullet_list.size();
+    int size=t_bullet_list.size();
     if(size>0 && idx <size)
     {
-        Weapon* p_bullet=bullet_list.at(idx);
-        bullet_list.erase(bullet_list.begin()+idx);
-        if(p_bullet)
+        Weapon* t_bullet=t_bullet_list.at(idx);
+        t_bullet_list.erase(t_bullet_list.begin()+idx);
+        if(t_bullet)
         {
-            delete p_bullet;
-            p_bullet=NULL;
+            delete t_bullet;
+            t_bullet=NULL;
         }
     }
 }
