@@ -35,8 +35,7 @@
 		</Compiler>
 		<Linker>
 			<Add option="-lmingw32 -lSDL2main -lSDL2" />
-			<Add option="-lSDL2_ttf  -lSDL2_image" />
-			<Add option="-lSDL_mixer" />
+			<Add option="-lSDL2_ttf  -lSDL2_image -lSDL2_mixer" />
 			<Add directory="C:/SDL2-2.30.1/i686-w64-mingw32/lib" />
 			<Add directory="C:/SDL2_image-2.8.2/i686-w64-mingw32/lib" />
 			<Add directory="C:/SDL2_ttf-2.22.0/i686-w64-mingw32/lib" />
@@ -50,6 +49,8 @@
 		<Unit filename="basefunc.h" />
 		<Unit filename="baseobj.cpp" />
 		<Unit filename="baseobj.h" />
+		<Unit filename="button.cpp" />
+		<Unit filename="button.h" />
 		<Unit filename="dropitem.cpp" />
 		<Unit filename="dropitem.h" />
 		<Unit filename="explosion.cpp" />

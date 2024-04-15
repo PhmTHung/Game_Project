@@ -33,7 +33,7 @@ Threats::Threats()
 
     frame=0;
 
-    threat_damage=5;
+    threat_damage=0.5;
 
     status=-1;
     input_type.left=0;

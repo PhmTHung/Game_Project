@@ -65,7 +65,7 @@ public:
 
     SDL_Rect GetRectFrame();
 
-    int GetThreatDamage()const{return threat_damage;}
+    double GetThreatDamage()const{return threat_damage;}
 private:
     int x_step,y_step;
 
@@ -83,7 +83,7 @@ private:
     int come_back_time;
     int hp;
 
-    int threat_damage;
+    double threat_damage;
 
     std::vector<Weapon*>t_bullet_list;
 };

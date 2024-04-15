@@ -1,9 +1,10 @@
 #include <SDL_mixer.h>
+#include "sound.h"
 #include <string>
 
 
 
-SoundEffect::SoundEffect() : chunk(nullptr) {}
+//SoundEffect::SoundEffect() : chunk(nullptr) {}
 
 SoundEffect::~SoundEffect() {
     if (chunk != nullptr) {

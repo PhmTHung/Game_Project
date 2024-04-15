@@ -147,7 +147,7 @@ int main (int argc,char* argv[])
             if(p_threat!=NULL)
             {
                 p_threat->Threat_Move(map_data);
-                p_threat->SetMapXY(map_data.start_x,map_data.start_y);
+                //p_threat->SetMapXY(map_data.start_x,map_data.start_y);
                 p_threat->MakeBullet(gScreen,SCREEN_WIDTH,SCREEN_HEIGHT);
                 p_threat->FrameShow(gScreen);
                 p_threat->DrawHPBar(gScreen);
