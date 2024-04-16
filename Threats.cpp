@@ -219,10 +219,10 @@ void Threats::InitBullet(Weapon* p_bullet,SDL_Renderer* screen)
 //                p_bullet->SetRect(this->x_pos+20,y_pos+10);
 //                break;
 //            }
-        //p_bullet->set_weapon_direct(Weapon::IN_LEFT);
-        p_bullet->set_weapon_direct(Weapon::IN_RIGHT);
-        //p_bullet->set_weapon_direct(Weapon::IN_UP);
-        //p_bullet->set_weapon_direct(Weapon::IN_DOWN);
+//        p_bullet->set_weapon_direct(Weapon::IN_LEFT);
+//        p_bullet->set_weapon_direct(Weapon::IN_RIGHT);
+//        p_bullet->set_weapon_direct(Weapon::IN_UP);
+        p_bullet->set_weapon_direct(Weapon::IN_DOWN);
         p_bullet->SetRect(this->x_pos+20,y_pos+10);
         p_bullet->set_x_val(20);
         t_bullet_list.push_back(p_bullet);

@@ -37,7 +37,7 @@ std::vector<Threats*> MakeThreatsList()
     return list_threats;
 }
 //Game *game = NULL;
-TTF_Font* gFont=NULL;
+TTF_Font* font_time=NULL;
 bool InitData()
 {
     bool flag=true;
@@ -61,12 +61,17 @@ bool InitData()
         if(TTF_Init()==-1) flag=false;
         else
         {
-            gFont=TTF_OpenFont("textfont/textfont.ttf",18);
-            if(gFont!=NULL)
+            font_time=TTF_OpenFont("textfont/Font.ttf",24);
+            if(font_time == NULL)
             {
                 flag=false;
-                std::cout<<"TTF cannot Init";
+                std::cout<<"TTF cannot Init"<<std::endl;
             }
+        }
+        if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT,2,4096)==-1)
+        {
+            flag= false;
+            std::cout<<"Mix cannot init"
         }
     }
     return flag;
@@ -79,7 +84,7 @@ int main (int argc,char* argv[])
     if(InitData()==false) return -1;
     //
     TextManager time;
-    time.setColorType(TextManager::WHITE_TEXT);
+    time.SetColorType(TextManager::WHITE_TEXT);
 
     GameMap G_Map;
     G_Map.LoadMap("map.txt");
@@ -103,7 +108,7 @@ int main (int argc,char* argv[])
         std::cout<<"Init file Explo OK"<<std::endl;
     }
     exp_threat.set_clip();
-
+    //drop item
     DropItem coins;
     bool cret=coins.LoadImage("image/DropItem/coin.png",gScreen);
     if(cret)
@@ -111,6 +116,10 @@ int main (int argc,char* argv[])
         std::cout<<"Init file DropIt OK"<<std::endl;
     }
     coins.set_clips();
+    //time text
+    TextManager time_game;
+    time_game.SetColorType(TextManager::RED_TEXT);
+
 
     Uint32 frameStart;
     int frameTime;
@@ -249,13 +258,21 @@ int main (int argc,char* argv[])
         }
 
         //thoi gian
-//        std::string str_time="TIME: ";
-//        Uint32 time_val=SDL_GetTicks()/1000;
-//        Uint32 val_time=300-time_val;
-//        if(val_time<=0)
-//        {
-//
-//        }
+        std::string str_time="TIME: ";
+        Uint32 time_val=SDL_GetTicks()/1000;
+        Uint32 val_time=300-time_val;
+        if(val_time<=0)
+        {
+            std::cout<<"Time out"<<std::endl;
+        }
+        else
+        {
+            std::string str_val_=std::to_string(val_time);
+            str_time+=str_val_;
+            time_game.SetText(str_time);
+            time_game.LoadFromRenderText(font_time,gScreen);
+            time_game.RenderText(gScreen,32,0);
+        }
 
         SDL_RenderPresent(gScreen);
 

@@ -440,7 +440,7 @@
 1712589709 c:\laptrinh\survivor\game_project\baseobj.h
 	"basefunc.h"
 
-1713107642 source:c:\laptrinh\survivor\game_project\main.cpp
+1713281612 source:c:\laptrinh\survivor\game_project\main.cpp
 	"basefunc.h"
 	"baseobj.h"
 	"mainobj.h"
@@ -531,11 +531,12 @@
 	"baseobj.h"
 	"basefunc.h"
 
-1712909916 source:c:\laptrinh\survivor\game_project\text.cpp
+1713280554 source:c:\laptrinh\survivor\game_project\text.cpp
 	"text.h"
 
-1712911454 c:\laptrinh\survivor\game_project\text.h
-	"basefunc.h"
+1713279874 c:\laptrinh\survivor\game_project\text.h
+	"baseobj.h"
+	<string>
 
 1709776581 c:\sdl2_mixer-2.8.0\i686-w64-mingw32\include\sdl2\sdl_mixer.h
 	"SDL_stdinc.h"
@@ -546,5 +547,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1713107719 source:c:\laptrinh\survivor\game_project\sound.cpp
+1713280612 source:c:\laptrinh\survivor\game_project\sound.cpp
+
+1713275802 source:c:\laptrinh\survivor\game_project\button.cpp
 

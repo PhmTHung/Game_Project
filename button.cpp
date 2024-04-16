@@ -1,8 +1,8 @@
-#include "button.h"
-#include "basefunc.h"
-#include "baseobj.h"
-
-Button::Button()
-{
-
-}
+//#include "button.h"
+//#include "basefunc.h"
+//#include "baseobj.h"
+//
+//Button::Button()
+//{
+//
+//}
