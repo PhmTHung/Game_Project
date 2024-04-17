@@ -424,7 +424,7 @@
 1712760360 source:c:\laptrinh\survivor\game_project\basefunc.cpp
 	"basefunc.h"
 
-1713108389 c:\laptrinh\survivor\game_project\basefunc.h
+1713315584 c:\laptrinh\survivor\game_project\basefunc.h
 	<string>
 	<SDL.h>
 	<SDL_image.h>
@@ -440,7 +440,7 @@
 1712589709 c:\laptrinh\survivor\game_project\baseobj.h
 	"basefunc.h"
 
-1713281612 source:c:\laptrinh\survivor\game_project\main.cpp
+1713315868 source:c:\laptrinh\survivor\game_project\main.cpp
 	"basefunc.h"
 	"baseobj.h"
 	"mainobj.h"
@@ -468,15 +468,9 @@
 	<SDL.h>
 	<stdio.h>
 
-1710768185 source:c:\laptrinh\survivor\game_project\xulygame.cpp
-	"xulygame.h"
-	"baseobj.h"
-	"basefunc.h"
-	"map.h"
-	"mainobj.h"
-	<iostream>
+1713315623 source:c:\laptrinh\survivor\game_project\xulygame.cpp
 
-1713108389 source:c:\laptrinh\survivor\game_project\mainobj.cpp
+1713316022 source:c:\laptrinh\survivor\game_project\mainobj.cpp
 	"mainobj.h"
 	"basefunc.h"
 	"baseobj.h"
@@ -484,7 +478,7 @@
 	<iostream>
 	<algorithm>
 
-1712804783 c:\laptrinh\survivor\game_project\mainobj.h
+1713315248 c:\laptrinh\survivor\game_project\mainobj.h
 	<vector>
 	"basefunc.h"
 	"baseobj.h"
@@ -505,7 +499,7 @@
 	"mainobj.h"
 	"vukhi.h"
 
-1713108389 source:c:\laptrinh\survivor\game_project\threats.cpp
+1713282068 source:c:\laptrinh\survivor\game_project\threats.cpp
 	"Threats.h"
 	"mainobj.h"
 	<cstdlib>

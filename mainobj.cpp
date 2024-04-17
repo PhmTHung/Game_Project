@@ -95,7 +95,7 @@ void MainObject::FrameShow(SDL_Renderer* des)
    //day clip hien tai len man hinh
    SDL_RenderCopy(des,p_object,current_clip,&renderQuad);
 }
-void MainObject::HandleInputAction(SDL_Event events,SDL_Renderer* screen)
+void MainObject::HandleInputAction(SDL_Event events,SDL_Renderer* screen,Mix_Chunk* bullet_sound[2])
 {
     if(events.type==SDL_KEYDOWN)
     {
@@ -175,11 +175,13 @@ void MainObject::HandleInputAction(SDL_Event events,SDL_Renderer* screen)
             {
                 p_weapon->set_weapon_type(Weapon::LASER_TYPE);
                 p_weapon->LoadImgWeapon(screen);
+                Mix_PlayChannel(-1,bullet_sound[0],0);
             }
             else
             {
                 p_weapon->set_weapon_type(Weapon::MAGE_TYPE);
                 p_weapon->LoadImgWeapon(screen);
+                Mix_PlayChannel(-1,bullet_sound[1],0);
             }
             switch (status)
             {
@@ -270,8 +272,7 @@ void MainObject::PlayerGPS(Map& map_data)
     // Kiểm tra va chạm với cạnh trên và cạnh dưới của bản đồ
     if (y1<0)
     {
-        // Đặt tọa độ y của nhân vật để không vượt ra khỏi biên của bản đồ
-        if (y1 < 0)
+        if (y1<0)
             y_pos = 0;
         else
             y_pos = (MAP_Y - 1) * TILE_SIZE - height_frame;
@@ -283,7 +284,6 @@ void MainObject::PlayerGPS(Map& map_data)
     // Kiểm tra va chạm với cạnh trái và cạnh phải của bản đồ
     if (x1<0)
     {
-        // Đặt tọa độ x của nhân vật để không vượt ra khỏi biên của bản đồ
         if (x1<0)
             x_pos = 0;
         else
@@ -294,7 +294,6 @@ void MainObject::PlayerGPS(Map& map_data)
          x_pos=MAP_X*TILE_SIZE-width_frame;
     }
 }
-
 void MainObject::InitHP(int initialHP) {
     hp = initialHP;
 }

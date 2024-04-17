@@ -71,7 +71,27 @@ bool InitData()
         if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT,2,4096)==-1)
         {
             flag= false;
-            std::cout<<"Mix cannot init"
+            std::cout<<"Mix cannot init";
+        }
+        get_theme=Mix_LoadWAV("gamesound/Desert_Theme.wav");
+        g_sound_bullet[0]=Mix_LoadWAV("gamesound/gun_fire.wav");
+        g_sound_bullet[1]=Mix_LoadWAV("gamesound/laser.wav");
+        g_sound_exp=Mix_LoadWAV("gamesound/explosion.wav");
+        if(get_theme==NULL)
+        {
+            std::cout<<"Get theme fail"<<std::endl;
+        }
+        if(g_sound_exp==NULL)
+        {
+            std::cout<<"Get explo_sound fail"<<std::endl;
+        }
+         if(g_sound_bullet[0]==NULL)
+        {
+            std::cout<<"Get bullet[0]_sound fail"<<std::endl;
+        }
+         if(g_sound_bullet[1]==NULL)
+        {
+            std::cout<<"Get bullet[1]_sound fail"<<std::endl;
         }
     }
     return flag;
@@ -83,6 +103,8 @@ int main (int argc,char* argv[])
     ImpTimer fps_timer;
     if(InitData()==false) return -1;
     //
+    Mix_PlayChannel(-1,get_theme,0);
+
     TextManager time;
     time.SetColorType(TextManager::WHITE_TEXT);
 
@@ -134,7 +156,7 @@ int main (int argc,char* argv[])
             {
                 is_quit=true;
             }
-            player.HandleInputAction(gEvent,gScreen);
+            player.HandleInputAction(gEvent,gScreen,g_sound_bullet);
         }
 
         SDL_SetRenderDrawColor(gScreen,RENDER_DRAW_COLOR,RENDER_DRAW_COLOR,RENDER_DRAW_COLOR,RENDER_DRAW_COLOR);
@@ -249,6 +271,7 @@ int main (int argc,char* argv[])
                                 //delete coin;
                                 obj_threat->Free();
                                 threats_list.erase(threats_list.begin()+t);
+                                Mix_PlayChannel(-1,g_sound_exp,0);
                             }
 
                         }

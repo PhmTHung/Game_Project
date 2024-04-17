@@ -26,9 +26,9 @@ const int RENDER_DRAW_COLOR = 0xFF;
 const int FRAME_PER_SECOND = 25;
 
 static Mix_Chunk* g_sound_bullet[2];
-static Mix_Chunk* g_sound_exp[2];
-static Mix_Chuck* get_coin;
-static
+static Mix_Chunk* g_sound_exp;
+static Mix_Chunk* get_coin;
+static Mix_Chunk* get_theme;
 
 #define TILE_SIZE 32
 #define SPEED_MOVE 8

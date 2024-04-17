@@ -24,7 +24,7 @@ public:
     };
     bool LoadImage(std::string path,SDL_Renderer* screen);
     void FrameShow(SDL_Renderer* des);
-    void HandleInputAction(SDL_Event events,SDL_Renderer* screen);
+    void HandleInputAction(SDL_Event events,SDL_Renderer* screen,Mix_Chunk* bullet_sound[2]);
     void set_clips();
     //ham xu ly di chuyen// se sua sau khi test
     void player_move(Map& map_data);
