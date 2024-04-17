@@ -54,6 +54,7 @@ public:
     void InitHP(int initialHP);
     void DecreaseHP(int amount);
     void DrawHPBar(SDL_Renderer* renderer);
+    double GetHP()const{return hp;}
     //chuyen vu khi
 
 private:
@@ -78,6 +79,6 @@ private:
     std::vector<Weapon*> p_weapon_list;
 
     //them thanh HP
-    int hp;
+    double hp;
 };
 #endif // MAIN_OBJ_H

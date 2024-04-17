@@ -3,7 +3,9 @@
 
 DropItem::DropItem()
 {
-    time_exist=3000;
+    frame_height=0;
+    frame_width=0;
+    time_exist=300;
 }
 DropItem::~DropItem(){}
 bool DropItem::LoadImage(std::string path,SDL_Renderer* screen)

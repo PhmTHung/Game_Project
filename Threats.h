@@ -54,7 +54,7 @@ public:
     void InitHP(int initialHP);
     void DecreaseHP(int damage);
     void DrawHPBar(SDL_Renderer* renderer);
-    int GetHP()const{return hp;}
+    double GetHP()const{return hp;}
 
     std::vector<Weapon*>get_bullet_list() const{return t_bullet_list;}
     void set_bullet_list(const std::vector<Weapon*>& bl_list){t_bullet_list=bl_list;}
@@ -81,7 +81,7 @@ private:
     Input input_type;
 
     int come_back_time;
-    int hp;
+    double hp;
 
     double threat_damage;
 

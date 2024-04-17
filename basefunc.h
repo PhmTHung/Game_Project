@@ -29,6 +29,8 @@ static Mix_Chunk* g_sound_bullet[2];
 static Mix_Chunk* g_sound_exp;
 static Mix_Chunk* get_coin;
 static Mix_Chunk* get_theme;
+static Mix_Chunk* char_talk;
+static Mix_Chunk* get_hurt;
 
 #define TILE_SIZE 32
 #define SPEED_MOVE 8

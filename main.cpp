@@ -10,7 +10,6 @@
 #include "dropitem.h"
 #include<iostream>
 
-std::vector<DropItem*> drop_items;
 std::vector<Threats*> MakeThreatsList()
 {
     std::vector<Threats*>list_threats;
@@ -77,6 +76,9 @@ bool InitData()
         g_sound_bullet[0]=Mix_LoadWAV("gamesound/gun_fire.wav");
         g_sound_bullet[1]=Mix_LoadWAV("gamesound/laser.wav");
         g_sound_exp=Mix_LoadWAV("gamesound/explosion.wav");
+        get_coin=Mix_LoadWAV("gamesound/hit_coin.wav");
+        char_talk=Mix_LoadWAV("gamesound/char_sound.wav");
+        get_hurt=Mix_LoadWAV("gamesound/hurt_sound.wav");
         if(get_theme==NULL)
         {
             std::cout<<"Get theme fail"<<std::endl;
@@ -92,6 +94,14 @@ bool InitData()
          if(g_sound_bullet[1]==NULL)
         {
             std::cout<<"Get bullet[1]_sound fail"<<std::endl;
+        }
+        if(get_coin==NULL)
+        {
+            std::cout<<"Get coin_sound fail"<<std::endl;
+        }
+        if(char_talk==NULL)
+        {
+            std::cout<<"Get character agr fail"<<std::endl;
         }
     }
     return flag;
@@ -200,6 +210,11 @@ int main (int argc,char* argv[])
                             std::cout<<"Hit threat bullet"<<std::endl;
                             //p_threat->DeleteBullet(b);
                             player.DecreaseHP(thr_bullet->GetThBuDamage());
+                            if(player.GetHP()<=0)
+                            {
+                               std::cout<<"I'm die!"<<std::endl;
+                               Mix_PlayChannel(-1,get_hurt,0);
+                            }
                             break;
                         }
                     }
@@ -209,7 +224,12 @@ int main (int argc,char* argv[])
                 {
                     std::cout<<"Hit the threat"<<std::endl;
                     player.DecreaseHP(p_threat->GetThreatDamage());
-
+                    //Mix_PlayChannel(-1,get_hurt,0);
+                    if(player.GetHP()<=0)
+                    {
+                        std::cout<<"I'm die!"<<std::endl;
+                        Mix_PlayChannel(-1,get_hurt,0);
+                    }
                     break;
                 }
             }
@@ -272,6 +292,12 @@ int main (int argc,char* argv[])
                                 obj_threat->Free();
                                 threats_list.erase(threats_list.begin()+t);
                                 Mix_PlayChannel(-1,g_sound_exp,0);
+                                if(t%2==0)
+                                {
+                                    Mix_PlayChannel(-1,char_talk,0);
+                                    Mix_PlayChannel(-1,g_sound_exp,0);
+                                }
+
                             }
 
                         }
