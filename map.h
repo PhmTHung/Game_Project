@@ -16,7 +16,6 @@ public:
     void LoadMap(std::string path);
     void DrawMap(SDL_Renderer* screen);
     void LoadTiles(SDL_Renderer* screen);
-    //camera view port
     Map getMap() const {return game_map;}
 private:
 
@@ -26,7 +25,5 @@ private:
     BaseObject sea;
     BaseObject brick;
     BaseObject flower;
-
-    //int arr[MAP_X][MAP_Y];
 };
 #endif // GAME_MAP

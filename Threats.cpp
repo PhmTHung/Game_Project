@@ -3,37 +3,21 @@
 #include <cstdlib>
 
 
-int randomNum()
-{
-    int n;
-    n=rand()%100+1;
-    return n;
-}
-int randomDirect()
-{
-    int n;
-    n=rand()%4;
-    return n;
-}
 Threats::Threats()
 {
-    int n=randomNum();
-    int m=randomNum();
 
-    x_pos=((SCREEN_WIDTH/n)+100);
-    y_pos=((SCREEN_HEIGHT/m)+100);
+    x_pos=0;
+    y_pos=0;
 
     x_step=0;
     y_step=0;
-
-
 
     width_frame=60;
     height_frame=40;
 
     frame=0;
 
-    threat_damage=0.1;
+    threat_damage=1;
 
     status=-1;
     input_type.left=0;
@@ -57,8 +41,6 @@ bool Threats::LoadImage(std::string path,SDL_Renderer* screen)
 }
 void Threats::FrameShow(SDL_Renderer* des)
 {
-    if(come_back_time==0)
-    {
         switch(status)
         {
             case MOVE_LEFT:
@@ -81,7 +63,6 @@ void Threats::FrameShow(SDL_Renderer* des)
         SDL_Rect* current_clip =& frame_clip[frame];
         SDL_Rect renderQuad={rect.x,rect.y,width_frame,height_frame};
         SDL_RenderCopy(des,p_object,current_clip,&renderQuad);
-    }
 }
 void Threats::set_clips()
 {
@@ -108,74 +89,39 @@ void Threats::set_clips()
         frame_clip[3].h=64;
     }
 }
-void Threats::Threat_Move(Map& map_data)
+void Threats::Threat_GPS(int x,int y)
 {
-    int n=randomDirect();
-    int old_x = x_pos;
-    int old_y = y_pos;
-    // Xác định bước di chuyển
     x_step = THREAT_SPEED;
     y_step = THREAT_SPEED;
-    switch(n)
+
+    if(x_pos!=x)
     {
-    case 0:
+        if(x_pos<x)
         {
-            status=MOVE_LEFT;
-            x_pos -= x_step;
+           x_pos+=x_step;
+           status=MOVE_RIGHT;
         }
-    case 1:
+        else if(x_pos>x)
         {
-            status=MOVE_RIGHT;
-            x_pos += x_step;
-        }
-    case 2:
-        {
-            status=MOVE_UP;
-            y_pos -= y_step;
-        }
-    case 3:
-        {
-            status=MOVE_DOWN;
-            y_pos += y_step;
+           x_pos-=x_step;
+           status=MOVE_LEFT;
         }
     }
-    //Threat_GPS(map_data);
+    if(y_pos!=y)
+    {
+         if(y_pos<y)
+        {
+           y_pos+=y_step;
+           status=MOVE_DOWN;
+        }
+        else if(y_pos>y)
+        {
+           y_pos-=y_step;
+           status=MOVE_UP;
+        }
+    }
 }
 
-void Threats::Threat_GPS(Map& map_data)
-{
-    int width_min = std::min(width_frame, TILE_SIZE);
-    int height_min = std::min(height_frame, TILE_SIZE);
-    // Tính toán các ô đang đứng
-    int x1=x_pos/TILE_SIZE;
-    int x2=(x_pos+width_min)/TILE_SIZE;
-    int y1=y_pos/TILE_SIZE;
-    int y2=(y_pos+height_min)/TILE_SIZE;
-    // Kiểm tra va chạm với cạnh trên và cạnh dưới của bản đồ
-    if (y1<0)
-    {
-        // Đặt tọa độ y của nhân vật để không vượt ra khỏi biên của bản đồ
-        if(y1<0)
-            y_pos=0;
-        else
-            y_pos=(MAP_Y-1)*TILE_SIZE-height_frame;
-    }
-    if(y2>=MAP_Y-1)
-    {
-        y_pos=MAP_Y*TILE_SIZE-height_frame;
-    }
-    // Kiểm tra va chạm với cạnh trái và cạnh phải của bản đồ
-    if(x1<0)
-    {
-        // Đặt tọa độ x của nhân vật để không vượt ra khỏi biên của bản đồ
-        if (x1<0) x_pos = 0;
-        else x_pos=(MAP_X-1)*TILE_SIZE-width_frame;
-    }
-    if(x2>=MAP_X-1)
-    {
-         x_pos=MAP_X*TILE_SIZE-width_frame;
-    }
-}
 void Threats::InitHP(int initialHP)
 {
     hp = initialHP;
@@ -188,8 +134,8 @@ void Threats::DecreaseHP(int damage)
 }
 void Threats::DrawHPBar(SDL_Renderer* renderer)
 {
-    SDL_Rect hpBarRect = { x_pos+30, y_pos-10,hp,10 }; // Ví dụ: thanh máu là hình chữ nhật màu đỏ
-    SDL_SetRenderDrawColor(renderer, 250, 150, 0, 255); // Màu đỏ
+    SDL_Rect hpBarRect = { x_pos+30, y_pos-10,hp,10 };
+    SDL_SetRenderDrawColor(renderer, 250, 150, 0, 255);
     SDL_RenderFillRect(renderer, &hpBarRect);
 }
 
@@ -199,32 +145,28 @@ void Threats::InitBullet(Weapon* p_bullet,SDL_Renderer* screen)
     {
         p_bullet->set_weapon_type(Weapon::THREAT_BULLET);
         p_bullet->LoadImgWeapon(screen);
-        p_bullet->set_is_move(true);
+        //p_bullet->set_is_move(true);
         switch (status)
             {
             case MOVE_LEFT:
                 p_bullet->set_weapon_direct(Weapon::IN_LEFT);
-                p_bullet->SetRect(this->x_pos+20,y_pos+10);
+                p_bullet->SetRect(this->rect.x+width_frame/2-15,rect.y-0.1*height_frame);
                 break;
             case MOVE_RIGHT:
                 p_bullet->set_weapon_direct(Weapon::IN_RIGHT);
-                p_bullet->SetRect(this->x_pos+20,y_pos+10);
+                p_bullet->SetRect(this->rect.x+width_frame/2-15,rect.y-0.1*height_frame);
                 break;
             case MOVE_UP:
                 p_bullet->set_weapon_direct(Weapon::IN_UP);
-                p_bullet->SetRect(this->x_pos+20,y_pos+10);
+                p_bullet->SetRect(this->rect.x+width_frame/2-15,rect.y-0.1*height_frame);
                 break;
             case MOVE_DOWN:
                 p_bullet->set_weapon_direct(Weapon::IN_DOWN);
-                p_bullet->SetRect(this->x_pos+30,y_pos+10);
+                p_bullet->SetRect(this->rect.x+width_frame/2-15,rect.y-0.1*height_frame);
                 break;
             }
-        p_bullet->set_weapon_direct(Weapon::IN_LEFT);
-        p_bullet->set_weapon_direct(Weapon::IN_RIGHT);
-        p_bullet->set_weapon_direct(Weapon::IN_UP);
-        p_bullet->set_weapon_direct(Weapon::IN_DOWN);
-        //p_bullet->SetRect(this->x_pos+20,y_pos+10);
         p_bullet->set_x_val(20);
+        p_bullet->set_is_move(true);
         t_bullet_list.push_back(p_bullet);
     }
 }
@@ -238,7 +180,7 @@ void Threats::MakeBullet(SDL_Renderer* screen,const int& x_limit,const int& y_li
             if(t_bullet->get_is_move())
             {
                 int bullet_dist=rect.x-t_bullet->GetRect().x;
-                if(bullet_dist<=20)
+                if(bullet_dist<=50)
                 {
                      t_bullet->WeaponRange(x_limit,y_limit);
                      t_bullet->Render(screen);
@@ -252,7 +194,7 @@ void Threats::MakeBullet(SDL_Renderer* screen,const int& x_limit,const int& y_li
             else
             {
                 t_bullet->set_is_move(true);
-                t_bullet->SetRect(this->x_pos+20,y_pos+10);
+                t_bullet->SetRect(this->x_pos-20,y_pos+10);
             }
         }
     }

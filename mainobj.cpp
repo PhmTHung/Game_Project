@@ -232,21 +232,21 @@ void MainObject::HandleWeapon(SDL_Renderer* des)
 }
 void MainObject::player_move(Map& map_data)
 {
-     // Lưu trữ các tọa độ trước khi di chuyển
-    int old_x = x_pos;
-    int old_y = y_pos;
+    //toa do hien tai
+    //int old_x = x_pos;
+    //int old_y = y_pos;
 
-    // Xác định bước di chuyển
+    //van toc
     x_step = SPEED_MOVE;
     y_step = SPEED_MOVE;
 
-    // Di chuyển player
+    //di chuyen
     if(input_type.left == 1)  x_pos -= x_step;
     if(input_type.right == 1) x_pos += x_step;
     if(input_type.up == 1)    y_pos -= y_step;
     if(input_type.down == 1)  y_pos += y_step;
 
-    // Kiểm tra va chạm với map
+    //check va cham map
     PlayerGPS(map_data);
 }
 
@@ -254,34 +254,27 @@ void MainObject::PlayerGPS(Map& map_data)
 {
     int width_min = std::min(width_frame, TILE_SIZE);
     int height_min = std::min(height_frame, TILE_SIZE);
-     // Tính toán các ô mà player đang đứng
+    //ô mà player đang đứng
     int x1 = x_pos/TILE_SIZE;
     int x2 = (x_pos+width_min)/TILE_SIZE;
-
     int y1 = y_pos/TILE_SIZE;
     int y2 = (y_pos+height_min)/TILE_SIZE;
 
     // Kiểm tra va chạm với cạnh trên và cạnh dưới của bản đồ
     if (y1<0)
     {
-        if (y1<0)
-            y_pos = 0;
-        else
-            y_pos = (MAP_Y - 1) * TILE_SIZE - height_frame;
+            y_pos=0;
     }
-    if(y2>=MAP_Y-1)
+    if(y2>MAP_Y-2)
     {
-        y_pos=MAP_Y*TILE_SIZE-height_frame;
+            y_pos=(MAP_Y-1)*TILE_SIZE-height_frame;
     }
     // Kiểm tra va chạm với cạnh trái và cạnh phải của bản đồ
     if (x1<0)
     {
-        if (x1<0)
-            x_pos = 0;
-        else
-            x_pos = (MAP_X-1)*TILE_SIZE-width_frame;
+            x_pos=0;
     }
-    if(x2>=MAP_X-1)
+    if(x2>MAP_X-2.5)
     {
          x_pos=MAP_X*TILE_SIZE-width_frame;
     }

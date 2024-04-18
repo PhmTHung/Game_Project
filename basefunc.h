@@ -7,6 +7,7 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 #include <vector>
+#include <ctime>
 
 static SDL_Window* gWindow =NULL;
 static SDL_Renderer* gScreen=NULL;
@@ -34,7 +35,7 @@ static Mix_Chunk* get_hurt;
 
 #define TILE_SIZE 32
 #define SPEED_MOVE 8
-#define THREAT_SPEED 3
+#define THREAT_SPEED 2
 #define WALL 1
 #define MAP_X 25
 #define MAP_Y 25
@@ -62,5 +63,6 @@ namespace SDLBaseFunc
 {
     bool CheckCollision(const SDL_Rect& object1, const SDL_Rect& object2);
 }
+
 #endif // BASE_H
 

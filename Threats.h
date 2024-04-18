@@ -23,8 +23,9 @@ public:
     void set_clips();
 
     //check va cham
-    void Threat_Move(Map& map_data);
-    void Threat_GPS(Map& map_data);
+    //void Threat_Cols();
+    //chase main
+    void Threat_GPS(int x,int y);
 
     void Threat_Action(SDL_Event events,SDL_Renderer* screen);
 
@@ -32,7 +33,6 @@ public:
     int get_x_step() const {return x_step;}
     void set_y_step(const int &step){y_step=step;}
     int get_y_step() const {return y_step;}
-
 
     void set_x_pos(const int &pos){x_pos=pos;}
     int get_x_pos() const {return x_pos;}

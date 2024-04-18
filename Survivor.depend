@@ -421,16 +421,17 @@
 1710471394 c:\laptrinh\survivor\baseobj.h
 	"basefunc.h"
 
-1712760360 source:c:\laptrinh\survivor\game_project\basefunc.cpp
+1713433033 source:c:\laptrinh\survivor\game_project\basefunc.cpp
 	"basefunc.h"
 
-1713326509 c:\laptrinh\survivor\game_project\basefunc.h
+1713447940 c:\laptrinh\survivor\game_project\basefunc.h
 	<string>
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
 	<SDL_mixer.h>
 	<vector>
+	<ctime>
 
 1712589725 source:c:\laptrinh\survivor\game_project\baseobj.cpp
 	"baseobj.h"
@@ -440,7 +441,7 @@
 1712589709 c:\laptrinh\survivor\game_project\baseobj.h
 	"basefunc.h"
 
-1713430284 source:c:\laptrinh\survivor\game_project\main.cpp
+1713453255 source:c:\laptrinh\survivor\game_project\main.cpp
 	"basefunc.h"
 	"baseobj.h"
 	"mainobj.h"
@@ -460,7 +461,7 @@
 	<fstream>
 	<iostream>
 
-1711468506 c:\laptrinh\survivor\game_project\map.h
+1713451600 c:\laptrinh\survivor\game_project\map.h
 	"basefunc.h"
 	"baseobj.h"
 
@@ -470,7 +471,7 @@
 
 1713315623 source:c:\laptrinh\survivor\game_project\xulygame.cpp
 
-1713430231 source:c:\laptrinh\survivor\game_project\mainobj.cpp
+1713453208 source:c:\laptrinh\survivor\game_project\mainobj.cpp
 	"mainobj.h"
 	"basefunc.h"
 	"baseobj.h"
@@ -493,13 +494,13 @@
 	"vukhi.h"
 	"baseobj.h"
 
-1713326832 c:\laptrinh\survivor\game_project\threats.h
+1713449658 c:\laptrinh\survivor\game_project\threats.h
 	"basefunc.h"
 	"baseobj.h"
 	"mainobj.h"
 	"vukhi.h"
 
-1713430343 source:c:\laptrinh\survivor\game_project\threats.cpp
+1713451729 source:c:\laptrinh\survivor\game_project\threats.cpp
 	"Threats.h"
 	"mainobj.h"
 	<cstdlib>
@@ -510,9 +511,10 @@
 
 1712594470 c:\laptrinh\survivor\game_project\fps.h
 
-1713427046 source:c:\laptrinh\survivor\game_project\dropitem.cpp
+1713435575 source:c:\laptrinh\survivor\game_project\dropitem.cpp
 	"dropitem.h"
 	"baseobj.h"
+	"basefunc.h"
 
 1712801943 source:c:\laptrinh\survivor\game_project\explosion.cpp
 	"explosion.h"
@@ -521,7 +523,7 @@
 	"basefunc.h"
 	"baseobj.h"
 
-1712971401 c:\laptrinh\survivor\game_project\dropitem.h
+1713435723 c:\laptrinh\survivor\game_project\dropitem.h
 	"baseobj.h"
 	"basefunc.h"
 

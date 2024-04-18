@@ -13,8 +13,8 @@
 std::vector<Threats*> MakeThreatsList()
 {
     std::vector<Threats*>list_threats;
-    Threats* threat_obj=new Threats[3];
-    for(int i=0;i<3;i++)
+    Threats* threat_obj=new Threats[1];
+    for(int i=0;i<1;i++)
     {
         Threats* p_threat=(threat_obj+i);
         if(p_threat!=NULL)
@@ -26,7 +26,6 @@ std::vector<Threats*> MakeThreatsList()
             p_threat->set_clips();
             p_threat->set_x_pos(i*100+50);
             p_threat->set_y_pos(i*120);
-
             Weapon* p_bullet=new Weapon();
             p_threat->InitBullet(p_bullet,gScreen);
 
@@ -35,28 +34,7 @@ std::vector<Threats*> MakeThreatsList()
     }
     return list_threats;
 }
-//std::vector<Threats*> MakeThreatsListX()
-//{
-//    std::vector<Threats*>X_list_threats;
-//    Threats* threat_obj=new Threats[5];
-//    for(int i=0;i<5;i++)
-//    {
-//        Threats* p_threat=(threat_obj+i);
-//        if(p_threat!=NULL)
-//        {
-//            p_threat->LoadImage("image/Threats/threatleft.png", gScreen);
-//            p_threat->LoadImage("image/Threats/threatright.png", gScreen);
-//            p_threat->LoadImage("image/Threats/threatforward.png", gScreen);
-//            p_threat->LoadImage("image/Threats/threatback.png", gScreen);
-//            p_threat->set_clips();
-//            p_threat->set_x_pos(i*120+50);
-//            p_threat->set_y_pos(i*90);
-//
-//            x_list_threats.push_back(p_threat);
-//        }
-//    }
-//    return x_list_threats;
-//}
+
 //Game *game = NULL;
 TTF_Font* font_time=NULL;
 bool InitData()
@@ -164,14 +142,13 @@ int main (int argc,char* argv[])
     }
     exp_threat.set_clip();
     //drop item
+    // khai bao DropItem
     DropItem coins;
-    bool cret=coins.LoadImage("image/DropItem/coin.png",gScreen);
+    bool cret=coins.LoadImage("image/DropItem/newcoin.png",gScreen);
     if(cret)
     {
         std::cout<<"Init file DropIt OK"<<std::endl;
     }
-    coins.set_clips();
-
     //time text
     TextManager time_game;
     time_game.SetColorType(TextManager::RED_TEXT);
@@ -204,13 +181,14 @@ int main (int argc,char* argv[])
         player.FrameShow(gScreen);
         player.DrawHPBar(gScreen);
 
-       //std::vector<Threats*> threats_list = MakeThreatsList();
+
        for (int i=0;i<threats_list.size();i++)
         {
             Threats* p_threat=threats_list.at(i);
             if(p_threat!=NULL)
             {
-                p_threat->Threat_Move(map_data);
+                //chase charater;
+                p_threat->Threat_GPS(player.get_x_pos()+10,player.get_y_pos()+10);
                 p_threat->MakeBullet(gScreen,SCREEN_WIDTH,SCREEN_HEIGHT);
                 p_threat->FrameShow(gScreen);
                 p_threat->DrawHPBar(gScreen);
@@ -246,8 +224,7 @@ int main (int argc,char* argv[])
                 {
                     std::cout<<"Hit the threat"<<std::endl;
                     player.DecreaseHP(p_threat->GetThreatDamage());
-                    double n=p_threat->GetThreatDamage();
-                    std::cout<<n<<std::endl;
+                    //std::cout<<player.GetHP()<<std::endl;
                     //Mix_PlayChannel(-1,get_hurt,0);
                     if(player.GetHP()<=0)
                     {
@@ -264,6 +241,7 @@ int main (int argc,char* argv[])
 
 ////        /*threat trung dan*/
         std::vector<Weapon*> bullet_arr=player.get_weapon_list();
+        std::vector<DropItem> coinList;
         for(int r=0;r<bullet_arr.size();r++)
         {
             Weapon* p_weapon=bullet_arr.at(r);
@@ -302,34 +280,13 @@ int main (int argc,char* argv[])
                                     exp_threat.SetRect(x_pos,y_pos);
                                     exp_threat.Show(gScreen);
                                 }
-
-//                                     for(int i=0;i<4;i++)
-//                                   {
-//                                    int x_pos=p_weapon->GetRect().x-frame_exp_width*0.5;
-//                                    int y_pos=p_weapon->GetRect().y-frame_exp_height*0.5;
-//                                    //sinh xu,item
-//                                    coins.set_frame(i);
-//                                    coins.SetRect(x_pos,y_pos);
-//                                    coins.Show(gScreen);
-//
-//                                   }
-                                //delete coin;
                                 obj_threat->Free();
-                         a       threats_list.erase(threats_list.begin()+t);
+                                threats_list.erase(threats_list.begin()+t);
                                 Mix_PlayChannel(-1,g_sound_exp,0);
                                 if(t%2==0)
                                 {
                                     Mix_PlayChannel(-1,char_talk,0);
                                     Mix_PlayChannel(-1,g_sound_exp,0);
-                                }
-                                for(int i=0;i<4;i++)
-                                {
-                                    int x_pos=p_weapon->GetRect().x-frame_exp_width*0.5;
-                                    int y_pos=p_weapon->GetRect().y-frame_exp_height*0.5;
-                                    //sinh xu,item
-                                    coins.set_frame(i);
-                                    coins.SetRect(x_pos,y_pos);
-                                    coins.Show(gScreen);
                                 }
 
                             }
