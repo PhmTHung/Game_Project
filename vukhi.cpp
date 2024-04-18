@@ -14,7 +14,7 @@ Weapon::Weapon()
 
     is_move=false;
 
-    weapon_type=50;
+    weapon_type=-1;
 
     weapon_damage=20;
     thr_bul_damge=10;

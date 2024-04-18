@@ -97,6 +97,7 @@ void MainObject::FrameShow(SDL_Renderer* des)
 }
 void MainObject::HandleInputAction(SDL_Event events,SDL_Renderer* screen,Mix_Chunk* bullet_sound[2])
 {
+    Weapon* p_weapon=new Weapon();
     if(events.type==SDL_KEYDOWN)
     {
         switch(events.key.keysym.sym)
@@ -170,19 +171,10 @@ void MainObject::HandleInputAction(SDL_Event events,SDL_Renderer* screen,Mix_Chu
     {
         if(events.key.keysym.sym==SDLK_SPACE)
         {
-            Weapon* p_weapon=new Weapon();
-            if(events.key.keysym.sym==SDLK_r)
-            {
-                p_weapon->set_weapon_type(Weapon::LASER_TYPE);
-                p_weapon->LoadImgWeapon(screen);
-                Mix_PlayChannel(-1,bullet_sound[0],0);
-            }
-            else
-            {
-                p_weapon->set_weapon_type(Weapon::MAGE_TYPE);
-                p_weapon->LoadImgWeapon(screen);
-                Mix_PlayChannel(-1,bullet_sound[1],0);
-            }
+            //Weapon* p_weapon=new Weapon();
+            p_weapon->set_weapon_type(Weapon::MAGE_TYPE);
+            p_weapon->LoadImgWeapon(screen);
+            Mix_PlayChannel(-1,bullet_sound[0],0);
             switch (status)
             {
             case MOVE_LEFT:

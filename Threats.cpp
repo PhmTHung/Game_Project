@@ -139,7 +139,7 @@ void Threats::Threat_Move(Map& map_data)
             y_pos += y_step;
         }
     }
-    Threat_GPS(map_data);
+    //Threat_GPS(map_data);
 }
 
 void Threats::Threat_GPS(Map& map_data)
@@ -200,30 +200,30 @@ void Threats::InitBullet(Weapon* p_bullet,SDL_Renderer* screen)
         p_bullet->set_weapon_type(Weapon::THREAT_BULLET);
         p_bullet->LoadImgWeapon(screen);
         p_bullet->set_is_move(true);
-//        switch (status)
-//            {
-//            case MOVE_LEFT:
-//                p_bullet->set_weapon_direct(Weapon::IN_LEFT);
-//                p_bullet->SetRect(this->x_pos+20,y_pos+10);
-//                break;
-//            case MOVE_RIGHT:
-//                p_bullet->set_weapon_direct(Weapon::IN_RIGHT);
-//                p_bullet->SetRect(this->x_pos+20,y_pos+10);
-//                break;
-//            case MOVE_UP:
-//                p_bullet->set_weapon_direct(Weapon::IN_UP);
-//                p_bullet->SetRect(this->x_pos+20,y_pos+10);
-//                break;
-//            case MOVE_DOWN:
-//                p_bullet->set_weapon_direct(Weapon::IN_DOWN);
-//                p_bullet->SetRect(this->x_pos+20,y_pos+10);
-//                break;
-//            }
-//        p_bullet->set_weapon_direct(Weapon::IN_LEFT);
-//        p_bullet->set_weapon_direct(Weapon::IN_RIGHT);
-//        p_bullet->set_weapon_direct(Weapon::IN_UP);
+        switch (status)
+            {
+            case MOVE_LEFT:
+                p_bullet->set_weapon_direct(Weapon::IN_LEFT);
+                p_bullet->SetRect(this->x_pos+20,y_pos+10);
+                break;
+            case MOVE_RIGHT:
+                p_bullet->set_weapon_direct(Weapon::IN_RIGHT);
+                p_bullet->SetRect(this->x_pos+20,y_pos+10);
+                break;
+            case MOVE_UP:
+                p_bullet->set_weapon_direct(Weapon::IN_UP);
+                p_bullet->SetRect(this->x_pos+20,y_pos+10);
+                break;
+            case MOVE_DOWN:
+                p_bullet->set_weapon_direct(Weapon::IN_DOWN);
+                p_bullet->SetRect(this->x_pos+30,y_pos+10);
+                break;
+            }
+        p_bullet->set_weapon_direct(Weapon::IN_LEFT);
+        p_bullet->set_weapon_direct(Weapon::IN_RIGHT);
+        p_bullet->set_weapon_direct(Weapon::IN_UP);
         p_bullet->set_weapon_direct(Weapon::IN_DOWN);
-        p_bullet->SetRect(this->x_pos+20,y_pos+10);
+        //p_bullet->SetRect(this->x_pos+20,y_pos+10);
         p_bullet->set_x_val(20);
         t_bullet_list.push_back(p_bullet);
     }

@@ -3,8 +3,8 @@
 
 DropItem::DropItem()
 {
-    frame_height=0;
-    frame_width=0;
+    frame_height=30;
+    frame_width=30;
     time_exist=300;
 }
 DropItem::~DropItem(){}
