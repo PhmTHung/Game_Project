@@ -8,10 +8,24 @@ public:
     DropItem();
     ~DropItem();
 
-    virtual bool LoadImage(std::string path,SDL_Renderer* screen);
-    int get_frame_width()const {return frame_width;}
-    int get_frame_height()const {return frame_height;}
+    bool LoadImage(std::string path,SDL_Renderer* screen);
+    void FrameShow(SDL_Renderer* des);
+    void set_clips();
+
+    void set_x_pos(const int &pos){x_pos=pos;}
+    int get_x_pos() const {return x_pos;}
+    void set_y_pos(const int &pos){y_pos=pos;}
+    int get_y_pos() const {return y_pos;}
+
+    int get_width_frame() const {return width_frame;}
+    int get_height_frame() const {return height_frame;}
+
 private:
-    int frame_width,frame_height;
+    int frame;
+    SDL_Rect frame_clip[8];
+    int width_frame,height_frame;
+
+    int status;
+    int x_pos,y_pos;
 };
 #endif // DROP_ITEM

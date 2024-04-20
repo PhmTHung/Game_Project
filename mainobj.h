@@ -55,12 +55,13 @@ public:
     void DecreaseHP(int amount);
     void DrawHPBar(SDL_Renderer* renderer);
     double GetHP()const{return hp;}
-    //chuyen vu khi
-
+    //xu ly money
+    void IncreaseMoney();
+    int GetMoney()const {return(money_earn);}
 private:
     //di chuyen trai phai x_step=x_val
-    int x_step;//trai phai
-    int y_step;//len xuong
+    int x_step;
+    int y_step;
     //vi tri hinh anh hien tai
     int x_pos;
     int y_pos;
@@ -77,7 +78,7 @@ private:
     int status;
     //vu khi
     std::vector<Weapon*> p_weapon_list;
-
+    int money_earn;
     //them thanh HP
     double hp;
 };

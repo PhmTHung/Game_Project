@@ -23,11 +23,10 @@ public:
     void set_clips();
 
     //check va cham
-    //void Threat_Cols();
     //chase main
     void Threat_GPS(int x,int y);
     int Threat_Bullet_Direc(Weapon* t_bullet, int x,int y);
-    void Threat_Action(SDL_Event events,SDL_Renderer* screen);
+    //void Threat_Action(SDL_Event events,SDL_Renderer* screen);
 
     void set_x_step(const int &step){x_step=step;}
     int get_x_step() const {return x_step;}

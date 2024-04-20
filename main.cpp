@@ -9,16 +9,17 @@
 #include "explosion.h"
 #include "dropitem.h"
 #include<iostream>
-
-//int random()
-//{
-//    int n=
-//}
+#include<cstdlib>
+int random()
+{
+    int n=rand() % 100 + 1;
+    return n;
+}
 std::vector<Threats*> MakeThreatsList()
 {
     std::vector<Threats*>list_threats;
-    Threats* threat_obj=new Threats[1];
-    for(int i=0;i<1;i++)
+    Threats* threat_obj=new Threats[5];
+    for(int i=0;i<5;i++)
     {
         Threats* p_threat=(threat_obj+i);
         if(p_threat!=NULL)
@@ -28,8 +29,8 @@ std::vector<Threats*> MakeThreatsList()
             p_threat->LoadImage("image/Threats/threatforward.png", gScreen);
             p_threat->LoadImage("image/Threats/threatback.png", gScreen);
             p_threat->set_clips();
-            p_threat->set_x_pos(i*100+50);
-            p_threat->set_y_pos(i*120);
+            p_threat->set_x_pos((i*100+random()*50)%800);
+            p_threat->set_y_pos((i*100+rand()*100)%800);
 
             Weapon* p_bullet=new Weapon();
             p_threat->InitBullet(p_bullet,gScreen);
@@ -40,7 +41,25 @@ std::vector<Threats*> MakeThreatsList()
     return list_threats;
 }
 
-//Game *game = NULL;
+std::vector<DropItem*>MakeCoins()
+{
+    std::vector<DropItem*>list_coins;
+    DropItem* Coins=new DropItem[5];
+    for(int i=0;i<5;i++)
+    {
+        DropItem* coins=(Coins+i);
+        if(coins!=NULL)
+        {
+            coins->LoadImage("image/DropItem/coinsprite.png",gScreen);
+        }
+        coins->set_clips();
+        coins->set_x_pos((i*150+random()*200)%800);
+        coins->set_y_pos((i*200+rand()*150)%800);
+        list_coins.push_back(coins);
+    }
+    return list_coins;
+}
+
 TTF_Font* font_time=NULL;
 bool InitData()
 {
@@ -117,16 +136,15 @@ int main (int argc,char* argv[])
 
     ImpTimer fps_timer;
     if(InitData()==false) return -1;
-    //
+    //PLAY THEME MUSIC
     Mix_PlayChannel(-1,get_theme,0);
 
-    TextManager time;
-    time.SetColorType(TextManager::WHITE_TEXT);
-
+    //GAME MAP
     GameMap G_Map;
     G_Map.LoadMap("map.txt");
     G_Map.LoadTiles(gScreen);
 
+    //PLAYER IMAGE
     MainObject player;
     player.LoadImage("image/MainCharacter/right.png",gScreen);
     player.LoadImage("image/MainCharacter/left.png",gScreen);
@@ -135,28 +153,40 @@ int main (int argc,char* argv[])
     player.set_clips();
 
     std::vector<Threats*> threats_list = MakeThreatsList();
+    std::vector<DropItem*>coins_list = MakeCoins();
+        for (int i=0;i<coins_list.size();i++)
+        {
+            DropItem* coins = coins_list.at(i);
+            if(coins!=NULL)
+            {
+                coins->FrameShow(gScreen);
+            }
+        }
 
-    //xu ly vu no
+
+    //EXPLOSION
     Explosion exp_threat;
-    Explosion exp_main;
     bool tRet=exp_threat.LoadImage("image/Explosion/explosionx8.png",gScreen);
     if(tRet)
     {
         std::cout<<"Init file Explo OK"<<std::endl;
     }
     exp_threat.set_clip();
-    //drop item
-    // khai bao DropItem
-    DropItem coins;
-    bool cret=coins.LoadImage("image/DropItem/newcoin.png",gScreen);
-    if(cret)
-    {
-        std::cout<<"Init file DropIt OK"<<std::endl;
-    }
-    //time text
+    //TEXT OBJECT
+    TextManager time;
+    time.SetColorType(TextManager::WHITE_TEXT);
+
     TextManager time_game;
     time_game.SetColorType(TextManager::RED_TEXT);
 
+    TextManager score;
+    score.SetColorType(TextManager::RED_TEXT);
+
+    TextManager money_count;
+    money_count.SetColorType(TextManager::RED_TEXT);
+    //
+    int money_earn=0;
+    //
     Uint32 frameStart;
     int frameTime;
 
@@ -229,7 +259,7 @@ int main (int argc,char* argv[])
                     std::cout<<"Hit the threat"<<std::endl;
                     player.DecreaseHP(p_threat->GetThreatDamage());
                     //std::cout<<player.GetHP()<<std::endl;
-                    //Mix_PlayChannel(-1,get_hurt,0);
+                    Mix_PlayChannel(-1,get_hurt,0);
                     if(player.GetHP()<=0)
                     {
                         std::cout<<"I'm die!"<<std::endl;
@@ -243,9 +273,9 @@ int main (int argc,char* argv[])
         int frame_exp_width=exp_threat.get_frame_width();
         int frame_exp_height=exp_threat.get_frame_height();
 
-////        /*threat trung dan*/
+        ///*threat trung dan*/
         std::vector<Weapon*> bullet_arr=player.get_weapon_list();
-        std::vector<DropItem> coinList;
+
         for(int r=0;r<bullet_arr.size();r++)
         {
             Weapon* p_weapon=bullet_arr.at(r);
@@ -267,8 +297,8 @@ int main (int argc,char* argv[])
                         bool bCol=SDLBaseFunc::CheckCollision(bRect,tRect);
                         if(bCol)
                         {
-                            //them weapon damge;
-                            //threat trung dan bij tru mau
+                            ///them weapon damge;
+                            ///threat trung dan bij tru mau
                             std::cout<<"Hit your bullet"<<std::endl;
                             obj_threat->DecreaseHP(p_weapon->GetWeaponDamage());
                             player.DeleteBullet(r);
@@ -286,13 +316,16 @@ int main (int argc,char* argv[])
                                 }
                                 obj_threat->Free();
                                 threats_list.erase(threats_list.begin()+t);
+                                if(threats_list.size()<5)
+                                {
+                                    std::vector<Threats*> MakeThreatsList();
+                                }
                                 Mix_PlayChannel(-1,g_sound_exp,0);
                                 if(t%2==0)
                                 {
                                     Mix_PlayChannel(-1,char_talk,0);
                                     Mix_PlayChannel(-1,g_sound_exp,0);
                                 }
-
                             }
 
                         }
@@ -300,6 +333,20 @@ int main (int argc,char* argv[])
                 }
             }
         }
+        // va cham dong xu,cong them xu
+
+
+
+
+
+
+        //hien thi so dong xu dang co
+        int money_earn=player.GetMoney();
+        std::string money_str=std::to_string(money_earn);
+
+        money_count.SetText(money_str);
+        money_count.LoadFromRenderText(font_time,gScreen);
+        money_count.RenderText(gScreen,SCREEN_WIDTH-300,3);
 
         //thoi gian
         std::string str_time="TIME: ";

@@ -2,8 +2,8 @@
 
 Explosion::Explosion()
 {
-    frame_height=0;
-    frame_width=0;
+    frame_height=30;
+    frame_width=30;
     frame=0;
 }
 Explosion::~Explosion(){}

@@ -22,6 +22,8 @@ MainObject::MainObject()
 	input_type.up=0;
 
     InitHP(100);
+
+    money_earn=0;
 }
 MainObject::~MainObject(){}
 // ke thua LoadImage tu BaseObject
@@ -318,4 +320,9 @@ SDL_Rect MainObject::GetRectFrame()
     p_rect.y=rect.y;
     p_rect.w=width_frame;
     p_rect.h=height_frame;
+}
+
+void MainObject::IncreaseMoney()
+{
+    money_earn++;
 }
