@@ -26,7 +26,7 @@ public:
     //void Threat_Cols();
     //chase main
     void Threat_GPS(int x,int y);
-
+    int Threat_Bullet_Direc(Weapon* t_bullet, int x,int y);
     void Threat_Action(SDL_Event events,SDL_Renderer* screen);
 
     void set_x_step(const int &step){x_step=step;}
@@ -78,7 +78,6 @@ private:
     int map_x,map_y;
 
     int type_move;
-    Input input_type;
 
     int come_back_time;
     double hp;

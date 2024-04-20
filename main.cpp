@@ -10,6 +10,10 @@
 #include "dropitem.h"
 #include<iostream>
 
+//int random()
+//{
+//    int n=
+//}
 std::vector<Threats*> MakeThreatsList()
 {
     std::vector<Threats*>list_threats;
@@ -26,6 +30,7 @@ std::vector<Threats*> MakeThreatsList()
             p_threat->set_clips();
             p_threat->set_x_pos(i*100+50);
             p_threat->set_y_pos(i*120);
+
             Weapon* p_bullet=new Weapon();
             p_threat->InitBullet(p_bullet,gScreen);
 
@@ -130,7 +135,6 @@ int main (int argc,char* argv[])
     player.set_clips();
 
     std::vector<Threats*> threats_list = MakeThreatsList();
-    //std::vector<Threats*> x_threats_list=MakeThreatsListX();
 
     //xu ly vu no
     Explosion exp_threat;
@@ -188,7 +192,7 @@ int main (int argc,char* argv[])
             if(p_threat!=NULL)
             {
                 //chase charater;
-                p_threat->Threat_GPS(player.get_x_pos()+10,player.get_y_pos()+10);
+                p_threat->Threat_GPS(player.get_x_pos(),player.get_y_pos());
                 p_threat->MakeBullet(gScreen,SCREEN_WIDTH,SCREEN_HEIGHT);
                 p_threat->FrameShow(gScreen);
                 p_threat->DrawHPBar(gScreen);
