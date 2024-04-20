@@ -154,14 +154,7 @@ int main (int argc,char* argv[])
 
     std::vector<Threats*> threats_list = MakeThreatsList();
     std::vector<DropItem*>coins_list = MakeCoins();
-        for (int i=0;i<coins_list.size();i++)
-        {
-            DropItem* coins = coins_list.at(i);
-            if(coins!=NULL)
-            {
-                coins->FrameShow(gScreen);
-            }
-        }
+
 
 
     //EXPLOSION
@@ -215,6 +208,34 @@ int main (int argc,char* argv[])
         player.FrameShow(gScreen);
         player.DrawHPBar(gScreen);
 
+
+
+        ///hien thi so dong xu dang co
+        int money_earn=player.GetMoney();
+        std::string money_str=std::to_string(money_earn);
+
+        money_count.SetText(money_str);
+        money_count.LoadFromRenderText(font_time,gScreen);
+        money_count.RenderText(gScreen,SCREEN_WIDTH-300,3);
+        ///hien thi va check va cham dong xu
+        for (int i=0;i<coins_list.size();i++)
+        {
+            DropItem* coins = coins_list.at(i);
+            if(coins!=NULL)
+            {
+                coins->FrameShow(gScreen);
+            }
+            SDL_Rect rect_player=player.GetRect();
+            SDL_Rect rect_coin=coins->GetRect();
+            bool coinCols=SDLBaseFunc::CheckCollision(rect_player,rect_coin);
+            if(coinCols)
+                {
+                    std::cout<<"Get Coin"<<std::endl;
+                    player.IncreaseMoney();
+                    Mix_PlayChannel(-1,get_coin,0);
+                    break;
+                }
+        }
 
        for (int i=0;i<threats_list.size();i++)
         {
@@ -340,13 +361,6 @@ int main (int argc,char* argv[])
 
 
 
-        //hien thi so dong xu dang co
-        int money_earn=player.GetMoney();
-        std::string money_str=std::to_string(money_earn);
-
-        money_count.SetText(money_str);
-        money_count.LoadFromRenderText(font_time,gScreen);
-        money_count.RenderText(gScreen,SCREEN_WIDTH-300,3);
 
         //thoi gian
         std::string str_time="TIME: ";
