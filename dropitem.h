@@ -20,6 +20,8 @@ public:
     int get_width_frame() const {return width_frame;}
     int get_height_frame() const {return height_frame;}
 
+    std::vector<DropItem*>get_coins_list() const{return coins_list;}
+    void DeleteCoins(const int& index);
 private:
     int frame;
     SDL_Rect frame_clip[8];
@@ -27,5 +29,7 @@ private:
 
     int status;
     int x_pos,y_pos;
+    std::vector<DropItem*>coins_list;
+
 };
 #endif // DROP_ITEM

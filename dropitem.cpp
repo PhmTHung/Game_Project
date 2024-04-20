@@ -76,4 +76,3 @@ void DropItem::set_clips()
         frame_clip[7].h=64;
     }
 }
-

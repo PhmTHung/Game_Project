@@ -165,6 +165,7 @@ int main (int argc,char* argv[])
         std::cout<<"Init file Explo OK"<<std::endl;
     }
     exp_threat.set_clip();
+
     //TEXT OBJECT
     TextManager time;
     time.SetColorType(TextManager::WHITE_TEXT);
@@ -233,6 +234,8 @@ int main (int argc,char* argv[])
                     std::cout<<"Get Coin"<<std::endl;
                     player.IncreaseMoney();
                     Mix_PlayChannel(-1,get_coin,0);
+                    coins->Free();
+                    coins_list.erase(coins_list.begin()+i);
                     break;
                 }
         }
@@ -242,7 +245,7 @@ int main (int argc,char* argv[])
             Threats* p_threat=threats_list.at(i);
             if(p_threat!=NULL)
             {
-                //chase charater;
+                ///SHOW THREAT ANIMATION,MOVE
                 p_threat->Threat_GPS(player.get_x_pos(),player.get_y_pos());
                 p_threat->MakeBullet(gScreen,SCREEN_WIDTH,SCREEN_HEIGHT);
                 p_threat->FrameShow(gScreen);
@@ -291,10 +294,11 @@ int main (int argc,char* argv[])
             }
         }
 
+        ///LAY CHIEU DAI,RONG FRAME
         int frame_exp_width=exp_threat.get_frame_width();
         int frame_exp_height=exp_threat.get_frame_height();
 
-        ///*threat trung dan*/
+        ///THREAT TRUNG DAN CUA NGUOI CHOI
         std::vector<Weapon*> bullet_arr=player.get_weapon_list();
 
         for(int r=0;r<bullet_arr.size();r++)
@@ -319,7 +323,7 @@ int main (int argc,char* argv[])
                         if(bCol)
                         {
                             ///them weapon damge;
-                            ///threat trung dan bij tru mau
+                            ///threat trung dan bi tru mau
                             std::cout<<"Hit your bullet"<<std::endl;
                             obj_threat->DecreaseHP(p_weapon->GetWeaponDamage());
                             player.DeleteBullet(r);
