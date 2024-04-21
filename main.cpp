@@ -96,6 +96,7 @@ bool InitData()
             flag= false;
             std::cout<<"Mix cannot init";
         }
+        ///sound
         get_theme=Mix_LoadWAV("gamesound/Desert_Theme.wav");
         g_sound_bullet[0]=Mix_LoadWAV("gamesound/gun_fire.wav");
         g_sound_bullet[1]=Mix_LoadWAV("gamesound/laser.wav");
@@ -134,6 +135,8 @@ bool InitData()
 int main (int argc,char* argv[])
 {
 
+    int count_threat_kill=0;
+
     ImpTimer fps_timer;
     if(InitData()==false) return -1;
     //PLAY THEME MUSIC
@@ -152,19 +155,30 @@ int main (int argc,char* argv[])
     player.LoadImage("image/MainCharacter/behind.png",gScreen);
     player.set_clips();
 
-    std::vector<Threats*> threats_list = MakeThreatsList();
+    std::vector<Threats*>threats_list = MakeThreatsList();
     std::vector<DropItem*>coins_list = MakeCoins();
 
+    int count_threat_in_screen=0;
 
-
-    //EXPLOSION
+    ///EXPLOSION
     Explosion exp_threat;
-    bool tRet=exp_threat.LoadImage("image/Explosion/explosionx8.png",gScreen);
-    if(tRet)
+    bool expl_init=exp_threat.LoadImage("image/Explosion/explosionx8.png",gScreen);
+    if(expl_init)
     {
         std::cout<<"Init file Explo OK"<<std::endl;
     }
     exp_threat.set_clip();
+    ///pich up heal
+    DropItem health_bonus;
+    bool health_init=health_bonus.LoadImage("image/DropItem/HealthPickupx.png",gScreen);
+    if(health_init)
+    {
+        std::cout<<"Init file Health Pick up OK"<<std::endl;
+    }
+    health_bonus.set_clips();
+    health_bonus.set_x_pos(100);
+    health_bonus.set_y_pos(100);
+    health_bonus.FrameShow(gScreen);
 
     //TEXT OBJECT
     TextManager time;
@@ -209,16 +223,14 @@ int main (int argc,char* argv[])
         player.FrameShow(gScreen);
         player.DrawHPBar(gScreen);
 
-
-
         ///hien thi so dong xu dang co
         int money_earn=player.GetMoney();
         std::string money_str=std::to_string(money_earn);
-
+        ///Hien thi so tien hien co
         money_count.SetText(money_str);
         money_count.LoadFromRenderText(font_time,gScreen);
         money_count.RenderText(gScreen,SCREEN_WIDTH-300,3);
-        ///hien thi va check va cham dong xu
+        ///Hien thi va check va cham dong xu
         for (int i=0;i<coins_list.size();i++)
         {
             DropItem* coins = coins_list.at(i);
@@ -229,15 +241,19 @@ int main (int argc,char* argv[])
             SDL_Rect rect_player=player.GetRect();
             SDL_Rect rect_coin=coins->GetRect();
             bool coinCols=SDLBaseFunc::CheckCollision(rect_player,rect_coin);
-            if(coinCols)
-                {
-                    std::cout<<"Get Coin"<<std::endl;
-                    player.IncreaseMoney();
-                    Mix_PlayChannel(-1,get_coin,0);
-                    coins->Free();
-                    coins_list.erase(coins_list.begin()+i);
-                    break;
-                }
+             if(coinCols)
+             {
+                std::cout<<"Get Coin"<<std::endl;
+                player.IncreaseMoney();
+                Mix_PlayChannel(-1,get_coin,0);
+                coins->Free();
+                coins_list.erase(coins_list.begin()+i);
+             }
+             if(coins_list.size()<=3)
+             {
+                 coins_list=MakeCoins();
+             }
+
         }
 
        for (int i=0;i<threats_list.size();i++)
@@ -266,11 +282,11 @@ int main (int argc,char* argv[])
                         if(bCol1)
                         {
                             std::cout<<"Hit threat bullet"<<std::endl;
-                            //p_threat->DeleteBullet(b);
+                            p_threat->DeleteBullet(b);
                             player.DecreaseHP(thr_bullet->GetThBuDamage());
                             if(player.GetHP()<=0)
                             {
-                               std::cout<<"I'm die!"<<std::endl;
+                               std::cout<<"I'm die !"<<std::endl;
                                Mix_PlayChannel(-1,get_hurt,0);
                             }
                             break;
@@ -282,13 +298,17 @@ int main (int argc,char* argv[])
                 {
                     std::cout<<"Hit the threat"<<std::endl;
                     player.DecreaseHP(p_threat->GetThreatDamage());
-                    //std::cout<<player.GetHP()<<std::endl;
+                    std::cout<<player.GetHP()<<std::endl;
                     Mix_PlayChannel(-1,get_hurt,0);
                     if(player.GetHP()<=0)
                     {
-                        std::cout<<"I'm die!"<<std::endl;
+                        std::cout<<"I'm die s!"<<std::endl;
                         Mix_PlayChannel(-1,get_hurt,0);
                     }
+//                    if(player.GetHP()<=100)
+//                    {
+//                        health_bonus.FrameShow(gScreen);
+//                    }
                     break;
                 }
             }
@@ -341,9 +361,11 @@ int main (int argc,char* argv[])
                                 }
                                 obj_threat->Free();
                                 threats_list.erase(threats_list.begin()+t);
+
+                                ///lam moi threat sau moi lan het
                                 if(threats_list.size()<5)
                                 {
-                                    std::vector<Threats*> MakeThreatsList();
+                                    threats_list = MakeThreatsList();
                                 }
                                 Mix_PlayChannel(-1,g_sound_exp,0);
                                 if(t%2==0)
@@ -358,14 +380,6 @@ int main (int argc,char* argv[])
                 }
             }
         }
-        // va cham dong xu,cong them xu
-
-
-
-
-
-
-
         //thoi gian
         std::string str_time="TIME: ";
         Uint32 time_val=SDL_GetTicks()/1000;

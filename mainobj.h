@@ -52,11 +52,13 @@ public:
     int get_height_frame() const {return height_frame;}
     //tao thanh HP
     void InitHP(int initialHP);
-    void DecreaseHP(int amount);
+    void DecreaseHP(double amount);
     void DrawHPBar(SDL_Renderer* renderer);
     double GetHP()const{return hp;}
+    void IncreaseHP();
     //xu ly money
     void IncreaseMoney();
+
     int GetMoney()const {return(money_earn);}
 private:
     //di chuyen trai phai x_step=x_val

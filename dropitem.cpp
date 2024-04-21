@@ -5,8 +5,6 @@ DropItem::DropItem()
 {
     height_frame=32;
     width_frame=32;
-//    x_pos=0;
-//    y_pos=0;
     frame=0;
     status=-1;
 }

@@ -21,7 +21,7 @@ MainObject::MainObject()
 	input_type.down=0;
 	input_type.up=0;
 
-    InitHP(100);
+    InitHP(500);
 
     money_earn=0;
 }
@@ -234,20 +234,13 @@ void MainObject::HandleWeapon(SDL_Renderer* des)
 }
 void MainObject::player_move(Map& map_data)
 {
-    //toa do hien tai
-    //int old_x = x_pos;
-    //int old_y = y_pos;
-
-    //van toc
     x_step = SPEED_MOVE;
     y_step = SPEED_MOVE;
-
     //di chuyen
-    if(input_type.left == 1)  x_pos -= x_step;
-    if(input_type.right == 1) x_pos += x_step;
-    if(input_type.up == 1)    y_pos -= y_step;
-    if(input_type.down == 1)  y_pos += y_step;
-
+    if(input_type.left==1)  x_pos -= x_step;
+    if(input_type.right==1) x_pos += x_step;
+    if(input_type.up==1)    y_pos -= y_step;
+    if(input_type.down==1)  y_pos += y_step;
     //check va cham map
     PlayerGPS(map_data);
 }
@@ -256,13 +249,12 @@ void MainObject::PlayerGPS(Map& map_data)
 {
     int width_min = std::min(width_frame, TILE_SIZE);
     int height_min = std::min(height_frame, TILE_SIZE);
-    //ô mà player đang đứng
+    ///ô mà player đang đứng
     int x1 = x_pos/TILE_SIZE;
     int x2 = (x_pos+width_min)/TILE_SIZE;
     int y1 = y_pos/TILE_SIZE;
     int y2 = (y_pos+height_min)/TILE_SIZE;
-
-    // Kiểm tra va chạm với cạnh trên và cạnh dưới của bản đồ
+    ///Kiểm tra va chạm với cạnh trên và cạnh dưới của bản đồ
     if (y1<0)
     {
             y_pos=0;
@@ -271,7 +263,7 @@ void MainObject::PlayerGPS(Map& map_data)
     {
             y_pos=(MAP_Y-1)*TILE_SIZE-height_frame;
     }
-    // Kiểm tra va chạm với cạnh trái và cạnh phải của bản đồ
+    ///Kiểm tra va chạm với cạnh trái và cạnh phải của bản đồ
     if (x1<0)
     {
             x_pos=0;
@@ -284,17 +276,16 @@ void MainObject::PlayerGPS(Map& map_data)
 void MainObject::InitHP(int initialHP) {
     hp = initialHP;
 }
-void MainObject::DecreaseHP(int amount) {
+void MainObject::DecreaseHP(double amount) {
     hp -= amount;
-    // Đảm bảo HP không nhỏ hơn 0
     if (hp < 0) {
         hp = 0;
     }
 }
 void MainObject::DrawHPBar(SDL_Renderer* renderer) {
     // Vẽ thanh HP
-    SDL_Rect hpBarRect = { x_pos+10, y_pos-10, hp, 10 }; // Ví dụ: thanh HP là hình chữ nhật màu đỏ
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Màu đỏ
+    SDL_Rect hpBarRect = { x_pos+10,y_pos-10,hp/5,10};
+    SDL_SetRenderDrawColor(renderer,255,0,0,255);
     SDL_RenderFillRect(renderer, &hpBarRect);
 }
 
@@ -325,4 +316,8 @@ SDL_Rect MainObject::GetRectFrame()
 void MainObject::IncreaseMoney()
 {
     money_earn++;
+}
+void MainObject::IncreaseHP()
+{
+    hp+=200;
 }
