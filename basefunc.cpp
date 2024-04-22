@@ -70,7 +70,4 @@ bool SDLBaseFunc::CheckCollision(const SDL_Rect& object1,const SDL_Rect& object2
   }
   return false;
 }
-//int SDLBaseFunc::ShowMenu(SDL_Surface* des,TTF_Font* font)
-//{
-//
-//}
+

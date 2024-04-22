@@ -61,6 +61,7 @@ std::vector<DropItem*>MakeCoins()
 }
 
 TTF_Font* font_time=NULL;
+TTF_Font* font_game=NULL;
 bool InitData()
 {
     bool flag=true;
@@ -85,10 +86,16 @@ bool InitData()
         else
         {
             font_time=TTF_OpenFont("textfont/Font.ttf",24);
+            font_game=TTF_OpenFont("textfont/Font.ttf",60);
             if(font_time == NULL)
             {
                 flag=false;
-                std::cout<<"TTF cannot Init"<<std::endl;
+                std::cout<<"font time cannot Init"<<std::endl;
+            }
+            if(font_game == NULL)
+            {
+                flag=false;
+                std::cout<<"font game cannot Init"<<std::endl;
             }
         }
         if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT,2,4096)==-1)
@@ -104,6 +111,7 @@ bool InitData()
         get_coin=Mix_LoadWAV("gamesound/hit_coin.wav");
         char_talk=Mix_LoadWAV("gamesound/char_sound.wav");
         get_hurt=Mix_LoadWAV("gamesound/hurt_sound.wav");
+        GameOver=Mix_LoadWAV("gamesound/GO_sound.wav");
         if(get_theme==NULL)
         {
             std::cout<<"Get theme fail"<<std::endl;
@@ -127,6 +135,10 @@ bool InitData()
         if(char_talk==NULL)
         {
             std::cout<<"Get character agr fail"<<std::endl;
+        }
+        if(GameOver==NULL)
+        {
+            std::cout<<"Get GO sound fail"<<std::endl;
         }
     }
     return flag;
@@ -193,6 +205,9 @@ int main (int argc,char* argv[])
     TextManager money_count;
     money_count.SetColorType(TextManager::RED_TEXT);
     //
+    TextManager game_over;
+    game_over.SetColorType(TextManager::WHITE_TEXT);
+    //
     int money_earn=0;
     //
     Uint32 frameStart;
@@ -225,7 +240,9 @@ int main (int argc,char* argv[])
 
         ///hien thi so dong xu dang co
         int money_earn=player.GetMoney();
-        std::string money_str=std::to_string(money_earn);
+        std::string s="YOUR COINS:  ";
+        std::string money_str;
+        money_str="YOUR COINS:" + std::to_string(money_earn);
         ///Hien thi so tien hien co
         money_count.SetText(money_str);
         money_count.LoadFromRenderText(font_time,gScreen);
@@ -253,9 +270,7 @@ int main (int argc,char* argv[])
              {
                  coins_list=MakeCoins();
              }
-
         }
-
        for (int i=0;i<threats_list.size();i++)
         {
             Threats* p_threat=threats_list.at(i);
@@ -263,7 +278,7 @@ int main (int argc,char* argv[])
             {
                 ///SHOW THREAT ANIMATION,MOVE
                 p_threat->Threat_GPS(player.get_x_pos(),player.get_y_pos());
-                p_threat->MakeBullet(gScreen,SCREEN_WIDTH,SCREEN_HEIGHT);
+                p_threat->MakeBullet(gScreen,150,150);
                 p_threat->FrameShow(gScreen);
                 p_threat->DrawHPBar(gScreen);
 
@@ -284,12 +299,6 @@ int main (int argc,char* argv[])
                             std::cout<<"Hit threat bullet"<<std::endl;
                             p_threat->DeleteBullet(b);
                             player.DecreaseHP(thr_bullet->GetThBuDamage());
-                            if(player.GetHP()<=0)
-                            {
-                               std::cout<<"I'm die !"<<std::endl;
-                               Mix_PlayChannel(-1,get_hurt,0);
-                            }
-                            break;
                         }
                     }
                 }
@@ -300,20 +309,19 @@ int main (int argc,char* argv[])
                     player.DecreaseHP(p_threat->GetThreatDamage());
                     std::cout<<player.GetHP()<<std::endl;
                     Mix_PlayChannel(-1,get_hurt,0);
-                    if(player.GetHP()<=0)
-                    {
-                        std::cout<<"I'm die s!"<<std::endl;
-                        Mix_PlayChannel(-1,get_hurt,0);
-                    }
-//                    if(player.GetHP()<=100)
-//                    {
-//                        health_bonus.FrameShow(gScreen);
-//                    }
                     break;
                 }
             }
         }
-
+        if(player.GetHP()<=0)
+        {
+            std::cout<<"I'm die!"<<std::endl;
+            Mix_PlayChannel(-1,GameOver,0);
+            std::string game_str="  GAME OVER  ";
+            game_over.SetText(game_str);
+            game_over.LoadFromRenderText(font_game,gScreen);
+            game_over.RenderText(gScreen,SCREEN_WIDTH/2-200,SCREEN_HEIGHT/2-100);
+        }
         ///LAY CHIEU DAI,RONG FRAME
         int frame_exp_width=exp_threat.get_frame_width();
         int frame_exp_height=exp_threat.get_frame_height();
@@ -381,21 +389,15 @@ int main (int argc,char* argv[])
             }
         }
         //thoi gian
-        std::string str_time="TIME: ";
+        std::string str_time="SURVIVOR TIME: ";
         Uint32 time_val=SDL_GetTicks()/1000;
-        Uint32 val_time=300-time_val;
-        if(val_time<=0)
-        {
-            std::cout<<"Time out"<<std::endl;
-        }
-        else
-        {
-            std::string str_val_=std::to_string(val_time);
-            str_time+=str_val_;
-            time_game.SetText(str_time);
-            time_game.LoadFromRenderText(font_time,gScreen);
-            time_game.RenderText(gScreen,32,0);
-        }
+        Uint32 val_time=time_val;
+
+        std::string str_val_=std::to_string(val_time);
+        str_time+=str_val_;
+        time_game.SetText(str_time);
+        time_game.LoadFromRenderText(font_time,gScreen);
+        time_game.RenderText(gScreen,32,0);
 
         SDL_RenderPresent(gScreen);
 
