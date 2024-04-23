@@ -16,6 +16,6 @@ public:
 private:
     SDL_Texture* menu;
 	SDL_Texture* play;
-	SDL_Texture* exit;
+	SDL_Texture* exit;s
 };
 #endif // MENU_H

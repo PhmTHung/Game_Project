@@ -18,8 +18,8 @@ int random()
 std::vector<Threats*> MakeThreatsList()
 {
     std::vector<Threats*>list_threats;
-    Threats* threat_obj=new Threats[5];
-    for(int i=0;i<5;i++)
+    Threats* threat_obj=new Threats[10];
+    for(int i=0;i<10;i++)
     {
         Threats* p_threat=(threat_obj+i);
         if(p_threat!=NULL)
@@ -29,18 +29,42 @@ std::vector<Threats*> MakeThreatsList()
             p_threat->LoadImage("image/Threats/threatforward.png", gScreen);
             p_threat->LoadImage("image/Threats/threatback.png", gScreen);
             p_threat->set_clips();
-            p_threat->set_x_pos((i*100+random()*50)%800);
-            p_threat->set_y_pos((i*100+rand()*100)%800);
+            p_threat->set_x_pos((i*100+rand()*50-1000)%800);
+            p_threat->set_y_pos((i*100+rand()*100-1000)%800);
 
-            Weapon* p_bullet=new Weapon();
-            p_threat->InitBullet(p_bullet,gScreen);
+            //Weapon* p_bullet=new Weapon();
+            //p_threat->InitBullet(p_bullet,gScreen);
 
             list_threats.push_back(p_threat);
         }
     }
     return list_threats;
 }
+std::vector<Threats*> MakeBigThreatsList()
+{
+    std::vector<Threats*>list_bigthreat;
+    Threats* big_thr=new Threats[2];
+    for(int i=0;i<2;i++)
+    {
+        Threats* p_bthreat=(big_thr+i);
+        if(p_bthreat!=NULL)
+        {
+            p_bthreat->LoadImage("image/Threats/threatleft.png", gScreen);
+            p_bthreat->LoadImage("image/Threats/threatright.png", gScreen);
+            p_bthreat->LoadImage("image/Threats/threatforward.png", gScreen);
+            p_bthreat->LoadImage("image/Threats/threatback.png", gScreen);
+            p_bthreat->set_clips();
+            p_bthreat->set_x_pos((i*100+rand()*50-1000)%800);
+            p_bthreat->set_y_pos((i*100+rand()*100-1000)%800);
 
+            Weapon* p_bullet=new Weapon();
+            p_bthreat->InitBullet(p_bullet,gScreen);
+
+            list_bigthreat.push_back(p_bthreat);
+        }
+    }
+    return list_bigthreat;
+}
 std::vector<DropItem*>MakeCoins()
 {
     std::vector<DropItem*>list_coins;
@@ -58,6 +82,25 @@ std::vector<DropItem*>MakeCoins()
         list_coins.push_back(coins);
     }
     return list_coins;
+}
+
+std::vector<DropItem*>MakeHeal()
+{
+    std::vector<DropItem*>list_heal;
+    DropItem* Heal_pick=new DropItem[1];
+    for(int i=0;i<1;i++)
+    {
+        DropItem* heal=(Heal_pick+i);
+        if(heal!=NULL)
+        {
+            heal->LoadImage("image/DropItem/heal.png",gScreen);
+        }
+        heal->set_clips();
+        heal->set_x_pos((i*150+random()*200)%800);
+        heal->set_y_pos((i*200+rand()*150)%800);
+        list_heal.push_back(heal);
+    }
+    return list_heal;
 }
 
 TTF_Font* font_time=NULL;
@@ -167,8 +210,9 @@ int main (int argc,char* argv[])
     player.LoadImage("image/MainCharacter/behind.png",gScreen);
     player.set_clips();
 
-    std::vector<Threats*>threats_list = MakeThreatsList();
-    std::vector<DropItem*>coins_list = MakeCoins();
+    std::vector<Threats*>threats_list=MakeThreatsList();
+    std::vector<DropItem*>coins_list=MakeCoins();
+    std::vector<DropItem*>heal_list=MakeHeal();
 
     int count_threat_in_screen=0;
 
@@ -180,17 +224,6 @@ int main (int argc,char* argv[])
         std::cout<<"Init file Explo OK"<<std::endl;
     }
     exp_threat.set_clip();
-    ///pich up heal
-    DropItem health_bonus;
-    bool health_init=health_bonus.LoadImage("image/DropItem/HealthPickupx.png",gScreen);
-    if(health_init)
-    {
-        std::cout<<"Init file Health Pick up OK"<<std::endl;
-    }
-    health_bonus.set_clips();
-    health_bonus.set_x_pos(100);
-    health_bonus.set_y_pos(100);
-    health_bonus.FrameShow(gScreen);
 
     //TEXT OBJECT
     TextManager time;
@@ -266,9 +299,25 @@ int main (int argc,char* argv[])
                 coins->Free();
                 coins_list.erase(coins_list.begin()+i);
              }
-             if(coins_list.size()<=3)
+        }
+        ///va cham vs Heal Item
+        for (int i=0;i<heal_list.size();i++)
+        {
+            DropItem* heal = heal_list.at(i);
+            if(heal!=NULL)
+            {
+                heal->FrameShow(gScreen);
+            }
+            SDL_Rect rect_player=player.GetRect();
+            SDL_Rect rect_heal=heal->GetRect();
+            bool coinCols=SDLBaseFunc::CheckCollision(rect_player,rect_heal);
+             if(coinCols)
              {
-                 coins_list=MakeCoins();
+                std::cout<<"Get Heal"<<std::endl;
+                player.IncreaseHP();
+                Mix_PlayChannel(-1,get_coin,0);
+                heal->Free();
+                heal_list.erase(heal_list.begin()+i);
              }
         }
        for (int i=0;i<threats_list.size();i++)
@@ -369,12 +418,6 @@ int main (int argc,char* argv[])
                                 }
                                 obj_threat->Free();
                                 threats_list.erase(threats_list.begin()+t);
-
-                                ///lam moi threat sau moi lan het
-                                if(threats_list.size()<5)
-                                {
-                                    threats_list = MakeThreatsList();
-                                }
                                 Mix_PlayChannel(-1,g_sound_exp,0);
                                 if(t%2==0)
                                 {
@@ -388,10 +431,32 @@ int main (int argc,char* argv[])
                 }
             }
         }
-        //thoi gian
+        ///thoi gian
         std::string str_time="SURVIVOR TIME: ";
         Uint32 time_val=SDL_GetTicks()/1000;
         Uint32 val_time=time_val;
+        ///tao moi coins,threats,heal item theo thoi gian
+        if(time_val%10==0)
+        {
+            if(coins_list.size()<3)
+             {
+                 coins_list=MakeCoins();
+             }
+        }
+        if(time_val%15==0)
+        {
+            if(threats_list.size()<10)
+            {
+                threats_list=MakeThreatsList();
+            }
+        }
+        if(time_val%5==0)
+        {
+            if(heal_list.size()<1)
+            {
+                heal_list=MakeHeal();
+            }
+        }
 
         std::string str_val_=std::to_string(val_time);
         str_time+=str_val_;

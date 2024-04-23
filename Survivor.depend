@@ -424,7 +424,7 @@
 1713780858 source:c:\laptrinh\survivor\game_project\basefunc.cpp
 	"basefunc.h"
 
-1713784285 c:\laptrinh\survivor\game_project\basefunc.h
+1713868303 c:\laptrinh\survivor\game_project\basefunc.h
 	<string>
 	<SDL.h>
 	<SDL_image.h>
@@ -441,7 +441,7 @@
 1712589709 c:\laptrinh\survivor\game_project\baseobj.h
 	"basefunc.h"
 
-1713784454 source:c:\laptrinh\survivor\game_project\main.cpp
+1713868264 source:c:\laptrinh\survivor\game_project\main.cpp
 	"basefunc.h"
 	"baseobj.h"
 	"mainobj.h"
@@ -472,7 +472,7 @@
 
 1713315623 source:c:\laptrinh\survivor\game_project\xulygame.cpp
 
-1713711742 source:c:\laptrinh\survivor\game_project\mainobj.cpp
+1713868443 source:c:\laptrinh\survivor\game_project\mainobj.cpp
 	"mainobj.h"
 	"basefunc.h"
 	"baseobj.h"
@@ -501,7 +501,7 @@
 	"mainobj.h"
 	"vukhi.h"
 
-1713784488 source:c:\laptrinh\survivor\game_project\threats.cpp
+1713868486 source:c:\laptrinh\survivor\game_project\threats.cpp
 	"Threats.h"
 	"mainobj.h"
 	<cstdlib>
@@ -512,7 +512,7 @@
 
 1712594470 c:\laptrinh\survivor\game_project\fps.h
 
-1713711142 source:c:\laptrinh\survivor\game_project\dropitem.cpp
+1713868565 source:c:\laptrinh\survivor\game_project\dropitem.cpp
 	"dropitem.h"
 	"baseobj.h"
 	"basefunc.h"

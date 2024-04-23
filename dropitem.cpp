@@ -3,8 +3,8 @@
 #include "basefunc.h"
 DropItem::DropItem()
 {
-    height_frame=32;
-    width_frame=32;
+    height_frame=40;
+    width_frame=40;
     frame=0;
     status=-1;
 }

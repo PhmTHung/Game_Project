@@ -17,7 +17,7 @@ Threats::Threats()
 
     frame=0;
 
-    threat_damage=100;
+    threat_damage=10;
 
     status=-1;
     come_back_time=0;
@@ -116,14 +116,14 @@ void Threats::Threat_GPS(int x,int y)
         }
     }
 }
-//int Threats::Threat_Bullet_Direc(Weapon* t_bullet,int x,int y)
-//{
-//    if(x_pos==x)
-//    {
-//        if(y_pos<y) t_bullet->set_weapon_direct(Weapon::IN_RIGHT);
-//        if(y_pos>y) t_bullet->set_weapon_direct(Weapon::IN_LEFT);
-//    }
-//}
+int Threats::Threat_Bullet_Direc(Weapon* t_bullet,int x,int y)
+{
+    if(x_pos==x)
+    {
+        if(y_pos<y) t_bullet->set_weapon_direct(Weapon::IN_RIGHT);
+        if(y_pos>y) t_bullet->set_weapon_direct(Weapon::IN_LEFT);
+    }
+}
 void Threats::InitHP(int initialHP)
 {
     hp = initialHP;

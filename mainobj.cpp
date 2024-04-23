@@ -26,7 +26,6 @@ MainObject::MainObject()
     money_earn=0;
 }
 MainObject::~MainObject(){}
-// ke thua LoadImage tu BaseObject
 bool MainObject::LoadImage(std::string path,SDL_Renderer* screen)
 {
     bool ret=BaseObject::LoadImage(path,screen);
@@ -274,7 +273,7 @@ void MainObject::PlayerGPS(Map& map_data)
     }
 }
 void MainObject::InitHP(int initialHP) {
-    hp = initialHP;
+    hp=initialHP;
 }
 void MainObject::DecreaseHP(double amount) {
     hp -= amount;
@@ -283,8 +282,8 @@ void MainObject::DecreaseHP(double amount) {
     }
 }
 void MainObject::DrawHPBar(SDL_Renderer* renderer) {
-    // Vẽ thanh HP
-    SDL_Rect hpBarRect = { x_pos+10,y_pos-10,hp/5,10};
+    ///Vẽ thanh HP
+    SDL_Rect hpBarRect={x_pos+10,y_pos-10,hp/5,10};
     SDL_SetRenderDrawColor(renderer,255,0,0,255);
     SDL_RenderFillRect(renderer, &hpBarRect);
 }
@@ -320,4 +319,8 @@ void MainObject::IncreaseMoney()
 void MainObject::IncreaseHP()
 {
     hp+=200;
+    if(hp>=500)
+    {
+        hp=500;
+    }
 }

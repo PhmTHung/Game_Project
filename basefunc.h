@@ -36,7 +36,7 @@ static Mix_Chunk* GameOver;
 
 #define TILE_SIZE 32
 #define SPEED_MOVE 8
-#define THREAT_SPEED 2
+#define THREAT_SPEED 1
 #define WALL 1
 #define MAP_X 25
 #define MAP_Y 25
