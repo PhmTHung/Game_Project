@@ -26,14 +26,14 @@ public:
     void FrameShow(SDL_Renderer* des);
     void HandleInputAction(SDL_Event events,SDL_Renderer* screen,Mix_Chunk* bullet_sound[2]);
     void set_clips();
-    //ham xu ly di chuyen// se sua sau khi test
+    ///ham xu ly di chuyen
     void player_move(Map& map_data);
-    //playercoordinate xu ly map
+    ///playercoordinate xu ly map
     void PlayerGPS(Map& map_data);
 
     SDL_Rect GetRectFrame();
 
-    //xu ly vu khi
+    ///xu ly vu khi
     void set_weapon_list(std::vector<Weapon*>weapon_list)
     {
         p_weapon_list=weapon_list;

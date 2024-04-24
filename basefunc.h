@@ -10,6 +10,7 @@
 #include <ctime>
 
 static SDL_Window* gWindow =NULL;
+static SDL_Window* gMenu=NULL;
 static SDL_Renderer* gScreen=NULL;
 static SDL_Event gEvent;
 
@@ -63,14 +64,8 @@ typedef struct Map
 namespace SDLBaseFunc
 {
     bool CheckCollision(const SDL_Rect& object1, const SDL_Rect& object2);
-//    bool CheckFocusRect(int&x, int&y,const SDL_Rect rect)
-//    {
-//        if(x>=rect.x && x<= rect.x+rect.w && y>=rect.y && y <= rect.y+rect.h)
-//	    {
-//		     return true;
-//	    }
-//	    return false;
-//    }
+    bool CheckFocusRect(int& x, int& y,const SDL_Rect rect);
+    //int ShowMenu(SDL_Surface* des,TTF_Font* font);
 }
 
 #endif // BASE_H

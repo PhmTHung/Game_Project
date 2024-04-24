@@ -59,7 +59,6 @@
 		<Unit filename="map.cpp" />
 		<Unit filename="map.h" />
 		<Unit filename="map.txt" />
-		<Unit filename="maplv2.txt" />
 		<Unit filename="menu.cpp" />
 		<Unit filename="menu.h" />
 		<Unit filename="sound.cpp" />

@@ -44,11 +44,7 @@ public:
     int get_height_frame() const {return height_frame;}
 
     void set_type_move(const int& typeMove){ type_move=typeMove;}
-    void SetMapXY(const int& mp_x,const int& mp_y)
-    {
-        map_x=mp_x;
-        map_y=mp_y;
-    }
+
 
     void InitHP(int initialHP);
     void DecreaseHP(int damage);
@@ -64,6 +60,7 @@ public:
     SDL_Rect GetRectFrame();
 
     double GetThreatDamage()const{return threat_damage;}
+    double IncreaseDamage();
 private:
     int x_step,y_step;
 
@@ -74,14 +71,11 @@ private:
     int status;
     int x_pos,y_pos;
     int map_x,map_y;
-
     int type_move;
-
-    int come_back_time;
     double hp;
 
     double threat_damage;
-
+    double threat_speed;
     std::vector<Weapon*>t_bullet_list;
 };
 #endif // THREATS_H

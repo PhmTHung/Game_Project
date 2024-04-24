@@ -8,12 +8,39 @@
 #include "text.h"
 #include "explosion.h"
 #include "dropitem.h"
+#include "menu.h"
 #include<iostream>
 #include<cstdlib>
 int random()
 {
     int n=rand() % 100 + 1;
     return n;
+}
+int random_x(int n)
+{
+    int x=(n*100+random()*50-1000)%800;
+    if(x<=32)
+    {
+        x=32;
+    }
+    if(x>=800)
+    {
+        x=768;
+    }
+    return x;
+}
+int random_y(int n)
+{
+    int y=(n*150+random()*50-1000)%800;
+    if(y<=32)
+    {
+        y=32;
+    }
+    if(y>=768)
+    {
+        y=768;
+    }
+    return y;
 }
 std::vector<Threats*> MakeThreatsList()
 {
@@ -29,42 +56,42 @@ std::vector<Threats*> MakeThreatsList()
             p_threat->LoadImage("image/Threats/threatforward.png", gScreen);
             p_threat->LoadImage("image/Threats/threatback.png", gScreen);
             p_threat->set_clips();
-            p_threat->set_x_pos((i*100+rand()*50-1000)%800);
-            p_threat->set_y_pos((i*100+rand()*100-1000)%800);
+            p_threat->set_x_pos((i*100+random()*50-1000)%800);
+            p_threat->set_y_pos((i*100+random()*100-1000)%800);
 
-            //Weapon* p_bullet=new Weapon();
-            //p_threat->InitBullet(p_bullet,gScreen);
+            Weapon* p_bullet=new Weapon();
+            p_threat->InitBullet(p_bullet,gScreen);
 
             list_threats.push_back(p_threat);
         }
     }
     return list_threats;
 }
-std::vector<Threats*> MakeBigThreatsList()
-{
-    std::vector<Threats*>list_bigthreat;
-    Threats* big_thr=new Threats[2];
-    for(int i=0;i<2;i++)
-    {
-        Threats* p_bthreat=(big_thr+i);
-        if(p_bthreat!=NULL)
-        {
-            p_bthreat->LoadImage("image/Threats/threatleft.png", gScreen);
-            p_bthreat->LoadImage("image/Threats/threatright.png", gScreen);
-            p_bthreat->LoadImage("image/Threats/threatforward.png", gScreen);
-            p_bthreat->LoadImage("image/Threats/threatback.png", gScreen);
-            p_bthreat->set_clips();
-            p_bthreat->set_x_pos((i*100+rand()*50-1000)%800);
-            p_bthreat->set_y_pos((i*100+rand()*100-1000)%800);
-
-            Weapon* p_bullet=new Weapon();
-            p_bthreat->InitBullet(p_bullet,gScreen);
-
-            list_bigthreat.push_back(p_bthreat);
-        }
-    }
-    return list_bigthreat;
-}
+//std::vector<Threats*> MakeBigThreatsList()
+//{
+//    std::vector<Threats*>list_bigthreat;
+//    Threats* big_thr=new Threats[2];
+//    for(int i=0;i<2;i++)
+//    {
+//        Threats* p_bthreat=(big_thr+i);
+//        if(p_bthreat!=NULL)
+//        {
+//            p_bthreat->LoadImage("image/Threats/threatleft.png", gScreen);
+//            p_bthreat->LoadImage("image/Threats/threatright.png", gScreen);
+//            p_bthreat->LoadImage("image/Threats/threatforward.png", gScreen);
+//            p_bthreat->LoadImage("image/Threats/threatback.png", gScreen);
+//            p_bthreat->set_clips();
+//            p_bthreat->set_x_pos((i*100+rand()*50-1000)%800);
+//            p_bthreat->set_y_pos((i*100+rand()*100-1000)%800);
+//
+//            Weapon* p_bullet=new Weapon();
+//            p_bthreat->InitBullet(p_bullet,gScreen);
+//
+//            list_bigthreat.push_back(p_bthreat);
+//        }
+//    }
+//    return list_bigthreat;
+//}
 std::vector<DropItem*>MakeCoins()
 {
     std::vector<DropItem*>list_coins;
@@ -77,8 +104,8 @@ std::vector<DropItem*>MakeCoins()
             coins->LoadImage("image/DropItem/coinsprite.png",gScreen);
         }
         coins->set_clips();
-        coins->set_x_pos((i*150+random()*200)%800);
-        coins->set_y_pos((i*200+rand()*150)%800);
+        coins->set_x_pos(random_x(i));
+        coins->set_y_pos(random_y(i));
         list_coins.push_back(coins);
     }
     return list_coins;
@@ -96,8 +123,8 @@ std::vector<DropItem*>MakeHeal()
             heal->LoadImage("image/DropItem/heal.png",gScreen);
         }
         heal->set_clips();
-        heal->set_x_pos((i*150+random()*200)%800);
-        heal->set_y_pos((i*200+rand()*150)%800);
+        heal->set_x_pos(random_x(i));
+        heal->set_y_pos(random_y(i));
         list_heal.push_back(heal);
     }
     return list_heal;
@@ -196,6 +223,9 @@ int main (int argc,char* argv[])
     if(InitData()==false) return -1;
     //PLAY THEME MUSIC
     Mix_PlayChannel(-1,get_theme,0);
+
+//    Menu newMenu;
+//    newMenu.LoadImage("image/background2.png",gMenu);
 
     //GAME MAP
     GameMap G_Map;
@@ -327,7 +357,7 @@ int main (int argc,char* argv[])
             {
                 ///SHOW THREAT ANIMATION,MOVE
                 p_threat->Threat_GPS(player.get_x_pos(),player.get_y_pos());
-                p_threat->MakeBullet(gScreen,150,150);
+                p_threat->MakeBullet(gScreen,350,350);
                 p_threat->FrameShow(gScreen);
                 p_threat->DrawHPBar(gScreen);
 
@@ -358,7 +388,7 @@ int main (int argc,char* argv[])
                     player.DecreaseHP(p_threat->GetThreatDamage());
                     std::cout<<player.GetHP()<<std::endl;
                     Mix_PlayChannel(-1,get_hurt,0);
-                    break;
+                    //break;
                 }
             }
         }
