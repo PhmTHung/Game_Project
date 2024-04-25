@@ -11,15 +11,26 @@
 
 ## Giới Thiệu
 
-Đây là Game nhập vai, thời gian thực ,sử dụng vũ khí để tiêu diệt quái vật , cố gắng tránh xa những con quái và viên đạn của chúng.Sinh tồn lâu nhất có thể và nhặt đồng xu vàng quý giá
+Đây là Game nhập vai, thời gian thực ,sử dụng vũ khí để tiêu diệt quái vật , cố gắng tránh xa những con quái và viên đạn của chúng.Sinh tồn lâu nhất có thể và nhặt đồng xu vàng quý giá.
 
 ## Cách Tải Game
 
-_You **can** combine them_
 
 ## Bắt đầu Game
 
-## Images
+Ấn vào nút Bắt đầu.
+
+## Các thành phần của game
+* Drop Item: Nhặt những vật phẩm có thể giúp bạn sinh tồn lâu hơn
+   * Túi máu : Giúp bạn hồi tối đa 200 HP ,hãy sử dụng chúng một cách thông minh bởi lượng máu
+               được hồi phụ thuộc vào số máu bạn đã mất.
+   * Đồng xu : Thứ quý giá luôn được bảo vệ bởi những kẻ máu mặt ,chúng sẵn sàn tấn công bạn để
+               bảo vệ những đồng tiền cổ.
+   * Nấm     : Được coi là sinh vật đặc biệt trên hòn đảo, ăn được chúng giúp ta cải thiện tốc
+               độ chạy rất nhiều.
+* Kẻ địch 1 : Những con dơi có khả năng tấn công tầm xa và cả tầm gần , chú ý giữ khoảng cách với chúng
+* Kẻ địch 2 : Những con rắn khổng lồ với thân hình to lớn tuy không có thể tấn công tần xa nhưng chúng có tốc độ di chuyển nhanh và lượng máu khổng lồ , tránh giao tranh với chúng để bảo toàn mạng sống
+* 
 
 ![This is an alt text.](/image/sample.webp "This is a sample image.")
 
