@@ -58,8 +58,9 @@ public:
     void IncreaseHP();
     //xu ly money
     void IncreaseMoney();
-
     int GetMoney()const {return(money_earn);}
+    void IncreaseSpeed();
+    int GetSpeed()const{return(main_speed);}
 private:
     //di chuyen trai phai x_step=x_val
     int x_step;
@@ -83,5 +84,6 @@ private:
     int money_earn;
     //them thanh HP
     double hp;
+    double main_speed;
 };
 #endif // MAIN_OBJ_H

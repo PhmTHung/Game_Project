@@ -34,12 +34,10 @@ public:
 
     void set_weapon_direct(const int & weaponDirect){weapon_direct=weaponDirect;}
     int  get_weapon_direct()const {return weapon_direct;}
-
-    //void HandleMove(const int& x_border,const int& y_border);
     void WeaponRange(int x_border,int y_border);
 
-    int get_x_range() const{return x_border;}
-    int get_y_range() const{return y_border;}
+//    int get_x_range() const{return x_border;}
+//    int get_y_range() const{return y_border;}
 
     void set_weapon_type(const unsigned int& weaponType){weapon_type=weaponType;}
     int get_weapon_type()const{return weapon_type;}
@@ -60,12 +58,9 @@ private:
     //tam xa cua vu khi
     int x_border;
     int y_border;
-    //trang thai trong man hinh de xoa
     bool is_move;
-    //hướng bắn
     int weapon_direct;
     int weapon_type;
-
     int weapon_damage;
     int thr_bul_damge;
 

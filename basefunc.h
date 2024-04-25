@@ -10,7 +10,6 @@
 #include <ctime>
 
 static SDL_Window* gWindow =NULL;
-static SDL_Window* gMenu=NULL;
 static SDL_Renderer* gScreen=NULL;
 static SDL_Event gEvent;
 
@@ -34,6 +33,8 @@ static Mix_Chunk* get_theme;
 static Mix_Chunk* char_talk;
 static Mix_Chunk* get_hurt;
 static Mix_Chunk* GameOver;
+static Mix_Chunk* Heal;
+static Mix_Chunk* eat;
 
 #define TILE_SIZE 32
 #define SPEED_MOVE 8
@@ -65,7 +66,6 @@ namespace SDLBaseFunc
 {
     bool CheckCollision(const SDL_Rect& object1, const SDL_Rect& object2);
     bool CheckFocusRect(int& x, int& y,const SDL_Rect rect);
-    //int ShowMenu(SDL_Surface* des,TTF_Font* font);
 }
 
 #endif // BASE_H

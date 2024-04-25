@@ -13,12 +13,12 @@ public:
     int get_x_pos() const {return x_pos;}
     void set_y_pos(const int &pos){y_pos=pos;}
     int get_y_pos() const {return y_pos;}
+    void FrameShow(SDL_Renderer* des);
+    void set_clips();
 private:
-    SDL_Event event;
-    SDL_Window* window;
-    SDL_Renderer* screen;
     int width_frame;
     int height_frame;
     int x_pos,y_pos;
+    SDL_Rect frame_clip;
 };
 #endif // MENU_H

@@ -1,16 +1,13 @@
-#ifndef THREATS_H
-#define THREATS_H
+#ifndef B_THREAT_H
+#define B_THREAT_H
 #include "basefunc.h"
 #include "baseobj.h"
 #include "mainobj.h"
-#include "vukhi.h"
-#define THREATS_WIDTH 20
-#define THREATS_HEIGHT 20
-class Threats:public BaseObject
+class BThreats:public BaseObject
 {
 public:
-    Threats();
-    ~Threats();
+    BThreats();
+    ~BThreats();
     enum MoveType
     {
         MOVE_RIGHT =0,
@@ -21,12 +18,7 @@ public:
     bool LoadImage(std::string path,SDL_Renderer* screen);
     void FrameShow(SDL_Renderer* des);
     void set_clips();
-
-    //check va cham
-    //chase main
     void Threat_GPS(int x,int y);
-    int Threat_Bullet_Direc(Weapon* t_bullet, int x,int y);
-
     void set_x_step(const int &step){x_step=step;}
     int get_x_step() const {return x_step;}
     void set_y_step(const int &step){y_step=step;}
@@ -44,37 +36,26 @@ public:
 
     void set_type_move(const int& typeMove){ type_move=typeMove;}
 
-
     void InitHP(int initialHP);
     void DecreaseHP(int damage);
     void DrawHPBar(SDL_Renderer* renderer);
     double GetHP()const{return hp;}
-
-    std::vector<Weapon*>get_bullet_list() const{return t_bullet_list;}
-    void set_bullet_list(const std::vector<Weapon*>& bl_list){t_bullet_list=bl_list;}
-
-    void InitBullet(Weapon* p_bullet,SDL_Renderer* screen);
-    void MakeBullet(SDL_Renderer* screen,const int& x_limit,const int& y_limit,int x,int y);
-    void DeleteBullet(const int& idx);
     SDL_Rect GetRectFrame();
-
     double GetThreatDamage()const{return threat_damage;}
     double IncreaseDamage();
 private:
     int x_step,y_step;
 
     int frame;
-    SDL_Rect frame_clip[4];
+    SDL_Rect frame_clip[3];
     int width_frame,height_frame;
 
     int status;
     int x_pos,y_pos;
-    int map_x,map_y;
     int type_move;
     double hp;
 
     double threat_damage;
     double threat_speed;
-    std::vector<Weapon*>t_bullet_list;
 };
-#endif // THREATS_H
+#endif // B_THREAT_H

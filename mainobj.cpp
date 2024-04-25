@@ -24,6 +24,7 @@ MainObject::MainObject()
     InitHP(500);
 
     money_earn=0;
+    main_speed=SPEED_MOVE;
 }
 MainObject::~MainObject(){}
 bool MainObject::LoadImage(std::string path,SDL_Renderer* screen)
@@ -179,29 +180,24 @@ void MainObject::HandleInputAction(SDL_Event events,SDL_Renderer* screen,Mix_Chu
             switch (status)
             {
             case MOVE_LEFT:
-                //p_weapon->LoadImage("image/Weapon/bladexleft.png",screen);
                 p_weapon->set_weapon_direct(Weapon::IN_LEFT);
                 p_weapon->SetRect(this->rect.x+width_frame/2,rect.y-0.1*height_frame);
                 break;
             case MOVE_RIGHT:
-                //p_weapon->LoadImage("image/Weapon/bladexright.png",screen);
                 p_weapon->set_weapon_direct(Weapon::IN_RIGHT);
                 p_weapon->SetRect(this->rect.x+width_frame/2,rect.y-0.1*height_frame);
                 break;
             case MOVE_UP:
-                //p_weapon->LoadImage("image/Weapon/bladexup.png",screen);
                 p_weapon->set_weapon_direct(Weapon::IN_UP);
                 p_weapon->SetRect(this->rect.x+width_frame/2-15,rect.y-0.1*height_frame);
                 break;
             case MOVE_DOWN:
-                //p_weapon->LoadImage("image/Weapon/bladexdown.png",screen);
                 p_weapon->set_weapon_direct(Weapon::IN_DOWN);
                 p_weapon->SetRect(this->rect.x+width_frame/2-15,rect.y-0.1*height_frame);
                 break;
             }
             p_weapon->set_x_val(20);
             p_weapon->set_is_move(true);
-
             p_weapon_list.push_back(p_weapon);
         }
     }
@@ -256,20 +252,20 @@ void MainObject::PlayerGPS(Map& map_data)
     ///Kiểm tra va chạm với cạnh trên và cạnh dưới của bản đồ
     if (y1<0)
     {
-            y_pos=0;
+        y_pos=0;
     }
     if(y2>MAP_Y-2)
     {
-            y_pos=(MAP_Y-1)*TILE_SIZE-height_frame;
+        y_pos=(MAP_Y-1)*TILE_SIZE-height_frame;
     }
     ///Kiểm tra va chạm với cạnh trái và cạnh phải của bản đồ
     if (x1<0)
     {
-            x_pos=0;
+        x_pos=0;
     }
     if(x2>MAP_X-2.5)
     {
-         x_pos=MAP_X*TILE_SIZE-width_frame;
+        x_pos=MAP_X*TILE_SIZE-width_frame;
     }
 }
 void MainObject::InitHP(int initialHP) {
@@ -277,7 +273,8 @@ void MainObject::InitHP(int initialHP) {
 }
 void MainObject::DecreaseHP(double amount) {
     hp -= amount;
-    if (hp < 0) {
+    if (hp < 0)
+    {
         hp = 0;
     }
 }
@@ -323,4 +320,8 @@ void MainObject::IncreaseHP()
     {
         hp=500;
     }
+}
+void MainObject::IncreaseSpeed()
+{
+    main_speed+=5;
 }
