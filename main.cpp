@@ -9,6 +9,7 @@
 #include "explosion.h"
 #include "dropitem.h"
 #include "menu.h"
+#include "bigthreat.h"
 #include<iostream>
 #include<cstdlib>
 int random()
@@ -67,31 +68,27 @@ std::vector<Threats*> MakeThreatsList()
     }
     return list_threats;
 }
-//std::vector<Threats*> MakeBigThreatsList()
-//{
-//    std::vector<Threats*>list_bigthreat;
-//    Threats* big_thr=new Threats[2];
-//    for(int i=0;i<2;i++)
-//    {
-//        Threats* p_bthreat=(big_thr+i);
-//        if(p_bthreat!=NULL)
-//        {
-//            p_bthreat->LoadImage("image/Threats/threatleft.png", gScreen);
-//            p_bthreat->LoadImage("image/Threats/threatright.png", gScreen);
-//            p_bthreat->LoadImage("image/Threats/threatforward.png", gScreen);
-//            p_bthreat->LoadImage("image/Threats/threatback.png", gScreen);
-//            p_bthreat->set_clips();
-//            p_bthreat->set_x_pos((i*100+rand()*50-1000)%800);
-//            p_bthreat->set_y_pos((i*100+rand()*100-1000)%800);
-//
-//            Weapon* p_bullet=new Weapon();
-//            p_bthreat->InitBullet(p_bullet,gScreen);
-//
-//            list_bigthreat.push_back(p_bthreat);
-//        }
-//    }
-//    return list_bigthreat;
-//}
+std::vector<BThreats*> MakeBigThreatsList()
+{
+    std::vector<BThreats*>list_bigthreat;
+    BThreats* big_thr=new BThreats[1];
+    for(int i=0;i<1;i++)
+    {
+        BThreats* p_bthreat=(big_thr+i);
+        if(p_bthreat!=NULL)
+        {
+            p_bthreat->LoadImage("image/Threats/left.png", gScreen);
+            p_bthreat->LoadImage("image/Threats/right.png", gScreen);
+            p_bthreat->LoadImage("image/Threats/forward.png", gScreen);
+            p_bthreat->LoadImage("image/Threats/back.png", gScreen);
+            p_bthreat->set_clips();
+            p_bthreat->set_x_pos((i*100+rand()*50-1000)%800);
+            p_bthreat->set_y_pos((i*100+rand()*100-1000)%800);
+            list_bigthreat.push_back(p_bthreat);
+        }
+    }
+    return list_bigthreat;
+}
 std::vector<DropItem*>MakeCoins()
 {
     std::vector<DropItem*>list_coins;
@@ -130,12 +127,30 @@ std::vector<DropItem*>MakeHeal()
     return list_heal;
 }
 
+std::vector<DropItem*>MakeMushroom()
+{
+    std::vector<DropItem*>list_mushroom;
+    DropItem* mushroom_pick=new DropItem[1];
+    for(int i=0;i<1;i++)
+    {
+        DropItem* mushroom=(mushroom_pick+i);
+        if(mushroom!=NULL)
+        {
+            mushroom->LoadImage("image/DropItem/mushroom.png",gScreen);
+        }
+        mushroom->set_clips();
+        mushroom->set_x_pos(random_x(i));
+        mushroom->set_y_pos(random_y(i));
+        list_mushroom.push_back(mushroom);
+    }
+    return list_mushroom;
+}
 TTF_Font* font_time=NULL;
 TTF_Font* font_game=NULL;
+SDL_Texture* gMenu=NULL;
 bool InitData()
 {
     bool flag=true;
-    //thiet lap mt ban dau
     int ret=SDL_Init(SDL_INIT_VIDEO);
     if(ret<0) std::cout<<"ERROR->Init"<<std::endl;
 
@@ -152,6 +167,13 @@ bool InitData()
             if((IMG_Init(imgFlags)&&imgFlags)) std::cout<<"Create init image.PNG"<<std::endl;
             flag=true;
         }
+
+//        gMenu=IMG_LoadTexture(gScreen,"image/background5.png");
+//        if(gMenu != NULL)
+//        {
+//            std::cout<<"Init menu"<<std::endl;
+//        }
+
         if(TTF_Init()==-1) flag=false;
         else
         {
@@ -182,34 +204,8 @@ bool InitData()
         char_talk=Mix_LoadWAV("gamesound/char_sound.wav");
         get_hurt=Mix_LoadWAV("gamesound/hurt_sound.wav");
         GameOver=Mix_LoadWAV("gamesound/GO_sound.wav");
-        if(get_theme==NULL)
-        {
-            std::cout<<"Get theme fail"<<std::endl;
-        }
-        if(g_sound_exp==NULL)
-        {
-            std::cout<<"Get explo_sound fail"<<std::endl;
-        }
-         if(g_sound_bullet[0]==NULL)
-        {
-            std::cout<<"Get bullet[0]_sound fail"<<std::endl;
-        }
-         if(g_sound_bullet[1]==NULL)
-        {
-            std::cout<<"Get bullet[1]_sound fail"<<std::endl;
-        }
-        if(get_coin==NULL)
-        {
-            std::cout<<"Get coin_sound fail"<<std::endl;
-        }
-        if(char_talk==NULL)
-        {
-            std::cout<<"Get character agr fail"<<std::endl;
-        }
-        if(GameOver==NULL)
-        {
-            std::cout<<"Get GO sound fail"<<std::endl;
-        }
+        Heal=Mix_LoadWAV("gamesound/healsound.wav");
+        eat=Mix_LoadWAV("gamesound/eatsound.wav");
     }
     return flag;
 }
@@ -217,16 +213,13 @@ bool InitData()
 int main (int argc,char* argv[])
 {
 
+
     int count_threat_kill=0;
 
     ImpTimer fps_timer;
     if(InitData()==false) return -1;
     //PLAY THEME MUSIC
     Mix_PlayChannel(-1,get_theme,0);
-
-//    Menu newMenu;
-//    newMenu.LoadImage("image/background2.png",gMenu);
-
     //GAME MAP
     GameMap G_Map;
     G_Map.LoadMap("map.txt");
@@ -241,10 +234,10 @@ int main (int argc,char* argv[])
     player.set_clips();
 
     std::vector<Threats*>threats_list=MakeThreatsList();
+    std::vector<BThreats*>bthreat_list=MakeBigThreatsList();
     std::vector<DropItem*>coins_list=MakeCoins();
     std::vector<DropItem*>heal_list=MakeHeal();
-
-    int count_threat_in_screen=0;
+    std::vector<DropItem*>mushroom_list=MakeMushroom();
 
     ///EXPLOSION
     Explosion exp_threat;
@@ -254,30 +247,24 @@ int main (int argc,char* argv[])
         std::cout<<"Init file Explo OK"<<std::endl;
     }
     exp_threat.set_clip();
-
     //TEXT OBJECT
     TextManager time;
     time.SetColorType(TextManager::WHITE_TEXT);
-
     TextManager time_game;
     time_game.SetColorType(TextManager::RED_TEXT);
-
     TextManager score;
     score.SetColorType(TextManager::RED_TEXT);
-
     TextManager money_count;
     money_count.SetColorType(TextManager::RED_TEXT);
-    //
     TextManager game_over;
     game_over.SetColorType(TextManager::WHITE_TEXT);
     //
     int money_earn=0;
-    //
     Uint32 frameStart;
     int frameTime;
-
     bool is_quit=false;
-     while(!is_quit)
+
+    while(!is_quit)
     {
         fps_timer.start();
         while(SDL_PollEvent(&gEvent)!=0)
@@ -303,13 +290,23 @@ int main (int argc,char* argv[])
 
         ///hien thi so dong xu dang co
         int money_earn=player.GetMoney();
-        std::string s="YOUR COINS:  ";
+        std::string s="COINS:  ";
         std::string money_str;
-        money_str="YOUR COINS:" + std::to_string(money_earn);
+        money_str=s+ std::to_string(money_earn);
         ///Hien thi so tien hien co
         money_count.SetText(money_str);
         money_count.LoadFromRenderText(font_time,gScreen);
         money_count.RenderText(gScreen,SCREEN_WIDTH-300,3);
+        ///Hien thi so score
+
+        std::string s2="SCORE:  ";
+        std::string score_str;
+        score.SetText(score_str);
+        score_str=s2+std::to_string(count_threat_kill);
+        score.SetText(score_str);
+        score.LoadFromRenderText(font_time,gScreen);
+        score.RenderText(gScreen,SCREEN_WIDTH-500,3);
+
         ///Hien thi va check va cham dong xu
         for (int i=0;i<coins_list.size();i++)
         {
@@ -340,14 +337,34 @@ int main (int argc,char* argv[])
             }
             SDL_Rect rect_player=player.GetRect();
             SDL_Rect rect_heal=heal->GetRect();
-            bool coinCols=SDLBaseFunc::CheckCollision(rect_player,rect_heal);
-             if(coinCols)
+            bool it1Cols=SDLBaseFunc::CheckCollision(rect_player,rect_heal);
+             if(it1Cols)
              {
-                std::cout<<"Get Heal"<<std::endl;
+                std::cout<<"Get heal"<<std::endl;
                 player.IncreaseHP();
-                Mix_PlayChannel(-1,get_coin,0);
+                Mix_PlayChannel(-1,Heal,-1);
                 heal->Free();
                 heal_list.erase(heal_list.begin()+i);
+             }
+        }
+        ///va cham nam
+        for (int i=0;i<mushroom_list.size();i++)
+        {
+            DropItem* mushroom = mushroom_list.at(i);
+            if(mushroom!=NULL)
+            {
+                mushroom->FrameShow(gScreen);
+            }
+            SDL_Rect rect_player=player.GetRect();
+            SDL_Rect rect_mushroom=mushroom->GetRect();
+            bool it2Cols=SDLBaseFunc::CheckCollision(rect_player,rect_mushroom);
+             if(it2Cols)
+             {
+                std::cout<<"Get mushroom to increase speed"<<std::endl;
+                player.IncreaseSpeed();
+                Mix_PlayChannel(-1,eat,0);
+                mushroom->Free();
+                mushroom_list.erase(mushroom_list.begin()+i);
              }
         }
        for (int i=0;i<threats_list.size();i++)
@@ -356,8 +373,9 @@ int main (int argc,char* argv[])
             if(p_threat!=NULL)
             {
                 ///SHOW THREAT ANIMATION,MOVE
+                Weapon* t_bullet;
                 p_threat->Threat_GPS(player.get_x_pos(),player.get_y_pos());
-                p_threat->MakeBullet(gScreen,350,350);
+                p_threat->MakeBullet(gScreen,SCREEN_HEIGHT,SCREEN_WIDTH,player.get_x_pos(),player.get_y_pos());
                 p_threat->FrameShow(gScreen);
                 p_threat->DrawHPBar(gScreen);
 
@@ -376,8 +394,8 @@ int main (int argc,char* argv[])
                         if(bCol1)
                         {
                             std::cout<<"Hit threat bullet"<<std::endl;
-                            p_threat->DeleteBullet(b);
-                            player.DecreaseHP(thr_bullet->GetThBuDamage());
+                            //p_threat->DeleteBullet(b);
+                            player.DecreaseHP(p_threat->GetThreatDamage());
                         }
                     }
                 }
@@ -386,6 +404,28 @@ int main (int argc,char* argv[])
                 {
                     std::cout<<"Hit the threat"<<std::endl;
                     player.DecreaseHP(p_threat->GetThreatDamage());
+                    std::cout<<player.GetHP()<<std::endl;
+                    Mix_PlayChannel(-1,get_hurt,0);
+                    //break;
+                }
+            }
+        }
+         for (int i=0;i<bthreat_list.size();i++)
+        {
+            BThreats* p_bthreat=bthreat_list.at(i);
+            if(p_bthreat!=NULL)
+            {
+                p_bthreat->Threat_GPS(player.get_x_pos(),player.get_y_pos());
+                p_bthreat->FrameShow(gScreen);
+                p_bthreat->DrawHPBar(gScreen);
+
+                SDL_Rect rect_player=player.GetRect();
+                SDL_Rect rect_bthreat=p_bthreat->GetRect();
+                bool bCol3=SDLBaseFunc::CheckCollision(rect_player,rect_bthreat);
+                if(bCol3)
+                {
+                    std::cout<<"Hit the threat"<<std::endl;
+                    player.DecreaseHP(p_bthreat->GetThreatDamage());
                     std::cout<<player.GetHP()<<std::endl;
                     Mix_PlayChannel(-1,get_hurt,0);
                     //break;
@@ -423,9 +463,7 @@ int main (int argc,char* argv[])
                         tRect.y=obj_threat->GetRect().y;
                         tRect.w=obj_threat->get_width_frame();
                         tRect.h=obj_threat->get_height_frame();
-
                         SDL_Rect bRect=p_weapon->GetRect();
-
                         bool bCol=SDLBaseFunc::CheckCollision(bRect,tRect);
                         if(bCol)
                         {
@@ -436,6 +474,7 @@ int main (int argc,char* argv[])
                             player.DeleteBullet(r);
                             if(obj_threat->GetHP()<=0)
                             {
+                                count_threat_kill++;
                                 std::cout<<"Kill"<<std::endl;
                                 for(int i=0;i<NUM_FRAM_EXP;i++)
                                 {
@@ -448,6 +487,47 @@ int main (int argc,char* argv[])
                                 }
                                 obj_threat->Free();
                                 threats_list.erase(threats_list.begin()+t);
+                                Mix_PlayChannel(-1,g_sound_exp,0);
+                                if(t%2==0)
+                                {
+                                    Mix_PlayChannel(-1,char_talk,0);
+                                    Mix_PlayChannel(-1,g_sound_exp,0);
+                                }
+                            }
+
+                        }
+                    }
+                }
+                for(int t=0;t<bthreat_list.size();t++)
+                {
+                    BThreats* obj_bthreat=bthreat_list.at(t);
+                    if(obj_bthreat!=NULL)
+                    {
+                        SDL_Rect btRect=obj_bthreat->GetRect();
+                        SDL_Rect bRect=p_weapon->GetRect();
+                        bool bgCol=SDLBaseFunc::CheckCollision(bRect,btRect);
+                        if(bgCol)
+                        {
+                            ///them weapon damge;
+                            ///threat trung dan bi tru mau
+                            std::cout<<"Hit your bullet"<<std::endl;
+                            obj_bthreat->DecreaseHP(p_weapon->GetWeaponDamage());
+                            player.DeleteBullet(r);
+                            if(obj_bthreat->GetHP()<=0)
+                            {
+                                count_threat_kill++;
+                                std::cout<<"Kill"<<std::endl;
+                                for(int i=0;i<NUM_FRAM_EXP;i++)
+                                {
+                                    int x_pos=p_weapon->GetRect().x-frame_exp_width*0.5;
+                                    int y_pos=p_weapon->GetRect().y-frame_exp_height*0.5;
+                                    //sinh vu no
+                                    exp_threat.set_frame(i);
+                                    exp_threat.SetRect(x_pos,y_pos);
+                                    exp_threat.Show(gScreen);
+                                }
+                                obj_bthreat->Free();
+                                bthreat_list.erase(bthreat_list.begin()+t);
                                 Mix_PlayChannel(-1,g_sound_exp,0);
                                 if(t%2==0)
                                 {
@@ -473,19 +553,30 @@ int main (int argc,char* argv[])
                  coins_list=MakeCoins();
              }
         }
-        if(time_val%15==0)
+        if(time_val%10==0 && time_val>0)
         {
-            if(threats_list.size()<10)
+            if(threats_list.size()<1)
             {
                 threats_list=MakeThreatsList();
             }
         }
-        if(time_val%5==0)
+        if(time_val%5==0 && time_val>0)
         {
             if(heal_list.size()<1)
             {
                 heal_list=MakeHeal();
             }
+        }
+        if(time_val%5==0 && time_val>0)
+        {
+            if(mushroom_list.size()<1)
+            {
+                mushroom_list=MakeMushroom();
+            }
+        }
+        if((time_val%15==0 && time_val>1) || count_threat_kill>=10)
+        {
+            bthreat_list=MakeBigThreatsList();
         }
 
         std::string str_val_=std::to_string(val_time);
@@ -519,4 +610,3 @@ int main (int argc,char* argv[])
 
     return 0;
 }
-

@@ -17,7 +17,6 @@ Weapon::Weapon()
     weapon_type=-1;
 
     weapon_damage=20;
-    thr_bul_damge=10;
 
     enum
     {

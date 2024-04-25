@@ -49,6 +49,8 @@
 		<Unit filename="basefunc.h" />
 		<Unit filename="baseobj.cpp" />
 		<Unit filename="baseobj.h" />
+		<Unit filename="bigthreat.cpp" />
+		<Unit filename="bigthreat.h" />
 		<Unit filename="dropitem.cpp" />
 		<Unit filename="dropitem.h" />
 		<Unit filename="explosion.cpp" />
@@ -61,8 +63,6 @@
 		<Unit filename="map.txt" />
 		<Unit filename="menu.cpp" />
 		<Unit filename="menu.h" />
-		<Unit filename="sound.cpp" />
-		<Unit filename="sound.h" />
 		<Unit filename="text.cpp" />
 		<Unit filename="text.h" />
 		<Unit filename="vukhi.cpp" />

@@ -19,3 +19,7 @@ bool Menu::LoadImage(std::string path,SDL_Renderer* screen)
     }
     return ret;
 }
+void Menu::FrameShow(SDL_Renderer* des)
+{
+
+}

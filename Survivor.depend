@@ -421,10 +421,11 @@
 1710471394 c:\laptrinh\survivor\baseobj.h
 	"basefunc.h"
 
-1713973659 source:c:\laptrinh\survivor\game_project\basefunc.cpp
+1714056942 source:c:\laptrinh\survivor\game_project\basefunc.cpp
 	"basefunc.h"
+	"text.h"
 
-1713975834 c:\laptrinh\survivor\game_project\basefunc.h
+1714057257 c:\laptrinh\survivor\game_project\basefunc.h
 	<string>
 	<SDL.h>
 	<SDL_image.h>
@@ -441,7 +442,7 @@
 1712589709 c:\laptrinh\survivor\game_project\baseobj.h
 	"basefunc.h"
 
-1713976954 source:c:\laptrinh\survivor\game_project\main.cpp
+1714059045 source:c:\laptrinh\survivor\game_project\main.cpp
 	"basefunc.h"
 	"baseobj.h"
 	"mainobj.h"
@@ -453,6 +454,7 @@
 	"explosion.h"
 	"dropitem.h"
 	"menu.h"
+	"bigthreat.h"
 	<iostream>
 	<cstdlib>
 
@@ -473,7 +475,7 @@
 
 1713315623 source:c:\laptrinh\survivor\game_project\xulygame.cpp
 
-1713869407 source:c:\laptrinh\survivor\game_project\mainobj.cpp
+1714053057 source:c:\laptrinh\survivor\game_project\mainobj.cpp
 	"mainobj.h"
 	"basefunc.h"
 	"baseobj.h"
@@ -481,28 +483,28 @@
 	<iostream>
 	<algorithm>
 
-1713966089 c:\laptrinh\survivor\game_project\mainobj.h
+1714052311 c:\laptrinh\survivor\game_project\mainobj.h
 	<vector>
 	"basefunc.h"
 	"baseobj.h"
 	"map.h"
 	"vukhi.h"
 
-1713016212 c:\laptrinh\survivor\game_project\vukhi.h
+1714032728 c:\laptrinh\survivor\game_project\vukhi.h
 	"basefunc.h"
 	"baseobj.h"
 
-1713429958 source:c:\laptrinh\survivor\game_project\vukhi.cpp
+1714004916 source:c:\laptrinh\survivor\game_project\vukhi.cpp
 	"vukhi.h"
 	"baseobj.h"
 
-1713976780 c:\laptrinh\survivor\game_project\threats.h
+1714033291 c:\laptrinh\survivor\game_project\threats.h
 	"basefunc.h"
 	"baseobj.h"
 	"mainobj.h"
 	"vukhi.h"
 
-1713977357 source:c:\laptrinh\survivor\game_project\threats.cpp
+1714034025 source:c:\laptrinh\survivor\game_project\threats.cpp
 	"Threats.h"
 	"mainobj.h"
 	<cstdlib>
@@ -550,14 +552,25 @@
 
 1713324344 source:c:\laptrinh\survivor\game_project\button.cpp
 
-1713972658 source:c:\laptrinh\survivor\game_project\menu.cpp
+1714057105 source:c:\laptrinh\survivor\game_project\menu.cpp
 	"menu.h"
 	"basefunc.h"
 	"baseobj.h"
 
 1713713228 source:c:\laptrinh\survivor\game_project\coinbag.cpp
 
-1713972867 c:\laptrinh\survivor\game_project\menu.h
+1714054093 c:\laptrinh\survivor\game_project\menu.h
 	"baseobj.h"
 	"basefunc.h"
+
+1714059115 source:c:\laptrinh\survivor\game_project\bigthreat.cpp
+	"bigthreat.h"
+	"mainobj.h"
+	<cstdlib>
+	<math.h>
+
+1714058308 c:\laptrinh\survivor\game_project\bigthreat.h
+	"basefunc.h"
+	"baseobj.h"
+	"mainobj.h"
 

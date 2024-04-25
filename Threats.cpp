@@ -124,43 +124,40 @@ void Threats::DrawHPBar(SDL_Renderer* renderer)
 }
 void Threats::InitBullet(Weapon* p_bullet,SDL_Renderer* screen)
 {
-    int x,y;
-    Threat_GPS(x,y);
+
     if(p_bullet!=NULL)
     {
         p_bullet->set_weapon_type(Weapon::THREAT_BULLET);
         p_bullet->LoadImgWeapon(screen);
         p_bullet->set_is_move(true);
-        switch (status)
-            {
-            case MOVE_LEFT:
-                p_bullet->set_weapon_direct(Weapon::IN_LEFT);
-                //p_bullet->SetRect(this->rect.x-20,this->rect.y-30);
-                break;
-            case MOVE_RIGHT:
-                p_bullet->set_weapon_direct(Weapon::IN_RIGHT);
-                //p_bullet->SetRect(this->rect.x-20,this->rect.y-30);
-                break;
-            case MOVE_UP:
-                p_bullet->set_weapon_direct(Weapon::IN_UP);
-                //p_bullet->SetRect(this->rect.x-20,this->rect.y-30);
-                break;
-            case MOVE_DOWN:
-                p_bullet->set_weapon_direct(Weapon::IN_DOWN);
-                //p_bullet->SetRect(this->rect.x-20,this->rect.y-30);
-                break;
-            default:
-                break;
-            }
-        p_bullet->set_x_val(40);
+        p_bullet->set_x_val(10);
         t_bullet_list.push_back(p_bullet);
     }
 }
-void Threats::MakeBullet(SDL_Renderer* screen,const int& x_limit,const int& y_limit)
+void Threats::MakeBullet(SDL_Renderer* screen,const int& x_limit,const int& y_limit,int x,int y)
 {
+    Threat_GPS(x,y);
+    Threats* threat;
     for(int i=0;i<t_bullet_list.size();i++)
     {
         Weapon* t_bullet=t_bullet_list.at(i);
+        switch (status)
+        {
+            case MOVE_LEFT:
+                t_bullet->set_weapon_direct(Weapon::IN_LEFT);
+                break;
+            case MOVE_RIGHT:
+                t_bullet->set_weapon_direct(Weapon::IN_RIGHT);
+                break;
+            case MOVE_UP:
+                t_bullet->set_weapon_direct(Weapon::IN_UP);
+                break;
+            case MOVE_DOWN:
+                t_bullet->set_weapon_direct(Weapon::IN_DOWN);
+                break;
+            default:
+                break;
+        }
         if(t_bullet!=NULL)
         {
             if(t_bullet->get_is_move())
@@ -168,26 +165,21 @@ void Threats::MakeBullet(SDL_Renderer* screen,const int& x_limit,const int& y_li
                 int bullet_dist_x=abs(rect.x-t_bullet->GetRect().x);
                 int bullet_dist_y=abs(rect.y-t_bullet->GetRect().y);
                 t_bullet->Render(screen);
-//                if(bullet_dist_x<=x_limit || bullet_dist_y<=y_limit)
-//                {
-//                     t_bullet->WeaponRange(x_limit,y_limit);
-//                     t_bullet->Render(screen);
-//                }
-//                else
-//                {
-//                    t_bullet->set_is_move(false);
-//                }
-                if(bullet_dist_x>=x_limit || bullet_dist_y>=y_limit)
+                if(abs(bullet_dist_x-x_limit)>0 && abs(bullet_dist_y-y_limit)>0)
+                {
+                     t_bullet->WeaponRange(x_limit,y_limit);
+                     //t_bullet->Render(screen);
+                }
+                else
                 {
                     t_bullet->set_is_move(false);
-                    t_bullet->WeaponRange(x_limit,y_limit);
                 }
-
             }
             else
             {
                 t_bullet->set_is_move(true);
-                t_bullet->SetRect(this->x_pos-30,this->y_pos-40);
+                //t_bullet->SetRect(this->x_pos-30,this->y_pos-40);
+                t_bullet->SetRect(this->rect.x,this->rect.y);
             }
         }
     }
@@ -214,4 +206,3 @@ SDL_Rect Threats::GetRectFrame()
     p_rect.w=width_frame;
     p_rect.h=height_frame;
 }
-
