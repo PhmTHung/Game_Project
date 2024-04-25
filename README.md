@@ -6,8 +6,7 @@
 * [Bắt đầu Game](#Bắt đầu Game).
 * [Các thành phần trong game](#Các thành phần trong game).
 * [Cách chơi]
-* [Chiến thắng và thất bại]
-* 
+* [
 
 ## Giới Thiệu
 
@@ -28,10 +27,19 @@
                bảo vệ những đồng tiền cổ.
    * Nấm     : Được coi là sinh vật đặc biệt trên hòn đảo, ăn được chúng giúp ta cải thiện tốc
                độ chạy rất nhiều.
-* Kẻ địch 1 : Những con dơi có khả năng tấn công tầm xa và cả tầm gần , chú ý giữ khoảng cách với chúng
-* Kẻ địch 2 : Những con rắn khổng lồ với thân hình to lớn tuy không có thể tấn công tần xa nhưng chúng có tốc độ di chuyển nhanh và lượng máu khổng lồ , tránh giao tranh với chúng để bảo toàn mạng sống
-* 
+* Kẻ địch 1 : Những con dơi có khả năng tấn công tầm xa và cả tầm gần , chú ý giữ khoảng cách với chúng !
+* Kẻ địch 2 : Những con rắn khổng lồ với thân hình to lớn tuy không có thể tấn công tần xa nhưng chúng có tốc độ di chuyển nhanh và lượng máu khổng lồ , tránh giao tranh với chúng để bảo toàn mạng sống !
 
+## Cách chơi
+* Điều khiển nhân vật : Sử dụng phím A->phải ,W->lên ,S->xuống ,D->phải, Space-> bắn
+* Sử dụng các phím điều khiển để nhặt các đồ vật xuất hiện trên bản đồ, tránh các mối đe doạ
+* Logic :
+  * Sinh tồn lâu nhất với các vật phẩm hỗ trợ;
+  * Các kẻ địch luôn luôn di chuyển tấn công chủ động nhân vật chính, lựa chọn tấn công hoặc
+  bỏ chạy.
+         
+
+## hình ảnh
 ![This is an alt text.](/image/sample.webp "This is a sample image.")
 
 ## Links
