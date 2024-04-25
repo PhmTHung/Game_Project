@@ -2,74 +2,64 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
+	<File name="map.h" open="1" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="334" topLine="2" />
+		</Cursor>
+	</File>
+	<File name="vukhi.h" open="1" top="0" tabpos="22" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1653" topLine="39" />
+		</Cursor>
+	</File>
+	<File name="text.h" open="1" top="0" tabpos="19" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="57" topLine="8" />
+		</Cursor>
+	</File>
+	<File name="bigthreat.cpp" open="1" top="0" tabpos="24" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2593" topLine="101" />
+		</Cursor>
+	</File>
+	<File name="basefunc.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1883" topLine="56" />
+		</Cursor>
+	</File>
 	<File name="mainobj.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="8584" topLine="299" />
+			<Cursor1 position="2329" topLine="78" />
 		</Cursor>
 	</File>
-	<File name="map.h" open="1" top="0" tabpos="19" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="dropitem.h" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="412" topLine="2" />
+			<Cursor1 position="442" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="basefunc.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="baseobj.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1334" topLine="44" />
+			<Cursor1 position="806" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="explosion.cpp" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="menu.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1755" topLine="48" />
+			<Cursor1 position="480" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Threats.cpp" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5511" topLine="186" />
-		</Cursor>
-	</File>
-	<File name="map.txt" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="FPS.cpp" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="704" topLine="20" />
-		</Cursor>
-	</File>
-	<File name="mainobj.h" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2017" topLine="48" />
-		</Cursor>
-	</File>
-	<File name="text.h" open="1" top="0" tabpos="20" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="57" topLine="11" />
-		</Cursor>
-	</File>
-	<File name="sound.cpp" open="0" top="0" tabpos="23" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="483" topLine="2" />
-		</Cursor>
-	</File>
-	<File name="FPS.h" open="1" top="0" tabpos="22" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="196" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="text.cpp" open="1" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="text.cpp" open="1" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1021" topLine="26" />
 		</Cursor>
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="explosion.cpp" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="11024" topLine="340" />
+			<Cursor1 position="1755" topLine="45" />
 		</Cursor>
 	</File>
-	<File name="dropitem.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="FPS.h" open="1" top="0" tabpos="21" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="133" topLine="0" />
+			<Cursor1 position="196" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="explosion.h" open="1" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -77,62 +67,72 @@
 			<Cursor1 position="69" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="bigthreat.h" open="1" top="0" tabpos="25" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1698" topLine="33" />
+		</Cursor>
+	</File>
+	<File name="menu.cpp" open="1" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="463" topLine="0" />
+		</Cursor>
+	</File>
 	<File name="Threats.h" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1873" topLine="51" />
+			<Cursor1 position="29" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="menu.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="mainobj.h" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="439" topLine="0" />
+			<Cursor1 position="2138" topLine="61" />
 		</Cursor>
 	</File>
-	<File name="map.cpp" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="61" topLine="0" />
+			<Cursor1 position="20609" topLine="559" />
 		</Cursor>
 	</File>
-	<File name="vukhi.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Threats.cpp" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="276" topLine="13" />
-		</Cursor>
-	</File>
-	<File name="menu.cpp" open="1" top="1" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="414" topLine="0" />
+			<Cursor1 position="0" topLine="30" />
 		</Cursor>
 	</File>
 	<File name="baseobj.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="431" topLine="0" />
+			<Cursor1 position="462" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="sound.h" open="1" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="FPS.cpp" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="443" topLine="0" />
+			<Cursor1 position="704" topLine="20" />
 		</Cursor>
 	</File>
-	<File name="baseobj.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="vukhi.cpp" open="1" top="0" tabpos="20" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="25" />
+			<Cursor1 position="981" topLine="33" />
 		</Cursor>
 	</File>
-	<File name="vukhi.cpp" open="1" top="0" tabpos="21" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="dropitem.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="884" topLine="46" />
+			<Cursor1 position="133" topLine="15" />
 		</Cursor>
 	</File>
-	<File name="basefunc.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="map.cpp" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3527" topLine="125" />
+			<Cursor1 position="1143" topLine="42" />
 		</Cursor>
 	</File>
-	<File name="dropitem.h" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="map.txt" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="442" topLine="8" />
+			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
-	<Target name="Debug" top="menu.cpp">
+	<File name="basefunc.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1343" topLine="45" />
+		</Cursor>
+	</File>
+	<Target name="Debug" top="main.cpp">
 		<File name="menu.h" />
 		<File name="main.cpp" />
 		<File name="basefunc.h" />
@@ -149,11 +149,13 @@
 		<File name="Threats.h" />
 		<File name="menu.cpp" />
 		<File name="explosion.h" />
-		<File name="sound.h" />
 		<File name="text.cpp" />
 		<File name="map.h" />
 		<File name="text.h" />
 		<File name="vukhi.cpp" />
 		<File name="FPS.h" />
+		<File name="vukhi.h" />
+		<File name="bigthreat.cpp" />
+		<File name="bigthreat.h" />
 	</Target>
 </CodeBlocks_layout_file>
