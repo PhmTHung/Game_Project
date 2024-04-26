@@ -131,5 +131,5 @@ Game giờ đã có thể chạy được rồi ,chức mọi người có trả
 *  Xây dựng serve game nhiều người chơi, tương tác, đối kháng giữa các nhân vật.
 *  Mở rộng nhiều tính năng trong trò chơi (mua bán vật phẩm,định giá vật phẩm, trao đổi vật phẩm giữa các người chơi)
 *  Có thể đưa lên các trang phát hành game.
-
+# Cuối cùng em xin cảm ơn các thầy ,các anh chị mentor đã giúp em trong quá trình làm bài tập lớn !
 
