@@ -72,7 +72,7 @@ bool SDLBaseFunc::CheckCollision(const SDL_Rect& object1,const SDL_Rect& object2
     return false;
 }
 
-bool CheckFocusRect(int& x, int& y,const SDL_Rect rect)
+bool SDLBaseFunc::CheckFocusRect(const int& x,const int& y,const SDL_Rect& rect)
 {
     if(x>=rect.x && x<= rect.x+rect.w && y>=rect.y && y <= rect.y+rect.h)
     {

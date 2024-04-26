@@ -1,5 +1,4 @@
 #include "baseobj.h"
-#include "xulygame.h"
 #include "basefunc.h"
 BaseObject::BaseObject()
 {
