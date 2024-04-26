@@ -71,8 +71,8 @@ std::vector<Threats*> MakeThreatsList()
 std::vector<BThreats*> MakeBigThreatsList()
 {
     std::vector<BThreats*>list_bigthreat;
-    BThreats* big_thr=new BThreats[1];
-    for(int i=0;i<1;i++)
+    BThreats* big_thr=new BThreats[2];
+    for(int i=0;i<2;i++)
     {
         BThreats* p_bthreat=(big_thr+i);
         if(p_bthreat!=NULL)
@@ -82,8 +82,8 @@ std::vector<BThreats*> MakeBigThreatsList()
             p_bthreat->LoadImage("image/Threats/forward.png", gScreen);
             p_bthreat->LoadImage("image/Threats/back.png", gScreen);
             p_bthreat->set_clips();
-            p_bthreat->set_x_pos((i*100+rand()*50-1000)%800);
-            p_bthreat->set_y_pos((i*100+rand()*100-1000)%800);
+            p_bthreat->set_x_pos(random_x(i));
+            p_bthreat->set_y_pos(random_y(i));
             list_bigthreat.push_back(p_bthreat);
         }
     }
@@ -147,7 +147,9 @@ std::vector<DropItem*>MakeMushroom()
 }
 TTF_Font* font_time=NULL;
 TTF_Font* font_game=NULL;
-SDL_Texture* gMenu=NULL;
+TTF_Font* font_title=NULL;
+//SDL_Texture* gMenu=NULL;
+BaseObject menu;
 bool InitData()
 {
     bool flag=true;
@@ -168,17 +170,12 @@ bool InitData()
             flag=true;
         }
 
-//        gMenu=IMG_LoadTexture(gScreen,"image/background5.png");
-//        if(gMenu != NULL)
-//        {
-//            std::cout<<"Init menu"<<std::endl;
-//        }
-
         if(TTF_Init()==-1) flag=false;
         else
         {
             font_time=TTF_OpenFont("textfont/Font.ttf",24);
             font_game=TTF_OpenFont("textfont/Font.ttf",60);
+            font_title=TTF_OpenFont("textfont/BigFont.ttf",72);
             if(font_time == NULL)
             {
                 flag=false;
@@ -188,6 +185,11 @@ bool InitData()
             {
                 flag=false;
                 std::cout<<"font game cannot Init"<<std::endl;
+            }
+            if(font_title == NULL)
+            {
+                flag=false;
+                std::cout<<"font title cannot Init"<<std::endl;
             }
         }
         if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT,2,4096)==-1)
@@ -212,6 +214,7 @@ bool InitData()
 
 int main (int argc,char* argv[])
 {
+
 
 
     int count_threat_kill=0;
@@ -258,12 +261,51 @@ int main (int argc,char* argv[])
     money_count.SetColorType(TextManager::RED_TEXT);
     TextManager game_over;
     game_over.SetColorType(TextManager::WHITE_TEXT);
+
     //
     int money_earn=0;
     Uint32 frameStart;
     int frameTime;
-    bool is_quit=false;
+    //bool is_quit=false;
 
+    menu.LoadImage("image/background5.png",gScreen);
+    TextManager menu_game;
+    menu_game.SetColorType(TextManager::WHITE_TEXT);
+
+    TextManager title_menu;
+    title_menu.SetColorType(TextManager::RED_TEXT);
+
+    bool menu1=true;
+    bool is_quit=true;
+    std::string menustr="PLAY";
+    std::string titlemenu=" ~ SURVIVOR ~ ";
+    while(menu1)
+    {
+        while(SDL_PollEvent(&gEvent) != 0)
+        {
+            if(gEvent.type == SDL_QUIT)
+            {
+                is_quit=true;
+                menu1=false;
+            }
+            if(gEvent.type == SDL_MOUSEBUTTONDOWN)
+            {
+                menu1=false;
+                is_quit=false;
+            }
+        }
+        menu.Render(gScreen,NULL);
+
+        menu_game.SetText(menustr);
+        menu_game.LoadFromRenderText(font_game,gScreen);
+        menu_game.RenderText(gScreen,SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
+
+        title_menu.SetText(titlemenu);
+        title_menu.LoadFromRenderText(font_title,gScreen);
+        title_menu.RenderText(gScreen,100,100);
+
+        SDL_RenderPresent(gScreen);
+    }
     while(!is_quit)
     {
         fps_timer.start();
@@ -287,6 +329,11 @@ int main (int argc,char* argv[])
         player.PlayerGPS(map_data);
         player.FrameShow(gScreen);
         player.DrawHPBar(gScreen);
+
+        ///thoi gian
+//        std::string str_time="SURVIVOR TIME: ";
+//        Uint32 time_val=SDL_GetTicks()/1000;
+//        Uint32 val_time=time_val;
 
         ///hien thi so dong xu dang co
         int money_earn=player.GetMoney();
@@ -574,9 +621,13 @@ int main (int argc,char* argv[])
                 mushroom_list=MakeMushroom();
             }
         }
-        if((time_val%15==0 && time_val>1) || count_threat_kill>=10)
+        if((time_val%15==0 && time_val>1))
         {
-            bthreat_list=MakeBigThreatsList();
+            if(bthreat_list.size()<1)
+            {
+                 bthreat_list=MakeBigThreatsList();
+            }
+
         }
 
         std::string str_val_=std::to_string(val_time);
