@@ -1,10 +1,10 @@
 # Game SURVIVOR - Phạm Thế Hùng K68J
 
 ## Mục lục
-* [Giới Thiệu](#Giới Thiệu).
-* [Cách Tải Game](#Cách Tải Game).
-* [Bắt đầu Game](#Bắt đầu Game).
-* [Các thành phần trong game](#Các thành phần trong game).
+* [Giới Thiệu](#giới-thiệu).
+* [Cách Tải Game](#cách-tải-game).
+* [Bắt đầu Game](#bắt-đầu-game).
+* [Các thành phần trong game](#các-thành-phần-trong-game).
 * [Cách chơi]
 * [
 
@@ -41,6 +41,7 @@
 
 ## hình ảnh
 ![This is an alt text.](/image/sample.webp "This is a sample image.")
+![bird2](https://github.com/PhmTHung/Game_project/assets/161602413/c1c75c7b-1806-4ddd-af3a-78d303cc67b5)
 
 ## Links
 
