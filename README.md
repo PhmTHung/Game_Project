@@ -49,17 +49,28 @@ Game giờ đã có thể chạy được rồi ,chức mọi người có trả
 * Drop Item: Nhặt những vật phẩm có thể giúp bạn sinh tồn lâu hơn
    * Túi máu : Giúp bạn hồi tối đa 200 HP ,hãy sử dụng chúng một cách thông minh bởi lượng máu
                được hồi phụ thuộc vào số máu bạn đã mất.
+
+![Screenshot 2024-04-26 211210](https://github.com/PhmTHung/Game_project/assets/161602413/302ca942-b0d8-48d5-9b0f-e4a202aa3525)
+
    * Đồng xu : Thứ quý giá luôn được bảo vệ bởi những kẻ máu mặt ,chúng sẵn sàn tấn công bạn để
                bảo vệ những đồng tiền cổ.
-   * Nấm     : Được coi là sinh vật đặc biệt trên hòn đảo, ăn được chúng giúp ta cải thiện tốc
-               độ chạy rất nhiều.
-* Kẻ địch 1 : Những con dơi có khả năng tấn công tầm xa và cả tầm gần , chú ý giữ khoảng cách với chúng !
+     
+![Screenshot 2024-04-26 211534](https://github.com/PhmTHung/Game_project/assets/161602413/c2912ab1-721f-402b-b89a-5c612aa4add6)
 
-          ![Screenshot 2024-04-26 210306](https://github.com/PhmTHung/Game_project/assets/161602413/8751841f-c0a8-470e-9aa4-1d8f3b570452)
+
+   * Nấm     : Được coi là sinh vật đặc biệt trên hòn đảo, ăn được chúng giúp ta cải thiện tốc
+               độ chạy rất nhiều.(mỗi lần ăn nấm tốc độ chạy tăng 5%).
+
+![Screenshot 2024-04-26 211356](https://github.com/PhmTHung/Game_project/assets/161602413/84128995-32be-4d8e-8b8d-b6b82be44811)
+
+* Kẻ địch 1 : Những con dơi có khả năng tấn công tầm xa và cả tầm gần , chú ý giữ khoảng cách với chúng !
+  
+![Screenshot 2024-04-26 210450](https://github.com/PhmTHung/Game_project/assets/161602413/2311dc32-bbb0-4249-b034-47049eb712dc)
+
 
 * Kẻ địch 2 : Những con rắn khổng lồ với thân hình to lớn tuy không có thể tấn công tần xa nhưng chúng có tốc độ di chuyển nhanh và lượng máu khổng lồ , tránh giao tranh với chúng để bảo toàn mạng sống !
-
-          ![Screenshot 2024-04-26 210306](https://github.com/PhmTHung/Game_project/assets/161602413/7342797e-52ec-475e-8d7d-3a5d68e04eca)
+  
+![Screenshot 2024-04-26 210306](https://github.com/PhmTHung/Game_project/assets/161602413/7342797e-52ec-475e-8d7d-3a5d68e04eca)
 
 # Cách chơi
 * Điều khiển nhân vật : Sử dụng phím A->phải ,W->lên ,S->xuống ,D->phải, Space-> bắn.
