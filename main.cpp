@@ -12,6 +12,7 @@
 #include "bigthreat.h"
 #include<iostream>
 #include<cstdlib>
+int tg =50;
 int random()
 {
     int n=rand() % 100 + 1;
@@ -251,7 +252,7 @@ int main (int argc,char* argv[])
         std::cout<<"Init file Explo OK"<<std::endl;
     }
     exp_threat.set_clip();
-    //TEXT OBJECT
+    ///TEXT
     TextManager time;
     time.SetColorType(TextManager::WHITE_TEXT);
     TextManager time_game;
@@ -262,6 +263,9 @@ int main (int argc,char* argv[])
     money_count.SetColorType(TextManager::RED_TEXT);
     TextManager game_over;
     game_over.SetColorType(TextManager::WHITE_TEXT);
+
+    TextManager last_time_game,money_earn_persecond;
+    last_time_game.SetColorType(TextManager::RED_TEXT);
 
     //
     int money_earn=0;
@@ -291,8 +295,8 @@ int main (int argc,char* argv[])
 	title_menu.SetColorType(TextManager::RED_TEXT);
 
 
+
     bool menu1=true;
-    //bool GO=false;
     bool is_quit=true;
     bool isSelect[kMenuItemNum]={0,0};
     SDL_Event mouse_event;
@@ -386,10 +390,6 @@ int main (int argc,char* argv[])
         player.FrameShow(gScreen);
         player.DrawHPBar(gScreen);
 
-        ///thoi gian
-//        std::string str_time="SURVIVOR TIME: ";
-//        Uint32 time_val=SDL_GetTicks()/1000;
-//        Uint32 val_time=time_val;
 
         ///hien thi so dong xu dang co
         int money_earn=player.GetMoney();
@@ -400,9 +400,9 @@ int main (int argc,char* argv[])
         money_count.SetText(money_str);
         money_count.LoadFromRenderText(font_time,gScreen);
         money_count.RenderText(gScreen,SCREEN_WIDTH-300,3);
-        ///Hien thi so score
 
-        std::string s2="SCORE:  ";
+        ///Hien thi so score
+        std::string s2="KILL:  ";
         std::string score_str;
         score.SetText(score_str);
         score_str=s2+std::to_string(count_threat_kill);
@@ -535,42 +535,7 @@ int main (int argc,char* argv[])
                 }
             }
         }
-        bool gameover=false;
 
-        if(player.GetHP()<=0)
-        {
-            gameover = true;
-//            std::cout<<"I'm die!"<<std::endl;
-//            Mix_PlayChannel(-1,GameOver,0);
-//            std::string game_str="  GAME OVER  ";
-//            game_over.SetText(game_str);
-//            game_over.LoadFromRenderText(font_game,gScreen);
-//            game_over.RenderText(gScreen,SCREEN_WIDTH/2-200,SCREEN_HEIGHT/2-100);
-        }
-        while(gameover)
-        {
-            while(SDL_PollEvent(&gEvent) != 0)
-            {
-            if(gEvent.type == SDL_QUIT)
-            {
-                is_quit=true;
-                menu1=false;
-            }
-            if(gEvent.type == SDL_MOUSEBUTTONDOWN)
-            {
-                gameover=false;
-            }
-            }
-            std::cout<<"I'm die!"<<std::endl;
-            Mix_PlayChannel(-1,GameOver,0);
-            std::string game_str="  GAME OVER  ";
-            game_over.SetText(game_str);
-            game_over.LoadFromRenderText(font_game,gScreen);
-            game_over.RenderText(gScreen,SCREEN_WIDTH/2-200,SCREEN_HEIGHT/2-100);
-
-            gameover=false;
-
-        }
         ///LAY CHIEU DAI,RONG FRAME
         int frame_exp_width=exp_threat.get_frame_width();
         int frame_exp_height=exp_threat.get_frame_height();
@@ -671,10 +636,17 @@ int main (int argc,char* argv[])
                 }
             }
         }
+
+
         ///thoi gian
         std::string str_time="SURVIVOR TIME: ";
         Uint32 time_val=SDL_GetTicks()/1000;
         Uint32 val_time=time_val;
+        std::string str_val_=std::to_string(val_time);
+        str_time+=str_val_;
+        time_game.SetText(str_time);
+        time_game.LoadFromRenderText(font_time,gScreen);
+        time_game.RenderText(gScreen,32,0);
         ///tao moi coins,threats,heal item theo thoi gian
         if(time_val%10==0)
         {
@@ -713,11 +685,37 @@ int main (int argc,char* argv[])
 
         }
 
-        std::string str_val_=std::to_string(val_time);
-        str_time+=str_val_;
-        time_game.SetText(str_time);
-        time_game.LoadFromRenderText(font_time,gScreen);
-        time_game.RenderText(gScreen,32,0);
+        //std::string last_time_game="YOUR LAST TIME SURIVIVOR : " + str_time;
+
+         bool go=false;
+        if(player.GetHP()<=0)
+        {
+            go=true;
+        }
+        std::string game_str="GAME OVER";
+        game_over.SetText(game_str);
+        game_over.LoadFromRenderText(font_game,gScreen);
+        std::string last_time="TIME SURIVIVOR :"+str_val_;
+        last_time_game.SetText(last_time);
+        last_time_game.LoadFromRenderText(font_game,gScreen);
+        ///time_game.
+        if(go)
+        {
+            std::cout<<"I'm die!"<<std::endl;
+
+            menu.Render(gScreen,NULL);
+            SDL_RenderPresent(gScreen);
+            Mix_PlayChannel(-1,GameOver,0);
+            last_time_game.RenderText(gScreen,100,SCREEN_HEIGHT/2-100);
+            game_over.RenderText(gScreen,SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
+            SDL_RenderPresent(gScreen);
+            SDL_Delay(7000);
+            //Mix_PausedMusic();
+
+            is_quit=true;
+
+        }
+
 
         SDL_RenderPresent(gScreen);
 
@@ -732,6 +730,7 @@ int main (int argc,char* argv[])
                  SDL_Delay(delay_time);
             }
         }
+
     }
     SDL_DestroyWindow(gWindow);
     gWindow=NULL;
