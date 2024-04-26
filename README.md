@@ -121,11 +121,11 @@ Game giờ đã có thể chạy được rồi ,chức mọi người có trả
 * Công cụ xử lý hình ảnh Aseprite.
 
 # Định hướng phát triển
-* 1. Nâng cấp hình ảnh 3D ,âm thanh sống động, chân thực.
-* 2. Sử dụng các công cụ tạo các item có thể sử dụng trên người nhân vật (ngoại trang,...).
-* 3. Chơi được trên cả điện thoại, máy tính.
-* 4. Xây dựng serve game nhiều người chơi, tương tác, đối kháng giữa các nhân vật.
-* 5. Mở rộng nhiều tính năng trong trò chơi (mua bán vật phẩm,định giá vật phẩm, trao đổi vật phẩm giữa các người chơi)
-* 6. Có thể đưa lên các trang phát hành game.
+*  Nâng cấp hình ảnh 3D ,âm thanh sống động, chân thực.
+*  Sử dụng các công cụ tạo các item có thể sử dụng trên người nhân vật (ngoại trang,...).
+*  Chơi được trên cả điện thoại, máy tính.
+*  Xây dựng serve game nhiều người chơi, tương tác, đối kháng giữa các nhân vật.
+*  Mở rộng nhiều tính năng trong trò chơi (mua bán vật phẩm,định giá vật phẩm, trao đổi vật phẩm giữa các người chơi)
+*  Có thể đưa lên các trang phát hành game.
 
 
