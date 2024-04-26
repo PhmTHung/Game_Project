@@ -4,13 +4,14 @@
 * [Giới Thiệu](#giới-thiệu).
 * [Cách Tải Game](#cách-tải-game).
 * [Bắt đầu Game](#bắt-đầu-game).
-* [Các thành phần trong game](#các-thành-phần-trong-game).
-* [Cách chơi]
-* [
+* [Các thành phần trong game](#các-thành-phần-trong_game).
+* [Cách chơi](#cách-chơi)
+  
 
 ## Giới Thiệu
 
-Đây là Game nhập vai, thời gian thực ,sử dụng vũ khí để tiêu diệt quái vật , cố gắng tránh xa những con quái và viên đạn của chúng.Sinh tồn lâu nhất có thể và nhặt đồng xu vàng quý giá.
+Đây là Game nhập vai, thời gian thực ,sử dụng vũ khí để tiêu diệt quái vật , cố gắng tránh xa những con quái và viên đạn của chúng.
+Sinh tồn lâu nhất có thể và nhặt đồng xu vàng quý giá.
 
 ## Cách Tải Game
 
@@ -40,8 +41,8 @@
          
 
 ## hình ảnh
-![This is an alt text.](/image/sample.webp "This is a sample image.")
-![bird2](https://github.com/PhmTHung/Game_project/assets/161602413/c1c75c7b-1806-4ddd-af3a-78d303cc67b5)
+![game](https://github.com/PhmTHung/Game_project/assets/161602413/ea208a78-b2ea-4211-afb6-6bf7c80a49f9)
+
 
 ## Links
 
