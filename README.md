@@ -15,8 +15,8 @@
 
 ## Giới Thiệu
 
-Đây là Game nhập vai, thời gian thực ,sử dụng vũ khí để tiêu diệt quái vật , cố gắng tránh xa những con quái và viên đạn của chúng.
-Sinh tồn lâu nhất có thể và nhặt đồng xu vàng quý giá.
+Khám phá và sinh tồn là chìa khóa, người chơi sẽ phải tìm cách tránh xa những con quái và viên đạn của chúng trong khi cố gắng tồn tại càng lâu càng tốt. Trong hành trình của bạn, bạn sẽ phải thu thập vật phẩm để tăng khả năng sinh tồn của bản thân.
+Với âm nhạc mạnh mẽ và đồ họa sống động, game nhập vai hành động kịch tính chắc chắn sẽ là một trải nghiệm đầy kịch tính và hấp dẫn cho người chơi. Liệu bạn có thể sống sót được bao lâu trong thế giới đầy thách thức này không? Điều đó là điều mà chỉ có thời gian và kỹ năng chơi của bạn mới có thể trả lời được !
 
 ## Cách Tải Game
 
