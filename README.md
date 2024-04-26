@@ -40,6 +40,7 @@ Ta sẽ có file như này, chọn vào file có đuôi .exe như này
 
 * Tạo file mới trên máy tính ,mở cmd bằng cách ấn Window+R hoặc sử dụng gitbash (nếu đã cài đặt)
 ![Screenshot 2024-04-26 204713](https://github.com/PhmTHung/Game_project/assets/161602413/29cceb3a-908b-4588-8786-ba3cabb25a4b)
+
 sau khi code được clone, chạy file Surivivor.cbp.
 Game giờ đã có thể chạy được rồi ,chức mọi người có trải nghiệm thật vui vẻ !
 
