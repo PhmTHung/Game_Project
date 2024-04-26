@@ -421,11 +421,11 @@
 1710471394 c:\laptrinh\survivor\baseobj.h
 	"basefunc.h"
 
-1714056942 source:c:\laptrinh\survivor\game_project\basefunc.cpp
+1714117021 source:c:\laptrinh\survivor\game_project\basefunc.cpp
 	"basefunc.h"
 	"text.h"
 
-1714057257 c:\laptrinh\survivor\game_project\basefunc.h
+1714116915 c:\laptrinh\survivor\game_project\basefunc.h
 	<string>
 	<SDL.h>
 	<SDL_image.h>
@@ -434,15 +434,14 @@
 	<vector>
 	<ctime>
 
-1712589725 source:c:\laptrinh\survivor\game_project\baseobj.cpp
+1714116921 source:c:\laptrinh\survivor\game_project\baseobj.cpp
 	"baseobj.h"
-	"xulygame.h"
 	"basefunc.h"
 
 1712589709 c:\laptrinh\survivor\game_project\baseobj.h
 	"basefunc.h"
 
-1714107544 source:c:\laptrinh\survivor\game_project\main.cpp
+1714118634 source:c:\laptrinh\survivor\game_project\main.cpp
 	"basefunc.h"
 	"baseobj.h"
 	"mainobj.h"

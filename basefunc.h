@@ -65,7 +65,7 @@ typedef struct Map
 namespace SDLBaseFunc
 {
     bool CheckCollision(const SDL_Rect& object1, const SDL_Rect& object2);
-    bool CheckFocusRect(int& x, int& y,const SDL_Rect rect);
+    bool CheckFocusRect(const int& x,const int& y,const SDL_Rect& rect);
 }
 
 #endif // BASE_H
