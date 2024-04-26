@@ -1,5 +1,4 @@
 # Game SURVIVOR - Phạm Thế Hùng K68J
-
 ## Mục lục
 * [Giới Thiệu](#giới-thiệu).
 * [Cách Tải Game](#cách-tải-game).
@@ -13,19 +12,22 @@
 
   
 
-## Giới Thiệu
+# Giới Thiệu
 
 Khám phá và sinh tồn là chìa khóa, người chơi sẽ phải tìm cách tránh xa những con quái và viên đạn của chúng trong khi cố gắng tồn tại càng lâu càng tốt. Trong hành trình của bạn, bạn sẽ phải thu thập vật phẩm để tăng khả năng sinh tồn của bản thân.
 Với âm nhạc mạnh mẽ và đồ họa sống động, game nhập vai hành động kịch tính chắc chắn sẽ là một trải nghiệm đầy kịch tính và hấp dẫn cho người chơi. Liệu bạn có thể sống sót được bao lâu trong thế giới đầy thách thức này không? Điều đó là điều mà chỉ có thời gian và kỹ năng chơi của bạn mới có thể trả lời được !
 
-## Cách Tải Game
+# Cách Tải Game
+Ấn vào đường dẫn này [https://github.com/PhmTHung/Game_project/releases/tag/release]
+Chọn vào SURVIVOR.zip và giải nén
+![Screenshot 2024-04-26 202213](https://github.com/PhmTHung/Game_project/assets/161602413/e63e7b00-2641-40aa-a2f6-7cdf995567b5)
 
 
-## Bắt đầu Game
+# Bắt đầu Game
 
 Ấn vào nút Bắt đầu.
 
-## Các thành phần trong game
+# Các thành phần trong game
 * Drop Item: Nhặt những vật phẩm có thể giúp bạn sinh tồn lâu hơn
    * Túi máu : Giúp bạn hồi tối đa 200 HP ,hãy sử dụng chúng một cách thông minh bởi lượng máu
                được hồi phụ thuộc vào số máu bạn đã mất.
@@ -36,7 +38,7 @@ Với âm nhạc mạnh mẽ và đồ họa sống động, game nhập vai hà
 * Kẻ địch 1 : Những con dơi có khả năng tấn công tầm xa và cả tầm gần , chú ý giữ khoảng cách với chúng !
 * Kẻ địch 2 : Những con rắn khổng lồ với thân hình to lớn tuy không có thể tấn công tần xa nhưng chúng có tốc độ di chuyển nhanh và lượng máu khổng lồ , tránh giao tranh với chúng để bảo toàn mạng sống !
 
-## Cách chơi
+# Cách chơi
 * Điều khiển nhân vật : Sử dụng phím A->phải ,W->lên ,S->xuống ,D->phải, Space-> bắn
 * Sử dụng các phím điều khiển để nhặt các đồ vật xuất hiện trên bản đồ, tránh các mối đe doạ
 * Logic :
