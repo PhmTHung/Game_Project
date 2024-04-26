@@ -65,6 +65,7 @@ Với âm nhạc mạnh mẽ và đồ họa sống động, game nhập vai hà
 * Website : LazyFoo.
 ## Nguồn tài nguyên
 * Ảnh Sprite nhân vật, Tile Map: [Open Game Art](#https://opengameart.org/).
-* Âm Thanh 
+* Âm Thanh :Open Game Art, YouTube
+
 
 
