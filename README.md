@@ -1,6 +1,8 @@
-# Game SURVIVOR - Phạm Thế Hùng K68J
+# Game SURVIVOR
+### Tác giả:Phạm Thế Hùng K68 J
+### Trường Đại học Công Nghệ - ĐHQG Hà Nội
 ## Mục lục
-* [Giới Thiệu](#giới-thiệu).
+* [Giới thiệu game](#giới-thiệu-game).
 * [Cách Tải Game](#cách-tải-game).
 * [Bắt đầu Game](#bắt-đầu-game).
 * [Các thành phần trong game](#các-thành-phần-trong-game).
@@ -12,10 +14,11 @@
 * [Nguồn tài nguyên](#nguồn-tài-nguyên)
 * [Định hướng phát triển](#định-hướng-phát-triển)
 
-# Giới Thiệu
-
-Khám phá và sinh tồn là chìa khóa, người chơi sẽ phải tìm cách tránh xa những con quái và viên đạn của chúng trong khi cố gắng tồn tại càng lâu càng tốt. Trong hành trình của bạn, bạn sẽ phải thu thập vật phẩm để tăng khả năng sinh tồn của bản thân.
-Với âm nhạc mạnh mẽ và đồ họa sống động, game nhập vai hành động kịch tính chắc chắn sẽ là một trải nghiệm đầy kịch tính và hấp dẫn cho người chơi. Liệu bạn có thể sống sót được bao lâu trong thế giới đầy thách thức này không? Điều đó là điều mà chỉ có thời gian và kỹ năng chơi của bạn mới có thể trả lời được !
+# Giới thiệu game
+Người chơi sẽ phải tìm cách tránh xa những con quái và viên đạn của chúng trong khi cố gắng tồn tại càng lâu càng tốt.
+Trong hành trình của bạn, bạn sẽ phải thu thập vật phẩm để tăng khả năng sinh tồn của bản thân.
+Với âm nhạc mạnh mẽ và đồ họa sống động, game nhập vai hành động kịch tính chắc chắn sẽ là một trải nghiệm đầy kịch tính và hấp dẫn cho người chơi.
+Bạn có thể sống sót được bao lâu trong thế giới đầy thách thức này ? Điều đó là điều mà chỉ có thời gian và kỹ năng chơi của bạn mới có thể trả lời được !
 
 # Cách Tải Game
 ## 1.Cách tải không bao gồm code
