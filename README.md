@@ -6,11 +6,11 @@
 * [Các thành phần trong game](#các-thành-phần-trong-game).
 * [Cách chơi](#cách-chơi).
 * [Hình ảnh](#hình-ảnh).
+* [Demo game giải thích cấu trúc game](#demo-game-giải-thích-cấu-trúc-game).
 * [Các kỹ thuật áp dụng để làm game](#các-kỹ-thuật-áp-dụng-để-làm-game).
 * [Các tài liệu tham khảo](#các-tài-liệu-tham-khảo)
 * [Nguồn tài nguyên](#nguồn-tài-nguyên)
-
-  
+* [Định hướng phát triển](#định-hướng-phát-triển)
 
 # Giới Thiệu
 
@@ -85,6 +85,9 @@ Game giờ đã có thể chạy được rồi ,chức mọi người có trả
 ![Screenshot 2024-04-26 154438](https://github.com/PhmTHung/Game_project/assets/161602413/9bcfb475-0d4c-4bf3-9156-2a9e197c5427)
 ![Screenshot 2024-04-26 171439](https://github.com/PhmTHung/Game_project/assets/161602413/20e06c58-4efa-47bd-8c40-8a2ccc2c6bcf)
 
+# Demo game giải thích cấu trúc game
+[https://www.youtube.com/watch?v=KfGUkZPmv28]
+
 # Các kỹ thuật áp dụng để làm game
 * Kỹ thuật lập trình hướng đối tượng.
 * Kỹ thuật tiled map (tham khảo LazyFoo,Let's Make Game,Phát Triển Phẩn Mềm 123az).
@@ -116,6 +119,13 @@ Game giờ đã có thể chạy được rồi ,chức mọi người có trả
 * Ảnh Sprite nhân vật, Tile Map:Open Game Art [https://opengameart.org/].
 * Âm Thanh :Open Game Art, YouTube, các công cụ hỗ trợ để chuyển file thành file .WAV.
 * Công cụ xử lý hình ảnh Aseprite.
+
+# Định hướng phát triển
+## 1. Nâng cấp hình ảnh 3D ,âm thanh sống động, chân thực.
+## 2. Sử dụng các công cụ tạo các item có thể sử dụng trên người nhân vật (ngoại trang,...).
+## 3. Chơi được trên cả điện thoại, máy tính.
+## 4. Xây dựng serve game nhiều người chơi, tương tác, đối kháng giữa các nhân vật.
+## 5. Mở rộng nhiều tính năng trong trò chơi (mua bán vật phẩm,định giá vật phẩm, trao đổi vật phẩm giữa các người chơi)
 
 
 
