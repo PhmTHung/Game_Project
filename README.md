@@ -54,7 +54,12 @@ Game giờ đã có thể chạy được rồi ,chức mọi người có trả
    * Nấm     : Được coi là sinh vật đặc biệt trên hòn đảo, ăn được chúng giúp ta cải thiện tốc
                độ chạy rất nhiều.
 * Kẻ địch 1 : Những con dơi có khả năng tấn công tầm xa và cả tầm gần , chú ý giữ khoảng cách với chúng !
+
+          ![Screenshot 2024-04-26 210306](https://github.com/PhmTHung/Game_project/assets/161602413/8751841f-c0a8-470e-9aa4-1d8f3b570452)
+
 * Kẻ địch 2 : Những con rắn khổng lồ với thân hình to lớn tuy không có thể tấn công tần xa nhưng chúng có tốc độ di chuyển nhanh và lượng máu khổng lồ , tránh giao tranh với chúng để bảo toàn mạng sống !
+
+          ![Screenshot 2024-04-26 210306](https://github.com/PhmTHung/Game_project/assets/161602413/7342797e-52ec-475e-8d7d-3a5d68e04eca)
 
 # Cách chơi
 * Điều khiển nhân vật : Sử dụng phím A->phải ,W->lên ,S->xuống ,D->phải, Space-> bắn.
@@ -64,12 +69,12 @@ Game giờ đã có thể chạy được rồi ,chức mọi người có trả
   * Các kẻ địch luôn luôn di chuyển tấn công chủ động nhân vật chính, lựa chọn tấn công hoặc
   bỏ chạy.
   * Mẹo :do kẻ địch xuất hiện trong một khoảng thời gian sau mỗi đợt tấn công, cố gắng nhặt những item để giúp có thể đạt được lợi thế.
-## Hình ảnh
+# Hình ảnh
 ![game](https://github.com/PhmTHung/Game_project/assets/161602413/ea208a78-b2ea-4211-afb6-6bf7c80a49f9)
 ![Screenshot 2024-04-26 154438](https://github.com/PhmTHung/Game_project/assets/161602413/9bcfb475-0d4c-4bf3-9156-2a9e197c5427)
 ![Screenshot 2024-04-26 171439](https://github.com/PhmTHung/Game_project/assets/161602413/20e06c58-4efa-47bd-8c40-8a2ccc2c6bcf)
 
-## Các kỹ thuật áp dụng để làm game
+# Các kỹ thuật áp dụng để làm game
 * Kỹ thuật lập trình hướng đối tượng.
 * Kỹ thuật tiled map (tham khảo LazyFoo,Let's Make Game,Phát Triển Phẩn Mềm 123az).
 * Các kỹ thuật được đề cập trong Website LazyFoo.
@@ -77,21 +82,29 @@ Game giờ đã có thể chạy được rồi ,chức mọi người có trả
   * Load ảnh, chữ ,âm thanh .
   * Hiển thị ảnh động.
   * Tính toán khung hình.
-## Các tài liệu tham khảo
+# Các tài liệu tham khảo
 * Youtube :Cô Trần Thị Minh Châu.
+
    *[https://www.youtube.com/watch?v=f23xRQoqUu0&list=PL-IbDGFpCvtluDVQSSslFYzFueSbjDvZO&index=21]
+  
 * Youtube,Website: Phát Triển Phẩn Mềm 123az.
+
    *[https://www.youtube.com/@PhatTrienPhanMem123AZ]
+  
    *[https://phattrienphanmem123az.com/]
+  
 * YouTube :Let's Make Game.
+  
    *[https://www.youtube.com/watch?v=QQzAHcojEKg&list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx]
+
 * Website : LazyFoo.
+
    *[https://lazyfoo.net/tutorials/SDL/]
-## Nguồn tài nguyên
+
+# Nguồn tài nguyên
 * Ảnh Sprite nhân vật, Tile Map:Open Game Art [https://opengameart.org/].
 * Âm Thanh :Open Game Art, YouTube, các công cụ hỗ trợ để chuyển file thành file .WAV.
 * Công cụ xử lý hình ảnh Aseprite.
-* 
 
 
 
