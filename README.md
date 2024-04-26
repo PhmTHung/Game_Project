@@ -4,8 +4,13 @@
 * [Giới Thiệu](#giới-thiệu).
 * [Cách Tải Game](#cách-tải-game).
 * [Bắt đầu Game](#bắt-đầu-game).
-* [Các thành phần trong game](#các-thành-phần-trong_game).
-* [Cách chơi](#cách-chơi)
+* [Các thành phần trong game](#các-thành-phần-trong-game).
+* [Cách chơi](#cách-chơi).
+* [Hình ảnh](#hình-ảnh).
+* [Các kỹ thuật áp dụng để làm game](#các-kỹ-thuật-áp-dụng-để-làm-game).
+* [Các tài liệu tham khảo](#các-tài-liệu-tham-khảo)
+* [Nguồn tài nguyên](#nguồn-tài-nguyên)
+
   
 
 ## Giới Thiệu
@@ -20,7 +25,7 @@ Sinh tồn lâu nhất có thể và nhặt đồng xu vàng quý giá.
 
 Ấn vào nút Bắt đầu.
 
-## Các thành phần của game
+## Các thành phần trong game
 * Drop Item: Nhặt những vật phẩm có thể giúp bạn sinh tồn lâu hơn
    * Túi máu : Giúp bạn hồi tối đa 200 HP ,hãy sử dụng chúng một cách thông minh bởi lượng máu
                được hồi phụ thuộc vào số máu bạn đã mất.
@@ -40,36 +45,26 @@ Sinh tồn lâu nhất có thể và nhặt đồng xu vàng quý giá.
   bỏ chạy.
          
 
-## hình ảnh
+## Hình ảnh
 ![game](https://github.com/PhmTHung/Game_project/assets/161602413/ea208a78-b2ea-4211-afb6-6bf7c80a49f9)
+![Screenshot 2024-04-26 154438](https://github.com/PhmTHung/Game_project/assets/161602413/9bcfb475-0d4c-4bf3-9156-2a9e197c5427)
 
 
-## Links
+## Các kỹ thuật áp dụng để làm game
+* Kỹ thuật lập trình hướng đối tượng
+* Kỹ thuật tiled map (tham khảo LazyFoo,Let's Make Game,Phát Triển Phẩn Mềm 123az)
+* Các kỹ thuật được đề cập trong Website LazyFoo
+  * Xử lý bàn phím, chuột
+  * Load ảnh, chữ ,âm thanh 
+  * Hiển thị ảnh động
+  * Tính toán khung hình
+## Các tài liệu tham khảo
+* Youtube :Cô Trần Thị Minh Châu
+* Youtube,Website: Phát Triển Phẩn Mềm 123az
+* YouTube :Let's Make Game
+* Website : LazyFoo.
+## Nguồn tài nguyên
+* Ảnh Sprite nhân vật, Tile Map: [Open Game Art](#https://opengameart.org/).
+* Âm Thanh 
 
-You may be using [Markdown Live Preview](https://markdownlivepreview.com/).
-
-## Blockquotes
-
-> Markdown is a lightweight markup language with plain-text-formatting syntax, created in 2004 by John Gruber with Aaron Swartz.
->
->> Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
-
-## Tables
-
-| Left columns  | Right columns |
-| ------------- |:-------------:|
-| left foo      | right foo     |
-| left bar      | right bar     |
-| left baz      | right baz     |
-
-## Blocks of code
-
-```
-let message = 'Hello world';
-alert(message);
-```
-
-## Inline code
-
-This web site is using `markedjs/marked`.
 
