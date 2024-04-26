@@ -7,8 +7,8 @@
 MainObject::MainObject()
 {
     frame=0;
-    x_pos=400;
-    y_pos=400;
+    x_pos=300;
+    y_pos=300;
     x_step=0;
     y_step=0;
 
@@ -323,5 +323,5 @@ void MainObject::IncreaseHP()
 }
 void MainObject::IncreaseSpeed()
 {
-    main_speed+=5;
+    main_speed=main_speed+main_speed*0.05;
 }
