@@ -48,6 +48,8 @@ Với âm nhạc mạnh mẽ và đồ họa sống động, game nhập vai hà
 ## Hình ảnh
 ![game](https://github.com/PhmTHung/Game_project/assets/161602413/ea208a78-b2ea-4211-afb6-6bf7c80a49f9)
 ![Screenshot 2024-04-26 154438](https://github.com/PhmTHung/Game_project/assets/161602413/9bcfb475-0d4c-4bf3-9156-2a9e197c5427)
+![Screenshot 2024-04-26 171439](https://github.com/PhmTHung/Game_project/assets/161602413/20e06c58-4efa-47bd-8c40-8a2ccc2c6bcf)
+
 
 
 ## Các kỹ thuật áp dụng để làm game
