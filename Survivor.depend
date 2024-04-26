@@ -441,7 +441,7 @@
 1712589709 c:\laptrinh\survivor\game_project\baseobj.h
 	"basefunc.h"
 
-1714125763 source:c:\laptrinh\survivor\game_project\main.cpp
+1714133718 source:c:\laptrinh\survivor\game_project\main.cpp
 	"basefunc.h"
 	"baseobj.h"
 	"mainobj.h"
@@ -474,7 +474,7 @@
 
 1713315623 source:c:\laptrinh\survivor\game_project\xulygame.cpp
 
-1714053057 source:c:\laptrinh\survivor\game_project\mainobj.cpp
+1714132882 source:c:\laptrinh\survivor\game_project\mainobj.cpp
 	"mainobj.h"
 	"basefunc.h"
 	"baseobj.h"
@@ -531,10 +531,10 @@
 	"baseobj.h"
 	"basefunc.h"
 
-1713280554 source:c:\laptrinh\survivor\game_project\text.cpp
+1714134941 source:c:\laptrinh\survivor\game_project\text.cpp
 	"text.h"
 
-1713279874 c:\laptrinh\survivor\game_project\text.h
+1714134889 c:\laptrinh\survivor\game_project\text.h
 	"baseobj.h"
 	<string>
 

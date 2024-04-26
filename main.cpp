@@ -224,7 +224,7 @@ int main (int argc,char* argv[])
     ImpTimer fps_timer;
     if(InitData()==false) return -1;
     //PLAY THEME MUSIC
-    Mix_PlayChannel(-1,get_theme,0);
+    Mix_PlayChannel(-1,get_theme,-1);
     //GAME MAP
     GameMap G_Map;
     G_Map.LoadMap("map.txt");
@@ -260,7 +260,7 @@ int main (int argc,char* argv[])
     TextManager score;
     score.SetColorType(TextManager::RED_TEXT);
     TextManager money_count;
-    money_count.SetColorType(TextManager::RED_TEXT);
+    money_count.SetColorType(TextManager::YELLOW_TEXT);
     TextManager game_over;
     game_over.SetColorType(TextManager::WHITE_TEXT);
 
@@ -276,15 +276,15 @@ int main (int argc,char* argv[])
     menu.LoadImage("image/background5.png",gScreen);
     GOver.LoadImage("image/background.png",gScreen);
 
-    const int kMenuItemNum=2;
-	SDL_Rect pos_arr[kMenuItemNum];
+    const int kMenu=2;
+	SDL_Rect pos_arr[kMenu];
 	pos_arr[0].x=450;
 	pos_arr[0].y=400;
 
 	pos_arr[1].x=550;
 	pos_arr[1].y=600;
 
-    TextManager text_menu[kMenuItemNum],title_menu;
+    TextManager text_menu[kMenu],title_menu;
 	text_menu[0].SetText("PLAY GAME");
 	text_menu[0].SetColorType(TextManager::WHITE_TEXT);
 	text_menu[0].SetRect(pos_arr[0].x,pos_arr[0].y);
@@ -298,7 +298,7 @@ int main (int argc,char* argv[])
 
     bool menu1=true;
     bool is_quit=true;
-    bool isSelect[kMenuItemNum]={0,0};
+    bool isSelect[kMenu]={0,0};
     SDL_Event mouse_event;
     std::string titlemenu=" ~ SURVIVOR ~ ";
     while(menu1)
@@ -308,7 +308,7 @@ int main (int argc,char* argv[])
        title_menu.LoadFromRenderText(font_title,gScreen);
        title_menu.RenderText(gScreen,100,100);
 
-       for(int i=0;i<kMenuItemNum;i++)
+       for(int i=0;i<kMenu;i++)
 		{
 			text_menu[i].LoadFromRenderText(font_game,gScreen);
 			text_menu[i].RenderText(gScreen,pos_arr[i].x,pos_arr[i].y);
@@ -323,14 +323,14 @@ int main (int argc,char* argv[])
 					   xm=mouse_event.motion.x;
 					   ym=mouse_event.motion.y;
 
-					for(int i=0;i<kMenuItemNum;i++)
+					for(int i=0;i<kMenu;i++)
 					{
 					    bool menu_select=SDLBaseFunc::CheckFocusRect(xm,ym,text_menu[i].GetRect());
 						if(SDLBaseFunc::CheckFocusRect(xm,ym,text_menu[i].GetRect()))
 						{
 							if(isSelect[i]==false)
 							{
-							    isSelect[i]=1;
+							    isSelect[i]=true;
 							    text_menu[i].SetColorType(TextManager::RED_TEXT);
 							}
 						}
@@ -338,8 +338,8 @@ int main (int argc,char* argv[])
 						 {
 							if(isSelect[i]==true)
 							{
-							    isSelect[i]=0;
-							    text_menu[i].SetColorType(TextManager::BLACK_TEXT);
+							    isSelect[i]=false;
+							    text_menu[i].SetColorType(TextManager::WHITE_TEXT);
 							}
 						 }
 					  }
@@ -347,15 +347,13 @@ int main (int argc,char* argv[])
                 break;
                     case SDL_MOUSEBUTTONDOWN:
                     {
-                       int xm;
-                       int ym;
                        SDL_GetMouseState(&xm, &ym);
-                       if (xm>450&&xm<600 && ym>400 && ym<800)
+                       if (xm>430&&xm<550 && ym>400 && ym<800)
                        {
                            menu1 = false;
                            is_quit = false;
                        }
-                       if (xm > 550 && xm <600 && ym > 600 && ym < 800)
+                       if (xm>550 && xm <600 &&ym>600&&ym<800)
                        {
                            is_quit=true;
                            menu1=false;
@@ -684,17 +682,30 @@ int main (int argc,char* argv[])
             }
 
         }
-
-        //std::string last_time_game="YOUR LAST TIME SURIVIVOR : " + str_time;
-
-         bool go=false;
+        bool go=false;
         if(player.GetHP()<=0)
         {
             go=true;
         }
-        std::string game_str="GAME OVER";
-        game_over.SetText(game_str);
-        game_over.LoadFromRenderText(font_game,gScreen);
+        if(time_val>20 && time_val<30)
+        {
+            std::string game_str=" GOOD JOB !";
+            game_over.SetText(game_str);
+            game_over.LoadFromRenderText(font_game,gScreen);
+        }
+        else if(time_val<5)
+        {
+            std::string game_str="SO BAD";
+            game_over.SetText(game_str);
+            game_over.LoadFromRenderText(font_game,gScreen);
+        }
+        else if(time_val>30)
+        {
+            std::string game_str="EXCELLENT";
+            game_over.SetText(game_str);
+            game_over.LoadFromRenderText(font_game,gScreen);
+        }
+
         std::string last_time="TIME SURIVIVOR :"+str_val_;
         last_time_game.SetText(last_time);
         last_time_game.LoadFromRenderText(font_game,gScreen);
@@ -706,16 +717,14 @@ int main (int argc,char* argv[])
             menu.Render(gScreen,NULL);
             SDL_RenderPresent(gScreen);
             Mix_PlayChannel(-1,GameOver,0);
+
             last_time_game.RenderText(gScreen,100,SCREEN_HEIGHT/2-100);
             game_over.RenderText(gScreen,SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
             SDL_RenderPresent(gScreen);
-            SDL_Delay(7000);
+            SDL_Delay(9000);
             //Mix_PausedMusic();
-
             is_quit=true;
-
         }
-
 
         SDL_RenderPresent(gScreen);
 

@@ -30,6 +30,12 @@ void TextManager::SetColorType(int type)
             text_color=black;
             break;
         }
+    case YELLOW_TEXT:
+        {
+            SDL_Color yellow={255,255,0};
+            text_color=yellow;
+            break;
+        }
     }
 }
 bool TextManager::LoadFromRenderText(TTF_Font* font,SDL_Renderer* screen)
